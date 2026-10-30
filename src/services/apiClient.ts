@@ -1,6 +1,6 @@
 import { supabase } from '../lib/supabaseClient';
 
-const BACKEND_API_URL = import.meta.env.VITE_BACKEND_API_URL || 'http://localhost:5000/api';
+const BACKEND_API_URL = import.meta.env.VITE_BACKEND_API_URL || '/api';
 
 /**
  * Generic fetch wrapper attaching the Supabase JWT Bearer token to backend requests
@@ -54,7 +54,7 @@ async function apiRequest<T = any>(
   } catch (err: any) {
     return {
       success: false,
-      error: err.message || 'Unable to connect to backend server. Ensure backend is running on port 5000.'
+      error: err.message || 'Unable to connect to backend server. Ensure backend service is running.'
     };
   }
 }
