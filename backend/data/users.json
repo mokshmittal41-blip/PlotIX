@@ -1,0 +1,28 @@
+[
+  {
+    "id": "usr-1789277476487-nl0ym",
+    "fullName": "Moksh",
+    "email": "moksh2811.beai25@chitkara.edu.in",
+    "phone": null,
+    "password": "password123",
+    "avatarUrl": null,
+    "role": "Property Pro",
+    "authProvider": "google",
+    "isVerified": true,
+    "createdAt": "2026-09-13T05:31:16.487Z",
+    "updatedAt": "2026-09-13T05:34:27.669Z"
+  },
+  {
+    "id": "usr-1789277866123-ps4hc",
+    "fullName": "Mokshmittal41",
+    "email": "mokshmittal41@gmail.com",
+    "phone": null,
+    "password": "Moksh@2241",
+    "avatarUrl": null,
+    "role": "Property Pro",
+    "authProvider": "email",
+    "isVerified": true,
+    "createdAt": "2026-09-13T05:37:46.123Z",
+    "updatedAt": "2026-09-13T05:37:46.123Z"
+  }
+]

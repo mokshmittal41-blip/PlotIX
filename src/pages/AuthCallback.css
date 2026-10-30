@@ -1,0 +1,126 @@
+.auth-callback-root {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 20%, #F0FDF4 0%, #F8FAFC 60%, #F1F5F9 100%);
+  padding: 24px;
+  font-family: inherit;
+}
+
+.auth-callback-card {
+  width: 100%;
+  max-width: 440px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.02);
+  padding: 36px 32px;
+  text-align: center;
+}
+
+.auth-callback-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.auth-callback-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.auth-callback-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0F172A;
+  letter-spacing: -0.02em;
+}
+
+.auth-callback-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-callback-spinner-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #ECFDF5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.auth-callback-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.auth-callback-icon-wrap.success {
+  background: #ECFDF5;
+}
+
+.auth-callback-icon-wrap.error {
+  background: #FEF2F2;
+}
+
+.auth-callback-body h2 {
+  font-size: 19px;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.01em;
+}
+
+.auth-callback-body p {
+  font-size: 14px;
+  color: #64748B;
+  line-height: 1.5;
+  margin: 0 0 24px 0;
+}
+
+.auth-callback-error-desc {
+  background: #FEF2F2;
+  border: 1px solid #FEE2E2;
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #DC2626 !important;
+  font-size: 13px !important;
+  width: 100%;
+  word-break: break-word;
+}
+
+.auth-callback-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 20px;
+  background: #059669;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2);
+}
+
+.auth-callback-action-btn:hover {
+  background: #047857;
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.3);
+  transform: translateY(-1px);
+}

@@ -1,0 +1,1792 @@
+{
+  "testExecutedAt": "2026-09-13T10:50:33.481Z",
+  "locationsTested": [
+    "Gurugram",
+    "Rewari",
+    "Dharuhera",
+    "Bawal",
+    "Chandigarh",
+    "Mohali",
+    "Mumbai",
+    "Pune",
+    "Delhi",
+    "Bengaluru",
+    "Hyderabad",
+    "Jaipur",
+    "Lucknow",
+    "Kolkata"
+  ],
+  "totalLocationCount": 14,
+  "magicBricksSummary": {
+    "totalRuns": 14,
+    "successfulRuns": 14,
+    "totalListingsExtracted": 420,
+    "results": [
+      {
+        "adapter": "MagicBricksAdapter",
+        "city": "Gurugram",
+        "mappedQueryCity": "Gurgaon",
+        "requestUrl": "https://www.magicbricks.com/property-for-sale/residential-real-estate?cityName=Gurgaon",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 30,
+        "first3Titles": [
+          "4 BHK Builder Floor for Sale in Gurgaon Luxury Floors, Golf Course Extension Road Gurgaon",
+          "3 BHK Apartment for Sale in Ramprastha Primera, Sector 37D, Delhi Gurgaon Expressway Gurgaon",
+          "3 BHK Apartment for Sale in Signature Global Daxin Vistas, Sohna Gurgaon"
+        ],
+        "first3Urls": [
+          "https://www.magicbricks.com/propertyDetails/4-BHK-2800-Sq-ft-Builder-Floor-Apartment-FOR-Sale-Golf-course-Extension-Road-in-Gurgaon&id=4d423835373238383235",
+          "https://www.magicbricks.com/propertyDetails/3-BHK-1800-Sq-ft-Multistorey-Apartment-FOR-Sale-Sector-37D-in-Gurgaon&id=4d423836343237373439",
+          "https://www.magicbricks.com/propertyDetails/3-BHK-1550-Sq-ft-Multistorey-Apartment-FOR-Sale-Sohna-in-Gurgaon&id=4d423836303630363339"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Extracted 30 genuine property listings from schema.org"
+      },
+      {
+        "adapter": "MagicBricksAdapter",
+        "city": "Rewari",
+        "mappedQueryCity": "Rewari",
+        "requestUrl": "https://www.magicbricks.com/property-for-sale/residential-real-estate?cityName=Rewari",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 30,
+        "first3Titles": [
+          "Plot/Land for Sale in Rewari Rural Rewari",
+          "5 BHK Villa for Sale in N H 8 Rewari",
+          "6 BHK  House for Sale in Shakti Nagar Rewari"
+        ],
+        "first3Urls": [
+          "https://www.magicbricks.com",
+          "https://www.magicbricks.com/propertyDetails/5-BHK-1225-Sq-ft-Villa-FOR-Sale-N-H-8-in-Rewari&id=4d423836333836363735",
+          "https://www.magicbricks.com/propertyDetails/6-BHK-1800-Sq-ft-Residential-House-FOR-Sale-Shakti-Nagar-in-Rewari&id=4d423835383435333231"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Extracted 30 genuine property listings from schema.org"
+      },
+      {
+        "adapter": "MagicBricksAdapter",
+        "city": "Dharuhera",
+        "mappedQueryCity": "Dharuhera",
+        "requestUrl": "https://www.magicbricks.com/property-for-sale/residential-real-estate?cityName=Dharuhera",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 30,
+        "first3Titles": [
+          "2 BHK Apartment for Sale in Bestech City, NH-8 Dharuhera",
+          "Plot/Land for Sale in M2K County, NH-8 Dharuhera",
+          "3 BHK Apartment for Sale in Avalon Rangoli, Dharuhera Dharuhera"
+        ],
+        "first3Urls": [
+          "https://www.magicbricks.com/propertyDetails/2-BHK-975-Sq-ft-Multistorey-Apartment-FOR-Sale-NH-8-in-Dharuhera&id=4d423834343332393133",
+          "https://www.magicbricks.com",
+          "https://www.magicbricks.com/propertyDetails/3-BHK-1680-Sq-ft-Multistorey-Apartment-FOR-Sale-Dharuhera-in-Dharuhera&id=4d423835323036393839"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Extracted 30 genuine property listings from schema.org"
+      },
+      {
+        "adapter": "MagicBricksAdapter",
+        "city": "Bawal",
+        "mappedQueryCity": "Rewari",
+        "requestUrl": "https://www.magicbricks.com/property-for-sale/residential-real-estate?cityName=Rewari",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 30,
+        "first3Titles": [
+          "Plot/Land for Sale in Rewari Rural Rewari",
+          "5 BHK Villa for Sale in N H 8 Rewari",
+          "6 BHK  House for Sale in Shakti Nagar Rewari"
+        ],
+        "first3Urls": [
+          "https://www.magicbricks.com",
+          "https://www.magicbricks.com/propertyDetails/5-BHK-1225-Sq-ft-Villa-FOR-Sale-N-H-8-in-Rewari&id=4d423836333836363735",
+          "https://www.magicbricks.com/propertyDetails/6-BHK-1800-Sq-ft-Residential-House-FOR-Sale-Shakti-Nagar-in-Rewari&id=4d423835383435333231"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Extracted 30 genuine property listings from schema.org"
+      },
+      {
+        "adapter": "MagicBricksAdapter",
+        "city": "Chandigarh",
+        "mappedQueryCity": "Chandigarh",
+        "requestUrl": "https://www.magicbricks.com/property-for-sale/residential-real-estate?cityName=Chandigarh",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 30,
+        "first3Titles": [
+          "3 BHK Apartment for Sale in Urban Nest The Zirk, Zirakpur Chandigarh",
+          "4 BHK Apartment for Sale in Omaxe The Lake, Madhya Marg Chandigarh",
+          "4 BHK Apartment for Sale in Vamana Arvindam, Zirakpur Chandigarh"
+        ],
+        "first3Urls": [
+          "https://www.magicbricks.com/propertyDetails/3-BHK-1900-Sq-ft-Multistorey-Apartment-FOR-Sale-Zirakpur-in-Chandigarh&id=4d423836333232333133",
+          "https://www.magicbricks.com/propertyDetails/4-BHK-4850-Sq-ft-Multistorey-Apartment-FOR-Sale-Madhya-Marg-in-Chandigarh&id=4d423836343230393333",
+          "https://www.magicbricks.com/propertyDetails/4-BHK-3685-Sq-ft-Multistorey-Apartment-FOR-Sale-Zirakpur-in-Chandigarh&id=4d423835393835353533"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Extracted 30 genuine property listings from schema.org"
+      },
+      {
+        "adapter": "MagicBricksAdapter",
+        "city": "Mohali",
+        "mappedQueryCity": "Mohali",
+        "requestUrl": "https://www.magicbricks.com/property-for-sale/residential-real-estate?cityName=Mohali",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 30,
+        "first3Titles": [
+          "3 BHK Apartment for Sale in CRA Buildtech Noble Aurellia, Sector 88 Mohali",
+          "4 BHK Apartment for Sale in Hero Homes Mohali Phase 3, Sector 88 Mohali",
+          "3 BHK Apartment for Sale in Omaxe Gardenia Floors, Mullanpur Garibdass Mohali"
+        ],
+        "first3Urls": [
+          "https://www.magicbricks.com/propertyDetails/3-BHK-2651-Sq-ft-Multistorey-Apartment-FOR-Sale-Sector-88-in-Mohali&id=4d423836343433393531",
+          "https://www.magicbricks.com/propertyDetails/4-BHK-3490-Sq-ft-Multistorey-Apartment-FOR-Sale-Sector-88-in-Mohali&id=4d423836333430323535",
+          "https://www.magicbricks.com/propertyDetails/3-BHK-2283-Sq-ft-Multistorey-Apartment-FOR-Sale-Mullanpur-Garibdass-in-Mohali&id=4d423836333531343731"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Extracted 30 genuine property listings from schema.org"
+      },
+      {
+        "adapter": "MagicBricksAdapter",
+        "city": "Mumbai",
+        "mappedQueryCity": "Mumbai",
+        "requestUrl": "https://www.magicbricks.com/property-for-sale/residential-real-estate?cityName=Mumbai",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 30,
+        "first3Titles": [
+          "4 BHK Apartment for Sale in Parinee Elenora, Juhu Mumbai",
+          "3 BHK Apartment for Sale in Prestige Nautilus, Worli Mumbai",
+          "3 BHK Apartment for Sale in Time Gold Residences, Vile Parle East Mumbai"
+        ],
+        "first3Urls": [
+          "https://www.magicbricks.com/propertyDetails/4-BHK-1655-Sq-ft-Multistorey-Apartment-FOR-Sale-Juhu-in-Mumbai&id=4d423835343835393837",
+          "https://www.magicbricks.com/propertyDetails/3-BHK-2035-Sq-ft-Multistorey-Apartment-FOR-Sale-Worli-in-Mumbai&id=4d423836343433343437",
+          "https://www.magicbricks.com/propertyDetails/3-BHK-865-Sq-ft-Multistorey-Apartment-FOR-Sale-Vile-Parle-East-in-Mumbai&id=4d423835363437373333"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Extracted 30 genuine property listings from schema.org"
+      },
+      {
+        "adapter": "MagicBricksAdapter",
+        "city": "Pune",
+        "mappedQueryCity": "Pune",
+        "requestUrl": "https://www.magicbricks.com/property-for-sale/residential-real-estate?cityName=Pune",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 30,
+        "first3Titles": [
+          "2 BHK Apartment for Sale in Majestique Signature Towers, Balewadi Pune",
+          "3 BHK Apartment for Sale in Basil Mount Lords, Dhankawadi Pune",
+          "4 BHK Apartment for Sale in VTP Cielo, Bavdhan Pune"
+        ],
+        "first3Urls": [
+          "https://www.magicbricks.com/propertyDetails/2-BHK-865-Sq-ft-Multistorey-Apartment-FOR-Sale-Balewadi-in-Pune&id=4d423836323932393035",
+          "https://www.magicbricks.com/propertyDetails/3-BHK-1288-Sq-ft-Multistorey-Apartment-FOR-Sale-Dhankawadi-in-Pune&id=4d423836323835323433",
+          "https://www.magicbricks.com/propertyDetails/4-BHK-1744-Sq-ft-Multistorey-Apartment-FOR-Sale-Bavdhan-in-Pune&id=4d423836333330313833"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Extracted 30 genuine property listings from schema.org"
+      },
+      {
+        "adapter": "MagicBricksAdapter",
+        "city": "Delhi",
+        "mappedQueryCity": "New-Delhi",
+        "requestUrl": "https://www.magicbricks.com/property-for-sale/residential-real-estate?cityName=New-Delhi",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 30,
+        "first3Titles": [
+          "1 BHK Apartment for Sale in DDA Flats Vasant Kunj, Vasant Kunj New Delhi",
+          "3 BHK Apartment for Sale in Eldeco Camelot, Sector 17 Dwarka New Delhi",
+          "4 BHK Apartment for Sale in Godrej South Estate, Okhla New Delhi"
+        ],
+        "first3Urls": [
+          "https://www.magicbricks.com/propertyDetails/1-BHK-700-Sq-ft-Multistorey-Apartment-FOR-Sale-Vasant-Kunj-in-New-Delhi&id=4d423836333739353437",
+          "https://www.magicbricks.com/propertyDetails/3-BHK-2434-Sq-ft-Multistorey-Apartment-FOR-Sale-Dwarka-Sector-17-in-New-Delhi&id=4d423836303638353837",
+          "https://www.magicbricks.com/propertyDetails/4-BHK-2518-Sq-ft-Multistorey-Apartment-FOR-Sale-Okhla-in-New-Delhi&id=4d423836343134393437"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Extracted 30 genuine property listings from schema.org"
+      },
+      {
+        "adapter": "MagicBricksAdapter",
+        "city": "Bengaluru",
+        "mappedQueryCity": "Bangalore",
+        "requestUrl": "https://www.magicbricks.com/property-for-sale/residential-real-estate?cityName=Bangalore",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 30,
+        "first3Titles": [
+          "4 BHK Villa for Sale in Devanahalli Bangalore",
+          "2 BHK Apartment for Sale in Whitefield Bangalore",
+          "2 BHK Apartment for Sale in Anjanapura Bangalore"
+        ],
+        "first3Urls": [
+          "https://www.magicbricks.com/propertyDetails/4-BHK-4087-Sq-ft-Villa-FOR-Sale-Devanahalli-in-Bangalore&id=4d423835333935353737",
+          "https://www.magicbricks.com/propertyDetails/2-BHK-1411-Sq-ft-Multistorey-Apartment-FOR-Sale-whitefield-in-Bangalore&id=4d423836343135363035",
+          "https://www.magicbricks.com/propertyDetails/2-BHK-1281-Sq-ft-Multistorey-Apartment-FOR-Sale-AnjanaPura-in-Bangalore&id=4d423836343230363937"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Extracted 30 genuine property listings from schema.org"
+      },
+      {
+        "adapter": "MagicBricksAdapter",
+        "city": "Hyderabad",
+        "mappedQueryCity": "Hyderabad",
+        "requestUrl": "https://www.magicbricks.com/property-for-sale/residential-real-estate?cityName=Hyderabad",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 30,
+        "first3Titles": [
+          "Office Space for Sale in Kondapur Hyderabad",
+          "Plot/Land for Sale in Girmapur Hyderabad",
+          "4 BHK Apartment for Sale in Kokapet, Outer Ring Road Hyderabad"
+        ],
+        "first3Urls": [
+          "https://www.magicbricks.com",
+          "https://www.magicbricks.com",
+          "https://www.magicbricks.com/propertyDetails/4-BHK-3020-Sq-ft-Multistorey-Apartment-FOR-Sale-Kokapet-in-Hyderabad&id=4d423835353837323531"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Extracted 30 genuine property listings from schema.org"
+      },
+      {
+        "adapter": "MagicBricksAdapter",
+        "city": "Jaipur",
+        "mappedQueryCity": "Jaipur",
+        "requestUrl": "https://www.magicbricks.com/property-for-sale/residential-real-estate?cityName=Jaipur",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 30,
+        "first3Titles": [
+          "4 BHK Apartment for Sale in Shree Vinayak Homes 11, Ajmer Road Jaipur",
+          "4 BHK Apartment for Sale in Shree Vinayak Homes 11, Ajmer Road Jaipur",
+          "4 BHK Apartment for Sale in KDMS Skywalk, Mansarovar Extension Jaipur"
+        ],
+        "first3Urls": [
+          "https://www.magicbricks.com/propertyDetails/4-BHK-2091-Sq-ft-Multistorey-Apartment-FOR-Sale-Ajmer-Road-in-Jaipur&id=4d423830363236353639",
+          "https://www.magicbricks.com/propertyDetails/4-BHK-2091-Sq-ft-Multistorey-Apartment-FOR-Sale-Ajmer-Road-in-Jaipur&id=4d423832393738333035",
+          "https://www.magicbricks.com/propertyDetails/4-BHK-2523-Sq-ft-Multistorey-Apartment-FOR-Sale-Mansarovar-Extension-in-Jaipur&id=4d423835383733343033"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Extracted 30 genuine property listings from schema.org"
+      },
+      {
+        "adapter": "MagicBricksAdapter",
+        "city": "Lucknow",
+        "mappedQueryCity": "Lucknow",
+        "requestUrl": "https://www.magicbricks.com/property-for-sale/residential-real-estate?cityName=Lucknow",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 30,
+        "first3Titles": [
+          "3 BHK Apartment for Sale in Shalimar Marbella gh 18, Gomtinagar Extension Lucknow",
+          "4 BHK Apartment for Sale in Serenity by Rishita, Sushant Golf City Lucknow",
+          "3 BHK Apartment for Sale in Privue Jashn Elevate, Sushant Golf City Lucknow"
+        ],
+        "first3Urls": [
+          "https://www.magicbricks.com/propertyDetails/3-BHK-2300-Sq-ft-Multistorey-Apartment-FOR-Sale-Gomtinagar-Extension-in-Lucknow&id=4d423836343030353837",
+          "https://www.magicbricks.com/propertyDetails/4-BHK-2890-Sq-ft-Multistorey-Apartment-FOR-Sale-Sushant-Golf-City-in-Lucknow&id=4d423836313732383635",
+          "https://www.magicbricks.com/propertyDetails/3-BHK-1236-Sq-ft-Multistorey-Apartment-FOR-Sale-Sushant-Golf-City-in-Lucknow&id=4d423836343333393337"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Extracted 30 genuine property listings from schema.org"
+      },
+      {
+        "adapter": "MagicBricksAdapter",
+        "city": "Kolkata",
+        "mappedQueryCity": "Kolkata",
+        "requestUrl": "https://www.magicbricks.com/property-for-sale/residential-real-estate?cityName=Kolkata",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 30,
+        "first3Titles": [
+          "3 BHK Apartment for Sale in Srijan Optima, Rajarhat Kolkata",
+          "3 BHK Apartment for Sale in Pansari Purti Tatsam, Rajarhat Kolkata",
+          "4 BHK Apartment for Sale in DTC Downtown Phase 1, Rajarhat Kolkata"
+        ],
+        "first3Urls": [
+          "https://www.magicbricks.com/propertyDetails/3-BHK-1077-Sq-ft-Multistorey-Apartment-FOR-Sale-Rajarhat-in-Kolkata&id=4d423836343238313235",
+          "https://www.magicbricks.com/propertyDetails/3-BHK-1455-Sq-ft-Multistorey-Apartment-FOR-Sale-Rajarhat-in-Kolkata&id=4d423835383435393531",
+          "https://www.magicbricks.com/propertyDetails/4-BHK-2010-Sq-ft-Multistorey-Apartment-FOR-Sale-Rajarhat-in-Kolkata&id=4d423836303136383733"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Extracted 30 genuine property listings from schema.org"
+      }
+    ]
+  },
+  "olxRealEstateSummary": {
+    "totalRuns": 42,
+    "successfulRuns": 41,
+    "totalListingsExtracted": 352,
+    "results": [
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Gurugram",
+        "category": "Lands & Plots",
+        "categoryId": "1729",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1729&query=Gurugram&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Gated Society Plot Available For Sale in Sec-95A Gurugram",
+          "Plots in IMT Sohna Basai Gurugram 500m from KMP expressway",
+          "160 Gaj Plot for Sale in IMT Sohna Gurugram  Near KMP Expressway"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1853925775",
+          "https://www.olx.in/item/1850479619",
+          "https://www.olx.in/item/1851912790"
+        ],
+        "first3Prices": [
+          22400000,
+          900000,
+          2400000
+        ],
+        "first3Locations": [
+          "Sector 95A, Gurgaon",
+          "Sohna, Gurgaon",
+          "IMT Sohna, Gurgaon"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Gurugram",
+        "category": "Houses & Apartments",
+        "categoryId": "1725",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1725&query=Gurugram&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "2 BHK Society Flat Available for Sale in Sector 95 A Gurugram",
+          "2BHK Park Facing unit Available for Sale in Sector 93 Gurugram",
+          "Luxury 3 BHK Builder Floor for Sale &ndash; Sector 51, Gurugram"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1846162883",
+          "https://www.olx.in/item/1842716992",
+          "https://www.olx.in/item/1855438831"
+        ],
+        "first3Prices": [
+          5500000,
+          6700000,
+          24900000
+        ],
+        "first3Locations": [
+          "Sector 95A, Gurgaon",
+          "Sector 93, Gurgaon",
+          "Sector 51, Gurgaon"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Gurugram",
+        "category": "Commercial Properties",
+        "categoryId": "1731",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1731&query=Gurugram&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 7,
+        "first3Titles": [
+          "OFFICE Space Available for Lease at  Gurugram",
+          "Available Shop for Rent in Sector 37D Gurugram",
+          "Premium Office Space for Rent in Sector 37, Gurugram | 1350 Sq. Ft."
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1829019395",
+          "https://www.olx.in/item/1842167997",
+          "https://www.olx.in/item/1854922577"
+        ],
+        "first3Prices": [
+          50000000,
+          35000,
+          40000
+        ],
+        "first3Locations": [
+          "Manesar, Gurgaon",
+          "Sector 37D, Gurgaon",
+          "Sector 37, Gurgaon"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 7 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Rewari",
+        "category": "Lands & Plots",
+        "categoryId": "1729",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1729&query=Rewari&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 2,
+        "first3Titles": [
+          "Plots in rewari , khatu shyam",
+          "Sector 19 rewari"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1854037041",
+          "https://www.olx.in/item/1853472237"
+        ],
+        "first3Prices": [
+          20000,
+          90000
+        ],
+        "first3Locations": [
+          "Rewari",
+          "Sector 20, Kaithal"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 2 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Rewari",
+        "category": "Houses & Apartments",
+        "categoryId": "1725",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1725&query=Rewari&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 3,
+        "first3Titles": [
+          "Rewari Haryana",
+          "1 BHK FLAT FOR SALE in Gurutek city society Rewari Near Amangany Soc.",
+          "2 bhk 100 sq ft house for sale at uttam nagar rewari"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1854094325",
+          "https://www.olx.in/item/1853971393",
+          "https://www.olx.in/item/1853129362"
+        ],
+        "first3Prices": [
+          8500000,
+          1500000,
+          5500000
+        ],
+        "first3Locations": [
+          "Sector 11 Uttam Nagar, Rewari",
+          "Shahbazpur Khalsa, Rewari",
+          "Sector 11 Uttam Nagar, Rewari"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 3 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Rewari",
+        "category": "Commercial Properties",
+        "categoryId": "1731",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1731&query=Rewari&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 5,
+        "first3Titles": [
+          "Shop for rent - jain puri saraffa  bazaar rewari",
+          "COMERCIAL COMPLEX FOR RENT IN REWARI BYPASS",
+          "9×60 Ft Hall for Rent in Rewari  Office, Customer Care, Shop & Godown"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1854311989",
+          "https://www.olx.in/item/1853485722",
+          "https://www.olx.in/item/1853372946"
+        ],
+        "first3Prices": [
+          16000,
+          80000,
+          15000
+        ],
+        "first3Locations": [
+          "Jeevani Bazar, Rewari",
+          "Sector 11, Rewari",
+          "Subhash Nagar, Rewari"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 5 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Dharuhera",
+        "category": "Lands & Plots",
+        "categoryId": "1729",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1729&query=Dharuhera&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 6,
+        "first3Titles": [
+          "Premium Commercial SCO Plot for Sale in Dwarkadhish",
+          "Plot for sale",
+          "2 kille h rent & lease k liye"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1855413675",
+          "https://www.olx.in/item/1854679929",
+          "https://www.olx.in/item/1853366866"
+        ],
+        "first3Prices": [
+          6500000,
+          5000000,
+          200000
+        ],
+        "first3Locations": [
+          "Dharuhera, Dharuhera",
+          "Bhagat Singh Chowk, Dharuhera",
+          "Garhi Alawalpur, Dharuhera"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 6 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Dharuhera",
+        "category": "Houses & Apartments",
+        "categoryId": "1725",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1725&query=Dharuhera&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 4,
+        "first3Titles": [
+          "Best society",
+          "RENT AND SALE PURCHASE. GOOD OPPORTUNITY FOR EVERY ONE.",
+          "Premium location house for sale"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1832709139",
+          "https://www.olx.in/item/1855404909",
+          "https://www.olx.in/item/1854257203"
+        ],
+        "first3Prices": [
+          6050000,
+          1100000,
+          10500000
+        ],
+        "first3Locations": [
+          "Dharuhera, Dharuhera",
+          "HUDA Sector 6, Dharuhera",
+          "Bhagat Singh Chowk, Dharuhera"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 4 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Dharuhera",
+        "category": "Commercial Properties",
+        "categoryId": "1731",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1731&query=Dharuhera&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 1,
+        "first3Titles": [
+          "Restaurant highway"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1854039833"
+        ],
+        "first3Prices": [
+          100000
+        ],
+        "first3Locations": [
+          "Kapriwas Village, Dharuhera"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 1 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Bawal",
+        "category": "Lands & Plots",
+        "categoryId": "1729",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1729&query=Bawal&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 2,
+        "first3Titles": [
+          "Baval haryana",
+          "Farm house Prime Loction clear crystal environment aims"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1855270509",
+          "https://www.olx.in/item/1853539219"
+        ],
+        "first3Prices": [
+          23000,
+          6500000
+        ],
+        "first3Locations": [
+          "Banipur Chowk, Bawal",
+          "Karnawas, Bawal"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 2 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Bawal",
+        "category": "Houses & Apartments",
+        "categoryId": "1725",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1725&query=Bawal&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 0,
+        "first3Titles": [],
+        "first3Urls": [],
+        "first3Prices": [],
+        "first3Locations": [],
+        "isValidSaleListing": false,
+        "validPriceLocationType": false,
+        "notes": "0 listings returned"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Bawal",
+        "category": "Commercial Properties",
+        "categoryId": "1731",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1731&query=Bawal&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 2,
+        "first3Titles": [
+          "Offices, Shop and Godam",
+          "Bithwana bus stand Bawal road rewari"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1855256793",
+          "https://www.olx.in/item/1852937931"
+        ],
+        "first3Prices": [
+          10000,
+          5000
+        ],
+        "first3Locations": [
+          "Maarender Goarma Village, Bawal",
+          "Chandpur Village, Rewari"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 2 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Chandigarh",
+        "category": "Lands & Plots",
+        "categoryId": "1729",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1729&query=Chandigarh&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "190 Sq Yards C Pocket",
+          "130 Sq Yards C Pocket",
+          "127 Sq Yards Altus E Pocket"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1846392495",
+          "https://www.olx.in/item/1846383894",
+          "https://www.olx.in/item/1846383664"
+        ],
+        "first3Prices": [
+          19500000,
+          14000000,
+          12500000
+        ],
+        "first3Locations": [
+          "New Chandigarh, Chandigarh",
+          "New Chandigarh, Chandigarh",
+          "New Chandigarh, Chandigarh"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Chandigarh",
+        "category": "Houses & Apartments",
+        "categoryId": "1725",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1725&query=Chandigarh&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Villa Near Luďhiana road, Kharar",
+          "Hurry up book your dream home \n3bhk only 50.90 lakh \nApna sapna hamari",
+          "3BHK Luxury Kothi for Sale"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1838019515",
+          "https://www.olx.in/item/1853560315",
+          "https://www.olx.in/item/1845824350"
+        ],
+        "first3Prices": [
+          6590000,
+          5075615,
+          9000000
+        ],
+        "first3Locations": [
+          "Ludhiana - Chandigarh State Highway, Kharar",
+          "Ludhiana - Chandigarh State Highway, Kharar",
+          "Kurali Chandigarh Rd, Kharar"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Chandigarh",
+        "category": "Commercial Properties",
+        "categoryId": "1731",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1731&query=Chandigarh&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Shop for rent",
+          "Office space available for rent in Zirakpur furnished",
+          "Furnished office for rent in Zirakpur Ambala chandigarh highway"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1855536605",
+          "https://www.olx.in/item/1853541433",
+          "https://www.olx.in/item/1853130682"
+        ],
+        "first3Prices": [
+          50000,
+          13500,
+          16000
+        ],
+        "first3Locations": [
+          "Sector 7B, Chandigarh",
+          "Ambala Chandigarh Expressway, Zirakpur",
+          "Ambala Chandigarh Expressway, Zirakpur"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Mohali",
+        "category": "Lands & Plots",
+        "categoryId": "1729",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1729&query=Mohali&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Urgent Sale 200 Sq yrd Plot For Sale In Gmada Aero City Mohali Chd",
+          "125 Gaj Plot in GMADA Sector 110 Mohali",
+          "263Gaj Map Approved Plot In Sec125 Sunny Enclave kharar Mohali"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1852721561",
+          "https://www.olx.in/item/1855529765",
+          "https://www.olx.in/item/1853541641"
+        ],
+        "first3Prices": [
+          28500000,
+          10500000,
+          19725000
+        ],
+        "first3Locations": [
+          "Bakarpur 264, Mohali",
+          "Sector 110, Mohali",
+          "Sector 125, Mohali"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Mohali",
+        "category": "Houses & Apartments",
+        "categoryId": "1725",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1725&query=Mohali&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "3 Bhk in Acme Heights sector-127 Mohali",
+          "75 Gaz 1 Bhk in Sector-115 Mohali",
+          "2 Bhk in Sector-115 Mohali"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1849013427",
+          "https://www.olx.in/item/1847196484",
+          "https://www.olx.in/item/1849014001"
+        ],
+        "first3Prices": [
+          8290000,
+          3090000,
+          4890000
+        ],
+        "first3Locations": [
+          "Sector 127, Mohali",
+          "Sector 115, Mohali",
+          "Sector 115, Mohali"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Mohali",
+        "category": "Commercial Properties",
+        "categoryId": "1731",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1731&query=Mohali&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Premium office space 1100 sqft for Rent in Bestech Tower Mohali",
+          "Luxury office space 800 sqf for rent in sector 74. Mohali",
+          "Phase 8b Mohali industrial area"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1855480765",
+          "https://www.olx.in/item/1845891746",
+          "https://www.olx.in/item/1828920197"
+        ],
+        "first3Prices": [
+          71500,
+          45000,
+          40000
+        ],
+        "first3Locations": [
+          "Sector 66, Mohali",
+          "Sector 74, Mohali",
+          "Industrial Area Phase 8B, Mohali"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Mumbai",
+        "category": "Lands & Plots",
+        "categoryId": "1729",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1729&query=Mumbai&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Mumbai Highway facing at Peddapur RRR just 1km Geted Community Venture",
+          "Mumbai Highway facing at Sadashivpet DTCP Rera Approved plots",
+          "Mumbai Highway facing at Aroor DTCP  Rera Approved plots Spot Registra"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1850982706",
+          "https://www.olx.in/item/1850969078",
+          "https://www.olx.in/item/1850968825"
+        ],
+        "first3Prices": [
+          23999,
+          14999,
+          15999
+        ],
+        "first3Locations": [
+          "Peddapur, Sangareddy",
+          "Shanti Nagar, Sadasivpet",
+          "Sadasivpet, Hyderabad"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Mumbai",
+        "category": "Houses & Apartments",
+        "categoryId": "1725",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1725&query=Mumbai&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Own a Luxury 3BHK.",
+          "RERA NAINA CIDCO APPROVED PROJECT IN PANVEL",
+          "1BHK For Sale in Swastik Sky W/Amenities Near MB Highway"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1855546459",
+          "https://www.olx.in/item/1855545991",
+          "https://www.olx.in/item/1838458080"
+        ],
+        "first3Prices": [
+          70000000,
+          1999000,
+          6500000
+        ],
+        "first3Locations": [
+          "Mumbai Central, Mumbai",
+          "Panvel, Navi Mumbai",
+          "Mira Road, Mumbai"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Mumbai",
+        "category": "Commercial Properties",
+        "categoryId": "1731",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1731&query=Mumbai&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "200 workstation Full Furnish Office Available",
+          "8500 Sq Ft Commerical Space Available",
+          "Brand new fully furnished office on rent at Andheri East"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1712868055",
+          "https://www.olx.in/item/1696338738",
+          "https://www.olx.in/item/1851217979"
+        ],
+        "first3Prices": [
+          325000,
+          600000,
+          80000
+        ],
+        "first3Locations": [
+          "Mumbai Naka, Nashik",
+          "Mumbai Naka, Nashik",
+          "Andheri East, Mumbai"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Pune",
+        "category": "Lands & Plots",
+        "categoryId": "1729",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1729&query=Pune&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "OPEN PLOTS FOR SALE AT MUGAWADE LOCATION",
+          "RESIDENTIAL PLOT",
+          "OPEN BUNGALOW PLOTS FOR SALE AT CHANDE LOCATION  LOC"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1855443575",
+          "https://www.olx.in/item/1844167236",
+          "https://www.olx.in/item/1853344526"
+        ],
+        "first3Prices": [
+          6346816,
+          8070000,
+          5380000
+        ],
+        "first3Locations": [
+          "Mugawade, Pune",
+          "Hinjewadi Rajiv Gandhi Infotech Park Phase 3, Pune",
+          "Chande, Pune"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Pune",
+        "category": "Houses & Apartments",
+        "categoryId": "1725",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1725&query=Pune&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "2 bhk luxurious apartment ready possession at hinjewadi ph1",
+          "Nearing posession 2&3 bhks at hinjewadi ph1",
+          "2 bhk flat for sale in bavdhan patilnagar..near suryadatta college"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1848247322",
+          "https://www.olx.in/item/1848194618",
+          "https://www.olx.in/item/1855544262"
+        ],
+        "first3Prices": [
+          7600000,
+          9500000,
+          8200000
+        ],
+        "first3Locations": [
+          "Hinjewadi, Pune",
+          "Hinjewadi Rajiv Gandhi Infotech Park Phase 1, Pune",
+          "Bavdhan, Pune"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Pune",
+        "category": "Commercial Properties",
+        "categoryId": "1731",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1731&query=Pune&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Prime location Restaurant & Retail Space in Kharadi",
+          "345 Sq.Ft Corner Commercial Space for Rent | 1st Floor | 93 Avenue Mal",
+          "8000 Sq.ft. Industrial Shed @ Chikhali Sonawane wasti For Rent."
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1849696731",
+          "https://www.olx.in/item/1855542778",
+          "https://www.olx.in/item/1834246043"
+        ],
+        "first3Prices": [
+          300000,
+          23000,
+          160000
+        ],
+        "first3Locations": [
+          "Kharadi, Pune",
+          "Wanowrie, Pune",
+          "Chikhali, Pune"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Delhi",
+        "category": "Lands & Plots",
+        "categoryId": "1729",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1729&query=Delhi&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "300 मीटर प्लॉट, सेक्टर 16, समृद्धि विहार, दिल्ली रोड, न्यू मुरादाबाद",
+          "150 मीटर प्लॉट, समृद्धि विहार, सेक्टर 16, दिल्ली रोड, न्यू मुरादाबाद",
+          "Plot and land Near Delhi  Meerut Expressway, Lal Kuan, Ghaziabad"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1855544071",
+          "https://www.olx.in/item/1855543514",
+          "https://www.olx.in/item/1843652679"
+        ],
+        "first3Prices": [
+          75000,
+          75000,
+          2700000
+        ],
+        "first3Locations": [
+          "Delhi Road, Moradabad",
+          "Delhi Road, Moradabad",
+          "Chhapraula, Ghaziabad"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Delhi",
+        "category": "Houses & Apartments",
+        "categoryId": "1725",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1725&query=Delhi&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "2Bhk Second Floor For Sale In Deep Vihar Sector-24 Rohini Delhi",
+          "We have Luxury & Low Cost Flat In Delhi Uttam Nagar West to Dwarka mor",
+          "We have Luxury & Low Cost Flat In Delhi Uttam Nagar West to Dwarka mor"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1842305842",
+          "https://www.olx.in/item/1831711848",
+          "https://www.olx.in/item/1844253475"
+        ],
+        "first3Prices": [
+          4155000,
+          4811000,
+          3110000
+        ],
+        "first3Locations": [
+          "Pansoli, Delhi",
+          "Nawada, Delhi",
+          "Nawada, Delhi"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Delhi",
+        "category": "Commercial Properties",
+        "categoryId": "1731",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1731&query=Delhi&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Godam hall Comercial space 200gj laxmi nagar delhi near by v3s mall",
+          "Ground floor shop for rent in rajpur khurd extension delhi 110068.",
+          "Ground floor shop for rent in rajpur  extension chattarpur delhi 68."
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1834926758",
+          "https://www.olx.in/item/1838639393",
+          "https://www.olx.in/item/1838819468"
+        ],
+        "first3Prices": [
+          85000,
+          15000,
+          15000
+        ],
+        "first3Locations": [
+          "Lakshmi Nagar, Delhi",
+          "Chattarpur, Delhi",
+          "Rajpur Khurd Extension, Delhi"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Bengaluru",
+        "category": "Lands & Plots",
+        "categoryId": "1729",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1729&query=Bengaluru&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Premium A-Khata Residential Sites in Bangalore",
+          "2800 Sqft Villa Plot for sale at Electronic City, Bangalore ID 1666",
+          "2400 Sqft plot for sale at Babusapalya, Bangalore ID 1669"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1853925513",
+          "https://www.olx.in/item/1849298355",
+          "https://www.olx.in/item/1849296108"
+        ],
+        "first3Prices": [
+          1439200,
+          25200000,
+          20400000
+        ],
+        "first3Locations": [
+          "Ambedkar Colony, Bengaluru",
+          "Electronic City, Bengaluru",
+          "Babusapalaya, Bengaluru"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Bengaluru",
+        "category": "Houses & Apartments",
+        "categoryId": "1725",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1725&query=Bengaluru&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Pg building for sale in bangalore",
+          "Pg building for sale in bangalore",
+          "Pg building for sale in bangalore"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1855545157",
+          "https://www.olx.in/item/1846388324",
+          "https://www.olx.in/item/1853717288"
+        ],
+        "first3Prices": [
+          45000000,
+          42500000,
+          55000000
+        ],
+        "first3Locations": [
+          "Electronic City Phase II, Bengaluru",
+          "Marathahalli, Bengaluru",
+          "Doddanekundi, Bengaluru"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Bengaluru",
+        "category": "Commercial Properties",
+        "categoryId": "1731",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1731&query=Bengaluru&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Its fully prime property for commercial bussiness",
+          "Office Space for Rent at Prestige Towers, Residency Road, Bangalore",
+          "Office space of 2000sqft area on the hyderabad - bengaluru highway"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1855505665",
+          "https://www.olx.in/item/1850758200",
+          "https://www.olx.in/item/1855413482"
+        ],
+        "first3Prices": [
+          1000000,
+          165000,
+          50000
+        ],
+        "first3Locations": [
+          "Bangalore Highway, Dhone",
+          "Residency Road, Bengaluru",
+          "Ram Nagar, Anantapur"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Hyderabad",
+        "category": "Lands & Plots",
+        "categoryId": "1729",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1729&query=Hyderabad&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "open plots for sale at rajapur @ just 4800 per sqyd",
+          "Gated community plots for sale near jadcharla just @3300",
+          "Plot for sale near Jana Chaitanya, Golden Heights"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1850286072",
+          "https://www.olx.in/item/1849863429",
+          "https://www.olx.in/item/1855544287"
+        ],
+        "first3Prices": [
+          480000,
+          330000,
+          65000
+        ],
+        "first3Locations": [
+          "Masab Tank, Hyderabad",
+          "Balapur, Hyderabad",
+          "Dairy Farm, Hyderabad"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Hyderabad",
+        "category": "Houses & Apartments",
+        "categoryId": "1725",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1725&query=Hyderabad&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Resale villa avaiable for sale in myscape Courtyard with interior",
+          "Ready to move appartment for sale in suki ubantu 3 bhk",
+          "Investor flat available in aditya atene in shaikpet manikonda"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1848720269",
+          "https://www.olx.in/item/1843501360",
+          "https://www.olx.in/item/1840042951"
+        ],
+        "first3Prices": [
+          300000000,
+          16000000,
+          25000000
+        ],
+        "first3Locations": [
+          "Nanakramguda, Hyderabad",
+          "Puppal Guda, Hyderabad",
+          "Shaikpet, Hyderabad"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Hyderabad",
+        "category": "Commercial Properties",
+        "categoryId": "1731",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1731&query=Hyderabad&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Plug N Play Commercial office space for Rent at Gachibowli",
+          "Plug N Play Commercial Office Space for renr at Jublihills",
+          "Plug N Play Commercial office space for Rent Madhapur"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1793006318",
+          "https://www.olx.in/item/1790490299",
+          "https://www.olx.in/item/1809663739"
+        ],
+        "first3Prices": [
+          75000,
+          75000,
+          50000
+        ],
+        "first3Locations": [
+          "Gachibowli, Hyderabad",
+          "Jubilee Hills, Hyderabad",
+          "Madhapur, Hyderabad"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Jaipur",
+        "category": "Lands & Plots",
+        "categoryId": "1729",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1729&query=Jaipur&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Jaipur property township Ajmer road investment government approved",
+          "रिंग रोड चिमनपुरा",
+          "जेडीए अप्रूव्ड 360 गज नॉर्थ ईस्ट कॉर्नर प्लॉट 60 फिट और 40 फिट रोड़ है"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1855546566",
+          "https://www.olx.in/item/1855546169",
+          "https://www.olx.in/item/1854827624"
+        ],
+        "first3Prices": [
+          12450,
+          108000000,
+          42000
+        ],
+        "first3Locations": [
+          "Ajmer Road, Jaipur",
+          "Ajmer Road, Jaipur",
+          "Ajmer Road, Jaipur"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Jaipur",
+        "category": "Houses & Apartments",
+        "categoryId": "1725",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1725&query=Jaipur&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Big Size 3BHK Semi Furnished Flat in Sikar Road Jaipur",
+          "Jda approve 2Bhk flat",
+          "Fully furnished 3bhk in mahesh nagar"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1852736973",
+          "https://www.olx.in/item/1855545580",
+          "https://www.olx.in/item/1855545438"
+        ],
+        "first3Prices": [
+          6498285,
+          1400000,
+          6500000
+        ],
+        "first3Locations": [
+          "Sikar Road, Jaipur",
+          "Hathod, Jaipur",
+          "Mahesh Nagar, Jaipur"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Jaipur",
+        "category": "Commercial Properties",
+        "categoryId": "1731",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1731&query=Jaipur&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Luxurious office",
+          "Luxurious office",
+          "Luxurious office for rent"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1801113022",
+          "https://www.olx.in/item/1801112752",
+          "https://www.olx.in/item/1800075018"
+        ],
+        "first3Prices": [
+          140000,
+          55000,
+          34000
+        ],
+        "first3Locations": [
+          "Mansarovar, Jaipur",
+          "Mansarovar, Jaipur",
+          "Mansarovar, Jaipur"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Lucknow",
+        "category": "Lands & Plots",
+        "categoryId": "1729",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1729&query=Lucknow&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Unnao highway",
+          "Lucknow to maurawa road",
+          "Lucknow to Unnao highway"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1852737749",
+          "https://www.olx.in/item/1852737466",
+          "https://www.olx.in/item/1852737215"
+        ],
+        "first3Prices": [
+          525000,
+          1248750,
+          799200
+        ],
+        "first3Locations": [
+          "Telibagh, Lucknow",
+          "Telibagh, Lucknow",
+          "Telibagh, Lucknow"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Lucknow",
+        "category": "Houses & Apartments",
+        "categoryId": "1725",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1725&query=Lucknow&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "500 वर्गफुट डबल स्टोरी मकान मात्र ₹ 34लाख, भूहर, नियर लालबाग मोड़, LKO",
+          "Residential House(Aliganj)",
+          "Best location perfect 2 bhk flat fix price"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1847897257",
+          "https://www.olx.in/item/1845885946",
+          "https://www.olx.in/item/1855544504"
+        ],
+        "first3Prices": [
+          3400000,
+          7500000,
+          4500000
+        ],
+        "first3Locations": [
+          "Ramna, Lucknow",
+          "Aliganj, Lucknow",
+          "Sultanpur Road, Lucknow"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Lucknow",
+        "category": "Commercial Properties",
+        "categoryId": "1731",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1731&query=Lucknow&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "1450 sqft Semi commercial Hall for rent at gomti nagar Lucknow",
+          "Basement Available For Rent",
+          "Open Terrace Space for Rent in Kapoorthala"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1852738417",
+          "https://www.olx.in/item/1855546605",
+          "https://www.olx.in/item/1855134415"
+        ],
+        "first3Prices": [
+          70000,
+          35000,
+          81000
+        ],
+        "first3Locations": [
+          "Gomti Nagar, Lucknow",
+          "Vrindavan Colony Phase 2, Lucknow",
+          "Chandganj, Lucknow"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Kolkata",
+        "category": "Lands & Plots",
+        "categoryId": "1729",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1729&query=Kolkata&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Near Rashbihari kalighat mandir - Land sale",
+          "Vacant land for sale at Jagaddal",
+          "Fresh land.barasat 1kata 4chotack"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1855543646",
+          "https://www.olx.in/item/1855531997",
+          "https://www.olx.in/item/1855513084"
+        ],
+        "first3Prices": [
+          95000000,
+          1800000,
+          450000
+        ],
+        "first3Locations": [
+          "Dhakuria South East, Kolkata",
+          "Kankinara, Kolkata",
+          "Barasat- Barrackpore Road, Kolkata"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Kolkata",
+        "category": "Houses & Apartments",
+        "categoryId": "1725",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1725&query=Kolkata&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "3bhk fully furnished flat sale in picnic garden. No loan",
+          "2bhk, Behala, fully Furnished.",
+          "2bhk apartment for sale at prime location in Parnasree, Behala"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1854826150",
+          "https://www.olx.in/item/1852735660",
+          "https://www.olx.in/item/1847463552"
+        ],
+        "first3Prices": [
+          4000000,
+          2800000,
+          3400000
+        ],
+        "first3Locations": [
+          "Picnic Garden, Kolkata",
+          "Behala, Kolkata",
+          "Behala, Kolkata"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      },
+      {
+        "adapter": "OlxRealEstateAdapter",
+        "city": "Kolkata",
+        "category": "Commercial Properties",
+        "categoryId": "1731",
+        "requestUrl": "https://www.olx.in/api/relevance/v4/search?category=1731&query=Kolkata&facet_only=false&page=0&size=10",
+        "httpStatus": 200,
+        "genuinelyFromSource": true,
+        "extractedCount": 10,
+        "first3Titles": [
+          "Godown/Office/Laborator Rent Hazra Road (Hazra More) 450sqft Rent 20K.",
+          "Unfurnished shop for rent at Newtown action area 3 near by uniworld",
+          "Dum Dum area 1,2,3OOM Office Place Available for rent at Dum Dum Metro"
+        ],
+        "first3Urls": [
+          "https://www.olx.in/item/1852739351",
+          "https://www.olx.in/item/1854724021",
+          "https://www.olx.in/item/1816590793"
+        ],
+        "first3Prices": [
+          20000,
+          25000,
+          18000
+        ],
+        "first3Locations": [
+          "Bhawanipur, Kolkata",
+          "Newtown- Action Area III, Kolkata",
+          "DUMDUM, Kolkata"
+        ],
+        "isValidSaleListing": true,
+        "validPriceLocationType": true,
+        "notes": "Successfully extracted 10 genuine sale listings"
+      }
+    ]
+  },
+  "canonicalUrlVerification": [
+    {
+      "source": "MagicBricks",
+      "city": "Gurugram",
+      "url": "https://www.magicbricks.com/propertyDetails/4-BHK-2800-Sq-ft-Builder-Floor-Apartment-FOR-Sale-Golf-course-Extension-Road-in-Gurgaon&id=4d423835373238383235",
+      "httpStatus": 200,
+      "opensCorrectly": true
+    },
+    {
+      "source": "MagicBricks",
+      "city": "Dharuhera",
+      "url": "https://www.magicbricks.com/propertyDetails/2-BHK-975-Sq-ft-Multistorey-Apartment-FOR-Sale-NH-8-in-Dharuhera&id=4d423834343332393133",
+      "httpStatus": 200,
+      "opensCorrectly": true
+    },
+    {
+      "source": "MagicBricks",
+      "city": "Chandigarh",
+      "url": "https://www.magicbricks.com/propertyDetails/3-BHK-1900-Sq-ft-Multistorey-Apartment-FOR-Sale-Zirakpur-in-Chandigarh&id=4d423836333232333133",
+      "httpStatus": 200,
+      "opensCorrectly": true
+    },
+    {
+      "source": "MagicBricks",
+      "city": "Mohali",
+      "url": "https://www.magicbricks.com/propertyDetails/3-BHK-2651-Sq-ft-Multistorey-Apartment-FOR-Sale-Sector-88-in-Mohali&id=4d423836343433393531",
+      "httpStatus": 200,
+      "opensCorrectly": true
+    },
+    {
+      "source": "MagicBricks",
+      "city": "Mumbai",
+      "url": "https://www.magicbricks.com/propertyDetails/4-BHK-1655-Sq-ft-Multistorey-Apartment-FOR-Sale-Juhu-in-Mumbai&id=4d423835343835393837",
+      "httpStatus": 200,
+      "opensCorrectly": true
+    },
+    {
+      "source": "MagicBricks",
+      "city": "Pune",
+      "url": "https://www.magicbricks.com/propertyDetails/2-BHK-865-Sq-ft-Multistorey-Apartment-FOR-Sale-Balewadi-in-Pune&id=4d423836323932393035",
+      "httpStatus": 200,
+      "opensCorrectly": true
+    },
+    {
+      "source": "MagicBricks",
+      "city": "Delhi",
+      "url": "https://www.magicbricks.com/propertyDetails/1-BHK-700-Sq-ft-Multistorey-Apartment-FOR-Sale-Vasant-Kunj-in-New-Delhi&id=4d423836333739353437",
+      "httpStatus": 200,
+      "opensCorrectly": true
+    },
+    {
+      "source": "MagicBricks",
+      "city": "Bengaluru",
+      "url": "https://www.magicbricks.com/propertyDetails/4-BHK-4087-Sq-ft-Villa-FOR-Sale-Devanahalli-in-Bangalore&id=4d423835333935353737",
+      "httpStatus": 200,
+      "opensCorrectly": true
+    },
+    {
+      "source": "MagicBricks",
+      "city": "Jaipur",
+      "url": "https://www.magicbricks.com/propertyDetails/4-BHK-2091-Sq-ft-Multistorey-Apartment-FOR-Sale-Ajmer-Road-in-Jaipur&id=4d423830363236353639",
+      "httpStatus": 200,
+      "opensCorrectly": true
+    },
+    {
+      "source": "MagicBricks",
+      "city": "Lucknow",
+      "url": "https://www.magicbricks.com/propertyDetails/3-BHK-2300-Sq-ft-Multistorey-Apartment-FOR-Sale-Gomtinagar-Extension-in-Lucknow&id=4d423836343030353837",
+      "httpStatus": 200,
+      "opensCorrectly": true
+    },
+    {
+      "source": "MagicBricks",
+      "city": "Kolkata",
+      "url": "https://www.magicbricks.com/propertyDetails/3-BHK-1077-Sq-ft-Multistorey-Apartment-FOR-Sale-Rajarhat-in-Kolkata&id=4d423836343238313235",
+      "httpStatus": 200,
+      "opensCorrectly": true
+    },
+    {
+      "source": "OLX",
+      "city": "Gurugram",
+      "url": "https://www.olx.in/item/1853925775",
+      "httpStatus": 200,
+      "opensCorrectly": true
+    },
+    {
+      "source": "OLX",
+      "city": "Gurugram",
+      "url": "https://www.olx.in/item/1846162883",
+      "httpStatus": 200,
+      "opensCorrectly": true
+    },
+    {
+      "source": "OLX",
+      "city": "Gurugram",
+      "url": "https://www.olx.in/item/1829019395",
+      "httpStatus": 200,
+      "opensCorrectly": true
+    }
+  ]
+}

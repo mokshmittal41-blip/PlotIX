@@ -1,0 +1,77 @@
+[
+  {
+    "source": "MagicBricks",
+    "testedUrl": "https://www.magicbricks.com/property-for-sale/residential-real-estate?cityName=Gurgaon",
+    "httpStatus": 200,
+    "accessible": true,
+    "listingsExtracted": 30,
+    "sample": {
+      "name": "4 BHK Builder Floor for Sale in Gurgaon Luxury Floors, Golf Course Extension Road Gurgaon",
+      "url": "https://www.magicbricks.com/propertyDetails/4-BHK-2800-Sq-ft-Builder-Floor-Apartment-FOR-Sale-Golf-course-Extension-Road-in-Gurgaon&id=4d423835373238383235"
+    },
+    "captchaStatus": "None (Public Schema.org JSON-LD allowed)",
+    "canRunFree": true
+  },
+  {
+    "source": "99acres",
+    "testedUrl": "https://www.99acres.com/property-in-delhi-ncr-ffid",
+    "httpStatus": 200,
+    "accessible": true,
+    "listingsExtracted": 0,
+    "captchaStatus": "No HTTP block, but client-side React bundle hides listings",
+    "canRunFree": false
+  },
+  {
+    "source": "Housing.com",
+    "testedUrl": "https://housing.com/in/buy/searches?category=residential",
+    "httpStatus": 406,
+    "accessible": false,
+    "listingsExtracted": 0,
+    "captchaStatus": "Blocked: HTTP 406 Security Alert (Cloudflare/PerimeterX WAF)",
+    "canRunFree": false
+  },
+  {
+    "source": "NoBroker",
+    "testedUrl": "https://www.nobroker.in/property/sale/gurgaon/Sector%2057",
+    "httpStatus": 200,
+    "accessible": true,
+    "listingsExtracted": 0,
+    "captchaStatus": "Public HTML only contains breadcrumb metadata; listings require dynamic client session",
+    "canRunFree": false
+  },
+  {
+    "source": "OLX India Real Estate (Public REST API)",
+    "testedUrl": "https://www.olx.in/api/relevance/v4/search?category=1503&facet_only=false&page=0&size=10",
+    "httpStatus": 200,
+    "accessible": true,
+    "listingsExtracted": 10,
+    "sample": {
+      "id": "1855443575",
+      "title": "OPEN PLOTS FOR SALE AT MUGAWADE LOCATION",
+      "price": 6346816,
+      "city": "Pune",
+      "state": "Maharashtra",
+      "url": "https://www.olx.in/item/1855443575"
+    },
+    "captchaStatus": "None (Clean unauthenticated public JSON API)",
+    "canRunFree": true
+  },
+  {
+    "source": "Haryana RERA (HRERA)",
+    "testedUrl": "https://haryanarera.gov.in",
+    "httpStatus": 200,
+    "accessible": true,
+    "listingsExtracted": 0,
+    "captchaStatus": "ASP.NET Form session with CAPTCHA for project registry search; no open REST API",
+    "canRunFree": false
+  },
+  {
+    "source": "Data.gov.in Open Data",
+    "testedUrl": "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070",
+    "httpStatus": 403,
+    "accessible": false,
+    "listingsExtracted": 0,
+    "captchaStatus": "Requires registered Government API Key (HTTP 403 Key not authorised)",
+    "canRunFree": false
+  }
+]

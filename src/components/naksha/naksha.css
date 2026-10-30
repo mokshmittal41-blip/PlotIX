@@ -1,0 +1,2851 @@
+/* ═════════════════════════════════════════════════════════════════════════════
+   PROPWISE ARCHITECTURAL CAD SUITE & WIZARD STYLESHEET
+   Comprehensive Vanilla CSS (No Tailwind dependency)
+   ═════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── 1. Core Typography & Animation Tokens ────────────────────────────────── */
+@keyframes nakshaFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes nakshaPop {
+  0% { transform: scale(0.96); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes nakshaPulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.2); }
+  50% { box-shadow: 0 0 0 6px rgba(37, 99, 235, 0); }
+}
+
+.animate-fadeIn {
+  animation: nakshaFadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-pop {
+  animation: nakshaPop 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ─── 2. Wizard Page Layout ────────────────────────────────────────────────── */
+.ai-naksha-wizard-page {
+  min-height: 100vh;
+  width: 100%;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  color: #0f172a;
+  box-sizing: border-box;
+}
+
+.wizard-top-header {
+  min-height: 62px;
+  height: auto;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  gap: 14px;
+  box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.04);
+}
+
+.wizard-brand-cluster {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.wizard-brand-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #10b981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15), 0 0 10px rgba(16, 185, 129, 0.2);
+  flex-shrink: 0;
+}
+
+.wizard-brand-tag {
+  font-size: 11px;
+  font-weight: 900;
+  color: #059669;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.wizard-brand-sub {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  margin-left: 6px;
+}
+
+.wizard-main-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 2px 0 0;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+
+.wizard-btn-ghost {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 750;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.wizard-btn-ghost:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+/* Stepper Ribbon */
+.wizard-ribbon-bar {
+  background: #ffffff;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+  padding: 12px 28px;
+}
+
+.wizard-ribbon-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wizard-step-tab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 999px;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 13px;
+  font-weight: 750;
+  color: #94a3b8;
+}
+
+.wizard-step-tab.current {
+  color: #047857;
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.wizard-step-tab.passed {
+  color: #0f172a;
+}
+
+.wizard-step-tab-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 900;
+  transition: all 0.15s ease;
+}
+
+.wizard-step-tab.current .wizard-step-tab-badge {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+}
+
+.wizard-step-tab.passed .wizard-step-tab-badge {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.wizard-ribbon-divider {
+  flex: 1;
+  height: 2px;
+  background: #e2e8f0;
+  margin: 0 12px;
+}
+
+/* Wizard Main Content */
+.wizard-main-content {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 36px 28px 64px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.step-intro-header {
+  margin-bottom: 26px;
+}
+
+.step-pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.08);
+  color: #047857;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.step-main-title {
+  font-size: 26px;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  margin: 0 0 8px;
+}
+
+.step-sub-desc {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ─── 3. Step 01: Plot & Space Selection Styles ────────────────────────────── */
+.plot-dim-card {
+  background: #ffffff;
+  border: 1.5px solid rgba(226, 232, 240, 0.95);
+  border-radius: 22px;
+  padding: 22px 26px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px -8px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.02);
+}
+
+.plot-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.plot-card-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 850;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.plot-area-badge {
+  font-size: 12.5px;
+  font-weight: 850;
+  color: #047857;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.plot-inputs-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 768px) {
+  .plot-inputs-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.plot-input-field label {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 750;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+.plot-input-field input,
+.plot-input-field select {
+  width: 100%;
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 800;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.plot-input-field input:focus,
+.plot-input-field select:focus {
+  border-color: #059669;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.plot-envelope-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid #f1f5f9;
+  font-size: 12.5px;
+  color: #64748b;
+  font-weight: 550;
+}
+
+.spaces-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.spaces-section-title {
+  font-size: 17px;
+  font-weight: 850;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.btn-add-custom-space {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #047857;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1.5px solid rgba(16, 185, 129, 0.25);
+  padding: 7px 16px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-add-custom-space:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: #059669;
+}
+
+.spaces-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 768px) {
+  .spaces-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.space-card-item {
+  background: #ffffff;
+  border: 1.5px solid rgba(226, 232, 240, 0.95);
+  border-radius: 18px;
+  padding: 18px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  box-sizing: border-box;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.02);
+}
+
+.space-card-item:hover {
+  border-color: #cbd5e1;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.08);
+}
+
+.space-card-item.selected {
+  background: #f0fdf4;
+  border-color: #059669;
+  box-shadow: 0 8px 24px -4px rgba(16, 185, 129, 0.18);
+}
+
+.space-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.space-card-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #f1f5f9;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.space-card-item.selected .space-card-icon-wrap {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.space-check-pill {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #059669;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  box-shadow: 0 2px 6px rgba(5, 150, 105, 0.3);
+}
+
+.space-card-name {
+  font-size: 14.5px;
+  font-weight: 850;
+  color: #0f172a;
+  letter-spacing: -0.2px;
+  margin: 0 0 4px;
+}
+
+.space-card-desc {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.space-count-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #bbf7d0;
+  font-size: 12px;
+  font-weight: 750;
+  color: #047857;
+}
+
+.stepper-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid #86efac;
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.stepper-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.stepper-btn:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.stepper-val {
+  font-size: 12px;
+  font-weight: 900;
+  padding: 0 4px;
+}
+
+/* ─── 4. Step 02: Space Allocation Styles ──────────────────────────────────── */
+.allocation-meter-card {
+  background: #ffffff;
+  border: 1.5px solid rgba(226, 232, 240, 0.95);
+  border-radius: 20px;
+  padding: 20px 24px;
+  margin-bottom: 26px;
+  box-shadow: 0 10px 30px -8px rgba(15, 23, 42, 0.05);
+}
+
+.allocation-meter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.allocation-meter-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 850;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.allocation-track {
+  width: 100%;
+  height: 10px;
+  border-radius: 9999px;
+  background: #e2e8f0;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.allocation-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+  border-radius: 9999px;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.allocation-progress-fill.warning {
+  background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+}
+
+.allocation-meter-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12.5px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.alloc-room-card {
+  background: #ffffff;
+  border: 1.5px solid rgba(226, 232, 240, 0.95);
+  border-radius: 18px;
+  padding: 18px 22px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.alloc-room-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.06);
+}
+
+.alloc-room-info {
+  min-width: 180px;
+}
+
+.alloc-room-title {
+  font-size: 15.5px;
+  font-weight: 850;
+  color: #0f172a;
+  letter-spacing: -0.2px;
+  margin: 0 0 4px;
+}
+
+.alloc-room-area-pill {
+  font-size: 12px;
+  font-weight: 800;
+  color: #059669;
+}
+
+.alloc-dim-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dim-input-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 4px 8px;
+}
+
+.dim-input-group span.dim-label {
+  font-size: 11.5px;
+  font-weight: 850;
+  color: #64748b;
+}
+
+.dim-input-group input {
+  width: 46px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  font-size: 14.5px;
+  font-weight: 900;
+  color: #0f172a;
+  outline: none;
+}
+
+.dim-btn-stepper {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.dim-btn-stepper:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.alloc-presets-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.alloc-preset-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #64748b;
+  cursor: pointer;
+  text-transform: capitalize;
+  transition: all 0.15s ease;
+}
+
+.alloc-preset-btn.active {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* ─── 5. Step 03: Build Method Choice Styles ───────────────────────────────── */
+.build-method-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 18px;
+  margin-bottom: 34px;
+}
+
+@media (max-width: 768px) {
+  .build-method-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.build-card {
+  background: #ffffff;
+  border: 2px solid rgba(226, 232, 240, 0.95);
+  border-radius: 24px;
+  padding: 34px 30px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.build-card:hover {
+  border-color: #059669;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px -6px rgba(16, 185, 129, 0.15);
+}
+
+.build-card.primary {
+  background: linear-gradient(150deg, #ffffff 0%, #f0fdf4 60%, #f8fafc 100%);
+  border-color: #059669;
+  box-shadow: 0 12px 32px -6px rgba(16, 185, 129, 0.15);
+}
+
+.build-card-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  font-size: 10.5px;
+  font-weight: 900;
+  padding: 7px 16px;
+  border-bottom-left-radius: 16px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.build-card-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
+}
+
+.build-card.custom-card .build-card-icon {
+  background: #0f172a;
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.2);
+}
+
+.build-card-title {
+  font-size: 23px;
+  font-weight: 900;
+  color: #0f172a;
+  letter-spacing: -0.4px;
+  margin: 0 0 8px;
+}
+
+.build-card-desc {
+  font-size: 13.5px;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0 0 22px;
+}
+
+.build-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.build-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.btn-build-action {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 14px;
+  border: none;
+  font-size: 14px;
+  font-weight: 850;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+
+.btn-build-action.primary {
+  background: linear-gradient(135deg, #0f172a 0%, #16243a 50%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 20px -2px rgba(15, 23, 42, 0.3), 0 0 14px rgba(16, 185, 129, 0.25);
+}
+
+.btn-build-action.primary:hover {
+  box-shadow: 0 8px 24px -2px rgba(15, 23, 42, 0.4), 0 0 20px rgba(16, 185, 129, 0.35);
+  transform: translateY(-1px);
+}
+
+.btn-build-action.secondary {
+  background: #0f172a;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.2);
+}
+
+.btn-build-action.secondary:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+}
+
+/* ─── 6. Wizard Footer Navigation ─────────────────────────────────────────── */
+.wizard-footer-bar, .wizard-footer-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 26px;
+  border-top: 1px solid rgba(226, 232, 240, 0.85);
+  margin-top: 28px;
+}
+
+.wizard-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 850;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.wizard-nav-btn.primary, .btn-wizard-continue {
+  background: linear-gradient(135deg, #0f172a 0%, #16243a 50%, #059669 100%);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.25), 0 0 12px rgba(16, 185, 129, 0.2);
+}
+
+.wizard-nav-btn.primary:hover, .btn-wizard-continue:hover {
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.35), 0 0 16px rgba(16, 185, 129, 0.3);
+  transform: translateY(-1px);
+}
+
+.wizard-nav-btn.secondary, .btn-wizard-back {
+  background: #ffffff;
+  color: #475569;
+  border: 1.5px solid #cbd5e1;
+}
+
+.wizard-nav-btn.secondary:hover, .btn-wizard-back:hover:not(:disabled) {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.btn-wizard-back:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ═════════════════════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVENESS (AI NAKSHA WIZARD & STUDIO)
+   ═════════════════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .wizard-top-header {
+    height: auto !important;
+    min-height: 48px;
+    padding: 8px 12px !important;
+    gap: 8px;
+  }
+  .wizard-brand-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+  .wizard-brand-cluster {
+    gap: 8px;
+    min-width: 0;
+    flex: 1;
+  }
+  .wizard-brand-tag-row {
+    display: none;
+  }
+  .wizard-main-title {
+    font-size: 13.5px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .wizard-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .wizard-btn-ghost {
+    padding: 5px 10px;
+    font-size: 11px;
+    border-radius: 8px;
+  }
+
+  /* Stepper ribbon */
+  .wizard-ribbon-bar {
+    padding: 8px 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .wizard-ribbon-bar::-webkit-scrollbar {
+    display: none;
+  }
+  .wizard-ribbon-inner {
+    width: 100%;
+    min-width: 290px;
+    gap: 4px;
+  }
+  .wizard-step-tab {
+    padding: 3px 6px;
+    font-size: 11px;
+    gap: 4px;
+  }
+  .wizard-step-tab-badge {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+  .wizard-ribbon-divider {
+    margin: 0 3px;
+  }
+
+  /* Main content */
+  .wizard-main-content {
+    padding: 14px 10px 84px !important;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .step-intro-header {
+    margin-bottom: 14px;
+  }
+  .step-pill-tag {
+    font-size: 10px;
+    padding: 3px 8px;
+    margin-bottom: 6px;
+  }
+  .step-main-title {
+    font-size: 17px !important;
+    letter-spacing: -0.3px;
+    line-height: 1.25;
+    word-break: break-word;
+  }
+  .step-sub-desc {
+    font-size: 12px !important;
+    line-height: 1.45;
+  }
+
+  /* Plot dimensions card */
+  .plot-dim-card {
+    padding: 14px 12px !important;
+    border-radius: 14px !important;
+    margin-bottom: 18px !important;
+  }
+  .plot-card-header {
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .plot-card-title-group {
+    font-size: 12px;
+  }
+  .plot-area-badge {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+  .plot-inputs-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+  .plot-input-field label {
+    font-size: 10.5px;
+    margin-bottom: 4px;
+  }
+  .plot-input-field input,
+  .plot-input-field select {
+    padding: 7px 8px !important;
+    font-size: 12px !important;
+    border-radius: 8px;
+  }
+  .plot-envelope-summary {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 11px;
+    padding-top: 10px;
+  }
+
+  /* Spaces selection */
+  .spaces-section-header {
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .spaces-section-title {
+    font-size: 13.5px;
+  }
+  .btn-add-custom-space {
+    padding: 4px 10px;
+    font-size: 11px;
+  }
+  .spaces-cards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+    margin-bottom: 20px;
+  }
+  .space-card-item {
+    padding: 12px !important;
+    border-radius: 12px !important;
+  }
+  .space-card-name {
+    font-size: 13px;
+  }
+  .space-card-desc {
+    font-size: 11px;
+  }
+
+  /* Space allocation step */
+  .allocation-meter-card {
+    padding: 14px 12px;
+    border-radius: 14px;
+  }
+  .alloc-room-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px;
+  }
+  .alloc-room-info {
+    min-width: auto;
+    width: 100%;
+  }
+  .alloc-dim-controls {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  /* Build method step */
+  .build-method-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+  .build-card {
+    padding: 20px 16px !important;
+    border-radius: 16px !important;
+  }
+  .build-card-title {
+    font-size: 18px;
+  }
+  .build-card-desc {
+    font-size: 12.5px;
+  }
+
+  /* Wizard footer bar */
+  .wizard-footer-bar, .wizard-footer-nav {
+    padding-top: 14px;
+    margin-top: 16px;
+  }
+  .wizard-nav-btn {
+    padding: 10px 18px;
+    font-size: 12.5px;
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════════════════════
+   7. FULLSCREEN ARCHITECTURAL CAD WORKSPACE
+   ═════════════════════════════════════════════════════════════════════════════ */
+
+.cad-workspace-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background: #0f172a;
+  overflow: hidden;
+  user-select: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* ─── Top CAD Header Toolbar ──────────────────────────────────────────────── */
+.cad-header {
+  height: 56px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  z-index: 30;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.cad-header-left,
+.cad-header-center,
+.cad-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cad-btn-back {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cad-btn-back:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.cad-project-title {
+  font-size: 13px;
+  font-weight: 900;
+  color: #0f172a;
+  margin-left: 4px;
+}
+
+/* Option Tabs (Balanced, Spacious, Vastu) */
+.cad-plan-tabs-group {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  background: #f1f5f9;
+  padding: 3px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.cad-plan-tab-btn {
+  padding: 5px 12px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.cad-plan-tab-btn.active {
+  background: #ffffff;
+  color: #059669;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.15);
+}
+
+.cad-score-pill {
+  font-size: 10px;
+  font-weight: 900;
+  background: rgba(16, 185, 129, 0.12);
+  color: #047857;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+/* View Mode Pills */
+.cad-view-modes-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #f1f5f9;
+  padding: 3px;
+  border-radius: 12px;
+  border: 1.5px solid #e2e8f0;
+}
+
+.cad-view-mode-btn {
+  padding: 6px 12px;
+  border-radius: 9px;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 800;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.cad-view-mode-btn.active {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.08);
+}
+
+/* Action Icon Buttons */
+.cad-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cad-icon-btn:hover:not(:disabled) {
+  background: #f8fafc;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+.cad-icon-btn.active {
+  background: rgba(16, 185, 129, 0.1);
+  border-color: #059669;
+  color: #059669;
+}
+
+.cad-icon-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.cad-zoom-pill {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 2px;
+}
+
+.cad-zoom-pill button {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cad-zoom-pill button:hover {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.cad-zoom-text {
+  font-size: 11px;
+  font-weight: 800;
+  font-family: monospace;
+  color: #1e293b;
+  padding: 0 6px;
+}
+
+.cad-btn-export {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.2);
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.cad-btn-export:hover {
+  background: #1d4ed8;
+}
+
+/* ─── Main 3-Column Body Layout ────────────────────────────────────────────── */
+.cad-body-layout {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+  box-sizing: border-box;
+}
+
+/* ─── Left Element Library Panel ───────────────────────────────────────────── */
+.element-library-panel {
+  width: 270px;
+  background: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.library-header {
+  padding: 12px 14px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.library-title {
+  font-size: 12px;
+  font-weight: 900;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.library-tabs-bar {
+  display: flex;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 0 8px;
+  background: #f8fafc;
+}
+
+.library-tab-item {
+  flex: 1;
+  padding: 9px 4px;
+  border: none;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 800;
+  color: #64748b;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.15s ease;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.library-tab-item.active {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+  background: #ffffff;
+}
+
+.library-items-scrollable {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-sizing: border-box;
+}
+
+.library-item-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.library-item-card:hover {
+  border-color: #2563eb;
+  background: #eff6ff;
+  transform: translateX(2px);
+}
+
+.library-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.library-item-icon-box {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.library-item-card:hover .library-item-icon-box {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.library-item-name {
+  font-size: 12px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.library-item-dim {
+  font-size: 10.5px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.library-item-add-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.library-item-card:hover .library-item-add-btn {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+/* ─── Right Property Inspector Panel ───────────────────────────────────────── */
+.property-inspector-panel {
+  width: 290px;
+  background: #ffffff;
+  border-left: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.inspector-header {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inspector-title {
+  font-size: 12px;
+  font-weight: 900;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.inspector-content-scrollable {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-sizing: border-box;
+}
+
+.inspector-section-label {
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.inspector-inputs-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.inspector-input-box label {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 3px;
+}
+
+.inspector-input-box input,
+.inspector-input-box select {
+  width: 100%;
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #0f172a;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.inspector-input-box input:focus,
+.inspector-input-box select:focus {
+  border-color: #2563eb;
+  background: #ffffff;
+}
+
+.inspector-stat-pill {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 10px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #1e40af;
+  font-weight: 800;
+}
+
+.inspector-actions-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.inspector-btn-action {
+  flex: 1;
+  padding: 7px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  font-size: 11.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.inspector-btn-action:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.inspector-btn-action.delete {
+  color: #dc2626;
+  border-color: #fecaca;
+  background: #fef2f2;
+}
+
+.inspector-btn-action.delete:hover {
+  background: #fee2e2;
+}
+
+/* ─── Center Canvas & Blueprint Viewport ───────────────────────────────────── */
+.cad-center-canvas-area {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #0b1726; /* Deep Architectural Blueprint Slate */
+  overflow: hidden;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.cad-canvas-viewport {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.cad-svg-container {
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  background: #ffffff;
+  transition: transform 0.1s ease-out;
+  transform-origin: center center;
+}
+
+/* ─── Bottom AI Natural Language Command Dock ──────────────────────────────── */
+.ai-bottom-bar-container {
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  padding: 10px 18px;
+  z-index: 25;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.04);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.ai-legend-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #64748b;
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.ai-legend-items {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ai-legend-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.ai-suggestions-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  margin-bottom: 8px;
+  padding-bottom: 2px;
+}
+
+.ai-suggestion-chip {
+  white-space: nowrap;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.ai-suggestion-chip:hover {
+  background: #eff6ff;
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.ai-input-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 12px;
+  padding: 5px 8px 5px 12px;
+  box-sizing: border-box;
+}
+
+.ai-input-form:focus-within {
+  border-color: #2563eb;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.ai-input-field {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0f172a;
+  outline: none;
+}
+
+.ai-btn-send {
+  padding: 7px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.ai-btn-send:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.ai-btn-send:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* AI Proposal Diff Card */
+.ai-proposal-card {
+  background: #eff6ff;
+  border: 1.5px solid #3b82f6;
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.1);
+}
+
+.ai-proposal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.ai-proposal-title {
+  font-size: 12.5px;
+  font-weight: 900;
+  color: #1e3a8a;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ai-proposal-desc {
+  font-size: 11.5px;
+  color: #334155;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.ai-diff-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 10px;
+  font-size: 11px;
+}
+
+.ai-diff-table td {
+  padding: 4px 8px;
+  border: 1px solid #bfdbfe;
+  background: #ffffff;
+}
+
+.ai-diff-before {
+  color: #dc2626;
+  text-decoration: line-through;
+}
+
+.ai-diff-after {
+  color: #16a34a;
+  font-weight: 800;
+}
+
+.ai-proposal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.btn-apply-change {
+  padding: 5px 14px;
+  border-radius: 8px;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.btn-cancel-change {
+  padding: 5px 14px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #475569;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ═════════════════════════════════════════════════════════════════════════════
+   3D INTERACTIVE NAKSHA ARCHITECTURAL VISUALIZER (360° ORBIT)
+   ═════════════════════════════════════════════════════════════════════════════ */
+
+.naksha-3d-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 580px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none;
+  transition: background 0.4s ease;
+}
+
+.naksha-3d-fullscreen {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 99999 !important;
+  height: 100vh !important;
+}
+
+/* Daylight Lighting Theme */
+.naksha-3d-wrapper.daylight {
+  background: radial-gradient(circle at 50% 30%, #f1f5f9 0%, #cbd5e1 100%);
+  color: #0f172a;
+}
+
+/* Evening / Golden Hour Lighting Theme */
+.naksha-3d-wrapper.evening {
+  background: radial-gradient(circle at 50% 30%, #0f172a 0%, #020617 100%);
+  color: #f8fafc;
+}
+
+/* ─── Top 3D Control HUD Bar ─── */
+.naksha-3d-top-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  z-index: 20;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.evening .naksha-3d-top-hud {
+  background: rgba(15, 23, 42, 0.85);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.naksha-3d-hud-left,
+.naksha-3d-hud-center,
+.naksha-3d-hud-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.naksha-3d-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 800;
+  color: #2563eb;
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.evening .naksha-3d-badge {
+  background: rgba(37, 99, 235, 0.2);
+  color: #60a5fa;
+  border-color: rgba(37, 99, 235, 0.4);
+}
+
+.naksha-3d-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: 0 0 6px #16a34a;
+}
+
+.naksha-3d-pill-group {
+  display: flex;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  padding: 2px;
+}
+
+.evening .naksha-3d-pill-group {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.naksha-3d-pill {
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  background: transparent;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.evening .naksha-3d-pill {
+  color: #94a3b8;
+}
+
+.naksha-3d-pill.active {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.evening .naksha-3d-pill.active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* Camera Angle Presets */
+.naksha-3d-camera-presets {
+  display: flex;
+  gap: 4px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  padding: 3px;
+  border-radius: 10px;
+}
+
+.evening .naksha-3d-camera-presets {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.naksha-3d-cam-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #475569;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.evening .naksha-3d-cam-btn {
+  color: #cbd5e1;
+}
+
+.naksha-3d-cam-btn:hover {
+  background: rgba(0,0,0,0.05);
+  color: #0f172a;
+}
+
+.evening .naksha-3d-cam-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: #ffffff;
+}
+
+.naksha-3d-cam-btn.active-turntable {
+  background: #2563eb;
+  color: #ffffff;
+  animation: turntablePulse 1.5s infinite;
+}
+
+@keyframes turntablePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.naksha-3d-btn-group {
+  display: flex;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 2px;
+}
+
+.evening .naksha-3d-btn-group {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.naksha-3d-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 8px;
+  min-width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.evening .naksha-3d-icon-btn {
+  color: #94a3b8;
+}
+
+.naksha-3d-icon-btn:hover,
+.naksha-3d-icon-btn.active {
+  background: #ffffff;
+  color: #0f172a;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+}
+
+.evening .naksha-3d-icon-btn:hover,
+.evening .naksha-3d-icon-btn.active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.naksha-3d-icon-btn.zoom-label {
+  min-width: 44px;
+}
+
+.naksha-3d-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 8px;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.naksha-3d-action-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* ─── 3D Viewport Stage ─── */
+.naksha-3d-stage {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  cursor: grab;
+  position: relative;
+  touch-action: none;
+}
+
+.naksha-3d-stage:active {
+  cursor: grabbing;
+}
+
+.naksha-3d-scene {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.04s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ground Plane Base */
+.naksha-3d-ground-plane {
+  position: relative;
+  background: #e2e8f0;
+  border-radius: 20px;
+  transform-style: preserve-3d;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.22);
+}
+
+.evening .naksha-3d-ground-plane {
+  background: #1e293b;
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.6);
+}
+
+/* Road on North */
+.naksha-3d-road-band {
+  position: absolute;
+  background: #334155;
+  border: 1px dashed #64748b;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  transform: translateZ(1px);
+}
+
+.naksha-3d-road-divider {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  border-top: 2px dashed #f59e0b;
+}
+
+/* Plot Boundary & Floor */
+.naksha-3d-plot-boundary {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.95);
+  border: 3px solid #cbd5e1;
+  border-radius: 4px;
+  transform-style: preserve-3d;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.evening .naksha-3d-plot-boundary {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+.naksha-3d-lawn-floor {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #86efac 0%, #4ade80 100%);
+  opacity: 0.35;
+}
+
+.evening .naksha-3d-lawn-floor {
+  background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+  opacity: 0.5;
+}
+
+.naksha-3d-driveway {
+  position: absolute;
+  background-image: repeating-linear-gradient(45deg, #cbd5e1 0, #cbd5e1 2px, #f1f5f9 2px, #f1f5f9 8px);
+  border-right: 2px solid #94a3b8;
+}
+
+/* ─── 3D ROOMS & EXTRUDED WALLS ─── */
+.naksha-3d-room {
+  position: absolute;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  box-sizing: border-box;
+}
+
+.naksha-3d-room.selected {
+  outline: 2px solid #2563eb;
+  transform: translateZ(3px);
+}
+
+.naksha-3d-room.hovered {
+  box-shadow: 0 0 16px rgba(37, 99, 235, 0.35);
+}
+
+/* Floor Material Textures */
+.naksha-3d-room-floor {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Hardwood Parquet (Master Bed & Bedrooms) */
+.mat-hardwood .naksha-3d-room-floor {
+  background: #fde047;
+  background-image: linear-gradient(90deg, #d97706 1px, transparent 1px), linear-gradient(#b45309 1px, transparent 1px);
+  background-size: 16px 16px;
+  opacity: 0.85;
+}
+
+/* Italian Statuario Marble (Living & Dining) */
+.mat-marble .naksha-3d-room-floor {
+  background: #ffffff;
+  background-image: radial-gradient(#e2e8f0 15%, transparent 16%);
+  background-size: 12px 12px;
+}
+
+.evening .mat-marble .naksha-3d-room-floor {
+  background: #1e293b;
+}
+
+/* Porcelain Slate Tiles (Kitchen & Bath) */
+.mat-tile .naksha-3d-room-floor {
+  background: #e2e8f0;
+  background-image: linear-gradient(#cbd5e1 1px, transparent 1px), linear-gradient(90deg, #cbd5e1 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.evening .mat-tile .naksha-3d-room-floor {
+  background: #334155;
+  background-image: linear-gradient(#475569 1px, transparent 1px), linear-gradient(90deg, #475569 1px, transparent 1px);
+}
+
+/* Puja Altar Sacred Stone */
+.mat-puja .naksha-3d-room-floor {
+  background: #fef08a;
+  border: 2px solid #f59e0b;
+}
+
+/* Balcony Teak Deck */
+.mat-deck .naksha-3d-room-floor {
+  background: repeating-linear-gradient(90deg, #92400e, #92400e 4px, #78350f 4px, #78350f 6px);
+}
+
+.naksha-3d-room-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.naksha-3d-room-label strong {
+  font-size: 10.5px;
+  font-weight: 900;
+  color: #0f172a;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+}
+
+.evening .naksha-3d-room-label strong {
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+
+.naksha-3d-room-label small {
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #475569;
+}
+
+.evening .naksha-3d-room-label small {
+  color: #94a3b8;
+}
+
+/* ─── 3D EXTRUDED WALLS (CSS 3D Faces) ─── */
+.naksha-3d-wall {
+  position: absolute;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transform-style: preserve-3d;
+}
+
+.evening .naksha-3d-wall {
+  background: #334155;
+  border-color: #475569;
+}
+
+.wall-north {
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform-origin: top center;
+  transform: rotateX(-90deg);
+}
+
+.wall-south {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transform-origin: bottom center;
+  transform: rotateX(90deg);
+}
+
+.wall-west {
+  top: 0;
+  left: 0;
+  height: 100%;
+  transform-origin: center left;
+  transform: rotateY(90deg);
+}
+
+.wall-east {
+  top: 0;
+  right: 0;
+  height: 100%;
+  transform-origin: center right;
+  transform: rotateY(-90deg);
+}
+
+/* Evening Interior Downlight */
+.evening .naksha-3d-downlight {
+  position: absolute;
+  inset: 10%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.35) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ─── 3D FURNITURE LAYER ─── */
+.naksha-3d-furniture-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 3D Bed Model */
+.model-3d-bed {
+  position: relative;
+  background: #3b82f6;
+  border-radius: 4px;
+  transform: translateZ(12px);
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.bed-headboard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background: #1e3a8a;
+  border-radius: 3px 3px 0 0;
+}
+
+.bed-mattress {
+  position: absolute;
+  top: 14px;
+  inset-inline: 4px;
+  bottom: 4px;
+  background: #ffffff;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bed-pillow {
+  position: absolute;
+  top: 4px;
+  width: 38%;
+  height: 14px;
+  background: #e2e8f0;
+  border-radius: 2px;
+}
+.bed-pillow.p1 { left: 8%; }
+.bed-pillow.p2 { right: 8%; }
+
+.bed-duvet {
+  position: absolute;
+  top: 22px;
+  inset-inline: 0;
+  bottom: 0;
+  background: #60a5fa;
+  border-radius: 0 0 2px 2px;
+}
+
+/* 3D Living Sofa Model */
+.model-3d-living {
+  position: relative;
+  width: 70%;
+  height: 70%;
+  transform: translateZ(10px);
+  transform-style: preserve-3d;
+}
+
+.model-sofa-l {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sofa-seat.main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 75%;
+  height: 24px;
+  background: #475569;
+  border-radius: 4px;
+}
+
+.sofa-seat.l-side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 65%;
+  background: #475569;
+  border-radius: 4px;
+}
+
+.model-coffee-table {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  width: 32px;
+  height: 20px;
+  background: #92400e;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+/* 3D Dining Table */
+.model-3d-dining {
+  transform: translateZ(10px);
+}
+.model-dining-table {
+  width: 60px;
+  height: 38px;
+  background: #78350f;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* 3D Kitchen Counters */
+.model-3d-kitchen {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  transform: translateZ(12px);
+}
+.kitchen-counter-l {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 16px;
+  background: #1e293b;
+  border-bottom: 3px solid #64748b;
+}
+
+/* 3D Gate */
+.naksha-3d-gate {
+  position: absolute;
+  background: #16a34a;
+  color: #ffffff;
+  font-size: 8px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transform: translateZ(6px);
+}
+
+/* ─── Floating HUD Widgets ─── */
+.naksha-3d-compass-widget {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  padding: 8px 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  z-index: 15;
+}
+
+.evening .naksha-3d-compass-widget {
+  background: rgba(15, 23, 42, 0.85);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.naksha-3d-compass-disc {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.05s ease-out;
+}
+
+.naksha-3d-compass-disc .dir {
+  position: absolute;
+  font-size: 8.5px;
+  font-weight: 900;
+}
+.dir.n { top: 2px; color: #dc2626; }
+.dir.s { bottom: 2px; color: #64748b; }
+.dir.e { right: 3px; color: #64748b; }
+.dir.w { left: 3px; color: #64748b; }
+
+.compass-needle {
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, #dc2626 50%, #64748b 50%);
+}
+
+.compass-sub {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+/* Floating Room Details Card */
+.naksha-3d-room-card {
+  position: absolute;
+  bottom: 20px;
+  left: 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  padding: 14px 18px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  max-width: 320px;
+  z-index: 15;
+}
+
+.evening .naksha-3d-room-card {
+  background: rgba(15, 23, 42, 0.92);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.room-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: 800;
+  color: #2563eb;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.room-card-title {
+  font-size: 16px;
+  font-weight: 900;
+  margin: 0 0 6px;
+}
+
+.room-card-metrics {
+  font-size: 11.5px;
+  color: #64748b;
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.evening .room-card-metrics {
+  color: #94a3b8;
+}
+
+.room-card-vastu {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #16a34a;
+  background: #dcfce7;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+.naksha-3d-drag-hint {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.82);
+  color: #f8fafc;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ─── CAD Studio Mobile Responsive Optimization ────────────────────────────── */
+.cad-mobile-action-bar {
+  display: none;
+}
+
+.cad-mobile-backdrop {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .cad-workspace-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .cad-header {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .cad-header-left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .cad-project-title {
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .cad-plan-tabs-group {
+    display: flex;
+    overflow-x: auto;
+    max-width: 100%;
+    padding: 2px 0;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cad-plan-tab-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .cad-header-center {
+    display: none; /* Replaced by cad-mobile-action-bar for clean touch controls */
+  }
+
+  .cad-header-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    overflow-x: auto;
+    gap: 6px;
+  }
+
+  .cad-btn-export {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  /* Mobile Quick Action Bar */
+  .cad-mobile-action-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: #0f172a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 6px 8px;
+    gap: 6px;
+    z-index: 30;
+    overflow-x: auto;
+  }
+
+  .cad-mobile-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #e2e8f0;
+    font-size: 11.5px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+
+  .cad-mobile-btn.active {
+    background: #2563eb;
+    border-color: #3b82f6;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+  }
+
+  .cad-body-layout {
+    flex: 1;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cad-center-canvas-area {
+    width: 100% !important;
+    height: 100% !important;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cad-canvas-viewport {
+    padding: 10px !important;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .architectural-svg-canvas {
+    max-width: 95vw !important;
+    height: auto !important;
+  }
+
+  .element-library-collapsed-bar,
+  .property-inspector-collapsed-bar {
+    display: none !important;
+  }
+
+  /* Left Drawer: Element Library on Mobile */
+  .element-library-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(320px, 86vw);
+    z-index: 100;
+    box-shadow: 10px 0 35px rgba(0, 0, 0, 0.4);
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    animation: slideInLeft 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Right Drawer: Property Inspector on Mobile */
+  .property-inspector-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(320px, 88vw);
+    z-index: 100;
+    box-shadow: -10px 0 35px rgba(0, 0, 0, 0.4);
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    animation: slideInRight 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Backdrop when drawer is open */
+  .cad-mobile-backdrop {
+    display: block;
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+    z-index: 90;
+    cursor: pointer;
+  }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
