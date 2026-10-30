@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import { useAuth } from '../context/AuthContext';
 import { useApp } from '../context/AppContext';
@@ -11,157 +11,207 @@ interface AuthCallbackProps {
   onNavigate?: (page: string, propertyId?: string) => void;
 }
 
+// Module-level set of authorization codes currently exchanging or already exchanged.
+// Survives React component remounts (including React StrictMode double-mount).
+const processedCodes = new Set<string>();
+
 export default function AuthCallback({ onNavigate }: AuthCallbackProps) {
   const { refreshProfile } = useAuth();
   const { addToast } = useApp();
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  // Refs to prevent race conditions and stale closure evaluation
+  // Keep latest callbacks in refs so the useEffect never re-triggers due to dependency changes
+  const onNavigateRef = useRef(onNavigate);
+  onNavigateRef.current = onNavigate;
+
+  const refreshProfileRef = useRef(refreshProfile);
+  refreshProfileRef.current = refreshProfile;
+
+  const addToastRef = useRef(addToast);
+  addToastRef.current = addToast;
+
+  // Single-resolution guard for this component instance
   const isResolvedRef = useRef<boolean>(false);
-  const hasExchangedRef = useRef<boolean>(false);
-
-  const handleSuccess = useCallback(async (user: any) => {
-    if (isResolvedRef.current) return;
-    isResolvedRef.current = true;
-
-    const meta = user.user_metadata || {};
-    const fullName = meta.full_name || meta.name || user.email?.split('@')[0] || 'Property Investor';
-    const avatarUrl = meta.avatar_url || meta.picture || null;
-
-    try {
-      await supabase.from('profiles').upsert({
-        id: user.id,
-        email: user.email,
-        full_name: fullName,
-        avatar_url: avatarUrl,
-        role: 'Verified Google Investor',
-        updated_at: new Date().toISOString()
-      }, { onConflict: 'id' });
-    } catch (profileErr) {
-      console.warn('[AuthCallback] Profile upsert notice:', profileErr);
-    }
-
-    try {
-      await refreshProfile();
-    } catch (refreshErr) {
-      console.warn('[AuthCallback] refreshProfile notice:', refreshErr);
-    }
-
-    setStatus('success');
-    addToast(`Welcome, ${fullName}! Signed in successfully with Google.`, 'success');
-
-    // Clean URL query parameters and navigate cleanly
-    setTimeout(() => {
-      try {
-        window.history.replaceState({}, document.title, '/');
-      } catch {
-        // Fallback if history state restricted
-      }
-
-      if (onNavigate) {
-        onNavigate('home');
-      } else {
-        window.dispatchEvent(new CustomEvent('navigate-to', { detail: 'home' }));
-      }
-    }, 1200);
-  }, [refreshProfile, addToast, onNavigate]);
-
-  const handleError = useCallback((msg: string) => {
-    if (isResolvedRef.current) return;
-    isResolvedRef.current = true;
-    setStatus('error');
-    setErrorMessage(msg);
-  }, []);
 
   useEffect(() => {
     let isMounted = true;
-    let authSubscription: { unsubscribe: () => void } | null = null;
     let timeoutId: any = null;
 
-    async function handleAuthCallback() {
+    const navigateToHome = () => {
       try {
-        // 1. Check URL for direct error parameters from OAuth provider
+        window.history.replaceState({}, document.title, '/');
+      } catch {}
+
+      if (onNavigateRef.current) {
+        onNavigateRef.current('home');
+      } else {
+        window.dispatchEvent(new CustomEvent('navigate-to', { detail: 'home' }));
+      }
+    };
+
+    const handleSuccess = async (user: any) => {
+      if (isResolvedRef.current) return;
+      isResolvedRef.current = true;
+
+      const meta = user.user_metadata || {};
+      const fullName = meta.full_name || meta.name || user.email?.split('@')[0] || 'Property Investor';
+      const avatarUrl = meta.avatar_url || meta.picture || null;
+
+      try {
+        await supabase.from('profiles').upsert({
+          id: user.id,
+          email: user.email,
+          full_name: fullName,
+          avatar_url: avatarUrl,
+          role: 'Verified Google Investor',
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'id' });
+      } catch (profileErr) {
+        console.warn('[AuthCallback] Profile upsert notice:', profileErr);
+      }
+
+      try {
+        if (refreshProfileRef.current) {
+          await refreshProfileRef.current();
+        }
+      } catch (refreshErr) {
+        console.warn('[AuthCallback] refreshProfile notice:', refreshErr);
+      }
+
+      if (isMounted) {
+        setStatus('success');
+        if (addToastRef.current) {
+          addToastRef.current(`Welcome, ${fullName}! Signed in successfully with Google.`, 'success');
+        }
+
+        // Clean URL query parameters and redirect to dashboard
+        setTimeout(() => {
+          if (isMounted) {
+            navigateToHome();
+          }
+        }, 1000);
+      }
+    };
+
+    const handleError = (msg: string) => {
+      if (isResolvedRef.current) return;
+      isResolvedRef.current = true;
+      if (isMounted) {
+        setStatus('error');
+        setErrorMessage(msg);
+      }
+    };
+
+    async function processAuth() {
+      try {
         const searchParams = new URLSearchParams(window.location.search);
         const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, '?'));
 
-        const error = searchParams.get('error') || hashParams.get('error');
-        const errorDescription = searchParams.get('error_description') || hashParams.get('error_description');
+        // 1. Direct error in URL from OAuth provider (e.g. user canceled Google consent)
+        const errorParam = searchParams.get('error') || hashParams.get('error');
+        const errorDescParam = searchParams.get('error_description') || hashParams.get('error_description');
 
-        if (error) {
-          if (isMounted) {
-            handleError(errorDescription || error || 'Google sign-in was canceled or failed.');
-          }
-          return;
-        }
-
-        // 2. Check if a session already exists (e.g. detectSessionInUrl handled it automatically)
-        const { data: initialData } = await supabase.auth.getSession();
-        if (initialData?.session?.user) {
-          if (isMounted) {
-            await handleSuccess(initialData.session.user);
-          }
-          return;
-        }
-
-        // 3. If PKCE auth code is in query params and no session yet, exchange it safely once
-        const authCode = searchParams.get('code');
-        if (authCode && !hasExchangedRef.current) {
-          hasExchangedRef.current = true;
+        if (errorParam) {
+          // Clean error parameters from URL
           try {
-            const { data: exchangeData, error: exchangeErr } = await supabase.auth.exchangeCodeForSession(authCode);
-            if (exchangeErr) {
-              console.warn('[AuthCallback] exchangeCodeForSession notice:', exchangeErr.message);
-            } else if (exchangeData?.session?.user && isMounted) {
-              await handleSuccess(exchangeData.session.user);
-              return;
-            }
-          } catch (codeErr) {
-            console.warn('[AuthCallback] exchangeCodeForSession exception:', codeErr);
-          }
-        }
-
-        // 4. Re-check session after possible exchange
-        const { data: retryData } = await supabase.auth.getSession();
-        if (retryData?.session?.user && isMounted) {
-          await handleSuccess(retryData.session.user);
+            window.history.replaceState({}, document.title, window.location.pathname);
+          } catch {}
+          handleError(errorDescParam || errorParam || 'Google sign-in was canceled.');
           return;
         }
 
-        // 5. Listen to onAuthStateChange in case token exchange is still in flight
-        const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, newSession) => {
-          if (!isMounted || isResolvedRef.current) return;
+        const authCode = searchParams.get('code');
 
-          if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION') && newSession?.user) {
-            await handleSuccess(newSession.user);
-            subscription?.unsubscribe();
+        // 2. If NO code parameter in URL, check if an active session already exists
+        if (!authCode) {
+          const { data: { session } } = await supabase.auth.getSession();
+          if (session?.user && isMounted) {
+            await handleSuccess(session.user);
+          } else if (isMounted) {
+            handleError('No authentication authorization code found.');
           }
-        });
-        authSubscription = subscription;
+          return;
+        }
 
-        // 6. Safe 15-second timeout guarded by isResolvedRef (immune to stale closures)
-        timeoutId = setTimeout(() => {
-          if (isMounted && !isResolvedRef.current) {
-            handleError('Authentication timed out. Please try signing in again.');
-            authSubscription?.unsubscribe();
+        // 3. Prevent duplicate code exchange:
+        // Check module-level Set AND sessionStorage lock
+        const sessionLockKey = `sb_pkce_${authCode}`;
+        const alreadyProcessed = processedCodes.has(authCode) || (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(sessionLockKey));
+
+        if (alreadyProcessed) {
+          // Already exchanging or exchanged this code: check current session
+          const { data: { session } } = await supabase.auth.getSession();
+          if (session?.user && isMounted) {
+            await handleSuccess(session.user);
           }
-        }, 15000);
+          return;
+        }
+
+        // Mark as being processed immediately
+        processedCodes.add(authCode);
+        try {
+          if (typeof sessionStorage !== 'undefined') {
+            sessionStorage.setItem(sessionLockKey, 'true');
+          }
+        } catch {}
+
+        // Immediately scrub ?code= from the browser URL bar so it cannot be read again
+        try {
+          window.history.replaceState({}, document.title, window.location.pathname);
+        } catch {}
+
+        // 4. Manually exchange the PKCE authorization code for a session (EXACTLY ONCE)
+        const { data: exchangeData, error: exchangeErr } = await supabase.auth.exchangeCodeForSession(authCode);
+
+        if (exchangeErr) {
+          // Check if session was already established despite error
+          const { data: existingSessionData } = await supabase.auth.getSession();
+          if (existingSessionData?.session?.user && isMounted) {
+            await handleSuccess(existingSessionData.session.user);
+            return;
+          }
+
+          if (isMounted) {
+            handleError(exchangeErr.message || 'Failed to exchange authorization code for session.');
+          }
+          return;
+        }
+
+        if (exchangeData?.session?.user && isMounted) {
+          await handleSuccess(exchangeData.session.user);
+          return;
+        }
+
+        // Fallback session verification
+        const { data: finalSessionData } = await supabase.auth.getSession();
+        if (finalSessionData?.session?.user && isMounted) {
+          await handleSuccess(finalSessionData.session.user);
+        } else if (isMounted) {
+          handleError('Authentication completed but no active user session was established.');
+        }
 
       } catch (err: any) {
-        if (isMounted && !isResolvedRef.current) {
-          handleError(err?.message || 'An unexpected error occurred during Google OAuth callback.');
+        if (isMounted) {
+          handleError(err?.message || 'An unexpected error occurred during Google authentication.');
         }
       }
     }
 
-    handleAuthCallback();
+    // Set a safety timeout (12s) in case of extreme network latency
+    timeoutId = setTimeout(() => {
+      if (isMounted && !isResolvedRef.current) {
+        handleError('Authentication timed out. Please try signing in again.');
+      }
+    }, 12000);
+
+    processAuth();
 
     return () => {
       isMounted = false;
       if (timeoutId) clearTimeout(timeoutId);
-      if (authSubscription) authSubscription.unsubscribe();
     };
-  }, [handleSuccess, handleError]);
+  }, []); // Run strictly ONCE on mount
 
   const handleReturnToLogin = () => {
     try {

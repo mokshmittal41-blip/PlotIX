@@ -80,7 +80,7 @@ export const supabase: SupabaseClient = createClient(
     auth: {
       persistSession: true,
       autoRefreshToken: true,
-      detectSessionInUrl: true,
+      detectSessionInUrl: false, // Explicitly false: code exchange is manually managed in AuthCallback.tsx to prevent flow_state_already_used collisions
       flowType: 'pkce'
     }
   }

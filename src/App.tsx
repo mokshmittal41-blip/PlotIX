@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import MobileShell from './components/layout/MobileShell';
 import DesktopShell from './components/layout/DesktopShell';
 import { AppProvider, useApp } from './context/AppContext';
-import { AuthProvider } from './context/AuthContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { MapProvider } from './context/MapContext';
 import LocationOnboardingScreen from './components/onboarding/LocationOnboardingScreen';
@@ -170,7 +170,15 @@ function AppInner() {
     isOAuthRedirect ? 'auth-callback' : 'signin'
   );
   const { currentPropertyId, setCurrentPropertyId, hasCompletedOnboarding } = useApp();
+  const { user } = useAuth();
   const isMobile = useIsMobile();
+
+  // If user is already authenticated and currently on signin/signup, transition to dashboard
+  useEffect(() => {
+    if (user && (currentPage === 'signin' || currentPage === 'signup')) {
+      setCurrentPage('home');
+    }
+  }, [user, currentPage]);
 
   const navigate = (page: string, propertyId?: string) => {
     if (propertyId) setCurrentPropertyId(propertyId);
