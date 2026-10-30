@@ -122,6 +122,7 @@ export default function AuthCallback({ onNavigate }: AuthCallbackProps) {
         }
 
         const authCode = searchParams.get('code');
+        const flowId = searchParams.get('sb_flow_id') || undefined;
 
         // 2. If NO code parameter in URL, check if an active session already exists
         if (!authCode) {
@@ -156,15 +157,21 @@ export default function AuthCallback({ onNavigate }: AuthCallbackProps) {
           }
         } catch {}
 
-        // Immediately scrub ?code= from the browser URL bar so it cannot be read again
+        // 4. Manually exchange the PKCE authorization code for a session (EXACTLY ONCE)
+        // Keep URL intact during call so Supabase SDK internal helpers can read flow context
+        const { data: exchangeData, error: exchangeErr } = await supabase.auth.exchangeCodeForSession(
+          authCode,
+          flowId ? { flowId } : undefined
+        );
+
+        // Scrub URL query parameters after exchange completes
         try {
-          window.history.replaceState({}, document.title, window.location.pathname);
+          window.history.replaceState({}, document.title, '/');
         } catch {}
 
-        // 4. Manually exchange the PKCE authorization code for a session (EXACTLY ONCE)
-        const { data: exchangeData, error: exchangeErr } = await supabase.auth.exchangeCodeForSession(authCode);
-
         if (exchangeErr) {
+          console.warn('[AuthCallback] exchangeCodeForSession notice:', exchangeErr.message);
+
           // Check if session was already established despite error
           const { data: existingSessionData } = await supabase.auth.getSession();
           if (existingSessionData?.session?.user && isMounted) {
