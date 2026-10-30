@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import { useAuth } from '../context/AuthContext';
 import { useApp } from '../context/AppContext';
@@ -17,144 +17,139 @@ export default function AuthCallback({ onNavigate }: AuthCallbackProps) {
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [errorMessage, setErrorMessage] = useState<string>('');
 
+  // Refs to prevent race conditions and stale closure evaluation
+  const isResolvedRef = useRef<boolean>(false);
+  const hasExchangedRef = useRef<boolean>(false);
+
+  const handleSuccess = useCallback(async (user: any) => {
+    if (isResolvedRef.current) return;
+    isResolvedRef.current = true;
+
+    const meta = user.user_metadata || {};
+    const fullName = meta.full_name || meta.name || user.email?.split('@')[0] || 'Property Investor';
+    const avatarUrl = meta.avatar_url || meta.picture || null;
+
+    try {
+      await supabase.from('profiles').upsert({
+        id: user.id,
+        email: user.email,
+        full_name: fullName,
+        avatar_url: avatarUrl,
+        role: 'Verified Google Investor',
+        updated_at: new Date().toISOString()
+      }, { onConflict: 'id' });
+    } catch (profileErr) {
+      console.warn('[AuthCallback] Profile upsert notice:', profileErr);
+    }
+
+    try {
+      await refreshProfile();
+    } catch (refreshErr) {
+      console.warn('[AuthCallback] refreshProfile notice:', refreshErr);
+    }
+
+    setStatus('success');
+    addToast(`Welcome, ${fullName}! Signed in successfully with Google.`, 'success');
+
+    // Clean URL query parameters and navigate cleanly
+    setTimeout(() => {
+      try {
+        window.history.replaceState({}, document.title, '/');
+      } catch {
+        // Fallback if history state restricted
+      }
+
+      if (onNavigate) {
+        onNavigate('home');
+      } else {
+        window.dispatchEvent(new CustomEvent('navigate-to', { detail: 'home' }));
+      }
+    }, 1200);
+  }, [refreshProfile, addToast, onNavigate]);
+
+  const handleError = useCallback((msg: string) => {
+    if (isResolvedRef.current) return;
+    isResolvedRef.current = true;
+    setStatus('error');
+    setErrorMessage(msg);
+  }, []);
+
   useEffect(() => {
     let isMounted = true;
+    let authSubscription: { unsubscribe: () => void } | null = null;
+    let timeoutId: any = null;
 
     async function handleAuthCallback() {
       try {
         // 1. Check URL for direct error parameters from OAuth provider
         const searchParams = new URLSearchParams(window.location.search);
-        const hashParams = new URLSearchParams(window.location.hash.replace('#', '?'));
+        const hashParams = new URLSearchParams(window.location.hash.replace(/^#/, '?'));
 
         const error = searchParams.get('error') || hashParams.get('error');
         const errorDescription = searchParams.get('error_description') || hashParams.get('error_description');
 
         if (error) {
           if (isMounted) {
-            setStatus('error');
-            setErrorMessage(errorDescription || error || 'Google sign-in was canceled or failed.');
+            handleError(errorDescription || error || 'Google sign-in was canceled or failed.');
           }
           return;
         }
 
-        // 2. If PKCE auth code is in query params, exchange it for session
+        // 2. Check if a session already exists (e.g. detectSessionInUrl handled it automatically)
+        const { data: initialData } = await supabase.auth.getSession();
+        if (initialData?.session?.user) {
+          if (isMounted) {
+            await handleSuccess(initialData.session.user);
+          }
+          return;
+        }
+
+        // 3. If PKCE auth code is in query params and no session yet, exchange it safely once
         const authCode = searchParams.get('code');
-        if (authCode) {
+        if (authCode && !hasExchangedRef.current) {
+          hasExchangedRef.current = true;
           try {
-            await supabase.auth.exchangeCodeForSession(authCode);
+            const { data: exchangeData, error: exchangeErr } = await supabase.auth.exchangeCodeForSession(authCode);
+            if (exchangeErr) {
+              console.warn('[AuthCallback] exchangeCodeForSession notice:', exchangeErr.message);
+            } else if (exchangeData?.session?.user && isMounted) {
+              await handleSuccess(exchangeData.session.user);
+              return;
+            }
           } catch (codeErr) {
-            console.warn('[AuthCallback] exchangeCodeForSession notice:', codeErr);
+            console.warn('[AuthCallback] exchangeCodeForSession exception:', codeErr);
           }
         }
 
-        // 3. Fetch session from Supabase PKCE / URL session handler
-        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-
-        if (sessionError) {
-          if (isMounted) {
-            setStatus('error');
-            setErrorMessage(sessionError.message || 'Failed to retrieve authenticated session.');
-          }
-          return;
-        }
-
-        if (session?.user) {
-          const user = session.user;
-          const meta = user.user_metadata || {};
-          const fullName = meta.full_name || meta.name || user.email?.split('@')[0] || 'Property Investor';
-          const avatarUrl = meta.avatar_url || meta.picture || null;
-
-          // 3. Upsert authentic user profile in Supabase public.profiles
-          try {
-            await supabase.from('profiles').upsert({
-              id: user.id,
-              email: user.email,
-              full_name: fullName,
-              avatar_url: avatarUrl,
-              role: 'Verified Google Investor',
-              updated_at: new Date().toISOString()
-            }, { onConflict: 'id' });
-          } catch (profileErr) {
-            console.warn('[AuthCallback] Profile upsert notice:', profileErr);
-          }
-
-          // 4. Refresh AuthContext state
-          await refreshProfile();
-
-          if (isMounted) {
-            setStatus('success');
-            addToast(`Welcome, ${fullName}! Signed in successfully with Google.`, 'success');
-
-            // Clean URL query parameters and navigate to home
-            setTimeout(() => {
-              window.history.replaceState({}, document.title, window.location.pathname.replace(/\/auth\/callback.*/, '/'));
-              if (onNavigate) {
-                onNavigate('home');
-              } else {
-                window.dispatchEvent(new CustomEvent('navigate-to', { detail: 'home' }));
-              }
-            }, 1000);
-          }
+        // 4. Re-check session after possible exchange
+        const { data: retryData } = await supabase.auth.getSession();
+        if (retryData?.session?.user && isMounted) {
+          await handleSuccess(retryData.session.user);
           return;
         }
 
         // 5. Listen to onAuthStateChange in case token exchange is still in flight
         const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, newSession) => {
-          if (!isMounted) return;
+          if (!isMounted || isResolvedRef.current) return;
 
-          if (event === 'SIGNED_IN' && newSession?.user) {
-            const user = newSession.user;
-            const meta = user.user_metadata || {};
-            const fullName = meta.full_name || meta.name || user.email?.split('@')[0] || 'Property Investor';
-            const avatarUrl = meta.avatar_url || meta.picture || null;
-
-            try {
-              await supabase.from('profiles').upsert({
-                id: user.id,
-                email: user.email,
-                full_name: fullName,
-                avatar_url: avatarUrl,
-                role: 'Verified Google Investor',
-                updated_at: new Date().toISOString()
-              }, { onConflict: 'id' });
-            } catch {}
-
-            await refreshProfile();
-
-            setStatus('success');
-            addToast(`Welcome, ${fullName}! Signed in successfully with Google.`, 'success');
-
-            setTimeout(() => {
-              window.history.replaceState({}, document.title, window.location.pathname.replace(/\/auth\/callback.*/, '/'));
-              if (onNavigate) {
-                onNavigate('home');
-              } else {
-                window.dispatchEvent(new CustomEvent('navigate-to', { detail: 'home' }));
-              }
-            }, 1000);
-
+          if ((event === 'SIGNED_IN' || event === 'INITIAL_SESSION') && newSession?.user) {
+            await handleSuccess(newSession.user);
             subscription?.unsubscribe();
           }
         });
+        authSubscription = subscription;
 
-        // Timeout fallback after 6 seconds
-        const timeout = setTimeout(() => {
-          if (isMounted && status === 'loading') {
-            setStatus('error');
-            setErrorMessage('Authentication timed out. Please try signing in again.');
-            subscription?.unsubscribe();
+        // 6. Safe 15-second timeout guarded by isResolvedRef (immune to stale closures)
+        timeoutId = setTimeout(() => {
+          if (isMounted && !isResolvedRef.current) {
+            handleError('Authentication timed out. Please try signing in again.');
+            authSubscription?.unsubscribe();
           }
-        }, 6000);
-
-        return () => {
-          clearTimeout(timeout);
-          subscription?.unsubscribe();
-        };
+        }, 15000);
 
       } catch (err: any) {
-        if (isMounted) {
-          setStatus('error');
-          setErrorMessage(err.message || 'An unexpected error occurred during Google OAuth callback.');
+        if (isMounted && !isResolvedRef.current) {
+          handleError(err?.message || 'An unexpected error occurred during Google OAuth callback.');
         }
       }
     }
@@ -163,11 +158,15 @@ export default function AuthCallback({ onNavigate }: AuthCallbackProps) {
 
     return () => {
       isMounted = false;
+      if (timeoutId) clearTimeout(timeoutId);
+      if (authSubscription) authSubscription.unsubscribe();
     };
-  }, [refreshProfile, addToast, onNavigate]);
+  }, [handleSuccess, handleError]);
 
   const handleReturnToLogin = () => {
-    window.history.replaceState({}, document.title, '/');
+    try {
+      window.history.replaceState({}, document.title, '/');
+    } catch {}
     if (onNavigate) {
       onNavigate('signin');
     } else {

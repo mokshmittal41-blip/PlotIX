@@ -229,8 +229,8 @@ function AppInner() {
     );
   }
 
-  // If OAuth callback route or params detected, render callback handler
-  if (currentPage === 'auth-callback' || isOAuthRedirect) {
+  // If OAuth callback route active, render callback handler
+  if (currentPage === 'auth-callback') {
     return <AuthCallback onNavigate={navigate} />;
   }
 

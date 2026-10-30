@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
-import { supabase, isSupabaseConfigured, normalizeAuthIdentifier, supabaseUrl, supabaseAnonKey } from '../lib/supabaseClient';
+import { supabase, isSupabaseConfigured, normalizeAuthIdentifier, supabaseUrl, supabaseAnonKey, getAuthRedirectUrl } from '../lib/supabaseClient';
 import { apiClient } from '../services/apiClient';
 
 export interface UserProfile {
@@ -269,6 +269,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         email: authEmail,
         password: password,
         options: {
+          emailRedirectTo: getAuthRedirectUrl(),
           data: {
             full_name: formattedName,
             phone: rawPhone || null,
@@ -445,7 +446,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: getAuthRedirectUrl(),
           queryParams: {
             access_type: 'offline',
             prompt: 'select_account'

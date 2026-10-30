@@ -26,6 +26,18 @@ if (isSupabaseConfigured) {
   }
 }
 
+/**
+ * Resolves the OAuth callback redirect URL based on environment.
+ * In browser environment, uses active window.location.origin + /auth/callback.
+ * Fallbacks to deployed production URL if window is undefined.
+ */
+export function getAuthRedirectUrl(): string {
+  if (typeof window !== 'undefined' && window.location && window.location.origin) {
+    return `${window.location.origin}/auth/callback`;
+  }
+  return 'https://plotix-mauve.vercel.app/auth/callback';
+}
+
 // Internal domain used exclusively for phone-number based password accounts
 export const PHONE_AUTH_INTERNAL_DOMAIN = '@phone.propwise.in';
 
