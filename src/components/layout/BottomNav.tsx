@@ -8,19 +8,19 @@ interface BottomNavProps {
 }
 
 export default function BottomNav({ currentPage, onNavigate }: BottomNavProps) {
-  const { t, language } = useLanguage();
+  const { language } = useLanguage();
   const { savedPropertyIds } = useApp();
 
   const getLabel = (id: string) => {
     switch (id) {
       case 'home':
-        return t.nav.home;
+        return language === 'pa' ? 'ਹੋਮ' : (language === 'hi' ? 'होम' : 'Home');
       case 'map':
-        return t.nav.map;
+        return language === 'pa' ? 'ਨਕਸ਼ਾ' : (language === 'hi' ? 'GIS मैप' : 'GIS Map');
       case 'my-properties':
-        return language === 'pa' ? 'ਮੇਰੀ ਜਾਇਦਾਦ' : (language === 'hi' ? 'मेरी प्रॉपर्टी' : 'My Property');
+        return language === 'pa' ? 'ਲਿਸਟ ਕਰੋ' : (language === 'hi' ? 'लिस्ट प्लॉट' : 'List Plot');
       case 'ai-design':
-        return t.nav.naksha;
+        return 'AI Naksha';
       case 'settings':
         return language === 'pa' ? 'ਪ੍ਰੋਫਾਈਲ' : (language === 'hi' ? 'प्रोफ़ाइल' : 'Profile');
       default:

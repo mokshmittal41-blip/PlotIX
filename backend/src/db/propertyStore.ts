@@ -96,7 +96,6 @@ export function isOriginalVerifiedPhotoProperty(p: PropertyEntity): boolean {
   return p.images.every(img => 
     typeof img === 'string' &&
     img.startsWith('http') &&
-    !img.includes('unsplash.com') &&
     !img.includes('placeholder') &&
     !img.includes('via.placeholder') &&
     !img.includes('dummy') &&
@@ -566,7 +565,7 @@ export const propertyStore = {
     }
 
     // Require genuine original photos
-    if (!data.images || !Array.isArray(data.images) || data.images.length === 0 || data.images.some((img: string) => img.includes('unsplash.com') || img.includes('placeholder') || img.includes('via.placeholder'))) {
+    if (!data.images || !Array.isArray(data.images) || data.images.length === 0 || data.images.some((img: string) => img.includes('placeholder') || img.includes('via.placeholder'))) {
       return { success: false, isSkipped: true, error: 'Listing must contain verified original uploaded photos.' };
     }
 

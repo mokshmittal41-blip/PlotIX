@@ -1,5 +1,6 @@
-import { Bell, Globe, ChevronLeft, PlusCircle } from 'lucide-react';
+import { Bell, Globe, ChevronLeft, UserPlus } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
+import { useAuth } from '../../context/AuthContext';
 import type { Language } from '../../translations/translations';
 import PropWiseLogo from '../common/PropWiseLogo';
 
@@ -13,7 +14,6 @@ const PAGE_BACK_ROUTES: Record<string, string> = {
   detail: 'explore',
   analysis: 'detail',
   'future-potential': 'detail',
-  'jamabandi': 'land-records',
   'planning-maps': 'home',
   'advisor': 'home',
   'land-calculator': 'home',
@@ -23,6 +23,7 @@ const PAGE_BACK_ROUTES: Record<string, string> = {
 
 export default function MobileHeader({ currentPage, onNavigate }: MobileHeaderProps) {
   const { language, setLanguage, t } = useLanguage();
+  const { user } = useAuth();
   const isHome = currentPage === 'home';
   const pageMeta = t.header.titles[currentPage];
   const title = pageMeta ? pageMeta.title : (
@@ -87,27 +88,7 @@ export default function MobileHeader({ currentPage, onNavigate }: MobileHeaderPr
         )}
       </div>
 
-      <div className="mobile-header-actions">
-        {/* List Property Free Top Action (shown on Home where space is ample) */}
-        {isHome && (
-          <button
-            type="button"
-            className="mobile-header-list-free-btn"
-            title={t.header.listPropertyFree}
-            aria-label={t.header.listPropertyFree}
-            onClick={() => {
-              if (onNavigate) {
-                onNavigate('my-properties');
-              } else {
-                window.dispatchEvent(new CustomEvent('navigate-to', { detail: 'my-properties' }));
-              }
-            }}
-          >
-            <PlusCircle size={12} strokeWidth={2.4} />
-            <span>{language === 'pa' ? 'ਲਿਸਟ ਕਰੋ' : (language === 'hi' ? 'लिस्ट करें' : 'List Free')}</span>
-          </button>
-        )}
-
+      <div className="mobile-header-actions" style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
         {/* Language Quick Toggle */}
         <button
           type="button"
@@ -132,16 +113,45 @@ export default function MobileHeader({ currentPage, onNavigate }: MobileHeaderPr
           <span className="mobile-pulse-notif-dot" />
         </button>
 
-        {/* Profile Avatar */}
-        <button
-          type="button"
-          className="mobile-avatar-pill"
-          title="Profile Workspace"
-          aria-label="Open profile workspace"
-          onClick={handleProfileClick}
-        >
-          <span className="avatar-initial">M</span>
-        </button>
+        {/* Profile Avatar or Sign Up */}
+        {user ? (
+          <button
+            type="button"
+            className="mobile-avatar-pill"
+            title="Profile Workspace"
+            aria-label="Open profile workspace"
+            onClick={handleProfileClick}
+          >
+            <span className="avatar-initial">{user.name.charAt(0).toUpperCase()}</span>
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="mobile-header-auth-pill"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              padding: '6px 12px',
+              borderRadius: '999px',
+              background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+              color: '#FFFFFF',
+              border: 'none',
+              fontSize: '11.5px',
+              fontWeight: 800,
+              cursor: 'pointer',
+              whiteSpace: 'nowrap',
+              flexShrink: 0
+            }}
+            onClick={() => {
+              if (onNavigate) onNavigate('signup');
+              else window.dispatchEvent(new CustomEvent('navigate-to', { detail: 'signup' }));
+            }}
+          >
+            <UserPlus size={12} strokeWidth={2.5} />
+            <span>Sign Up</span>
+          </button>
+        )}
       </div>
     </header>
   );

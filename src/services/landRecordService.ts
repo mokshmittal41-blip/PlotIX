@@ -79,7 +79,7 @@ export const getLandRecordByParcel = async (
 export const getLandRecordExplanation = () => {
   return [
     { term: 'Khasra', meaning: 'Land parcel or survey identifier number.' },
-    { term: 'Jamabandi', meaning: 'Official document containing land ownership, rights, and cultivation details.' },
+    { term: 'Title Deed (Fard/Registry)', meaning: 'Official document containing land ownership and legal title details.' },
     { term: 'Mutation (Inteqal)', meaning: 'The process of changing the ownership title in the revenue records.' },
     { term: 'Girdawari', meaning: 'Harvest inspection record, documenting crop details and land cultivation.' },
     { term: 'Khewat', meaning: 'Account number given to owner(s) forming a set of co-sharers.' }

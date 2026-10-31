@@ -329,16 +329,6 @@ export default function ExploreProperties({ onNavigate }: ExploreProps) {
   const [isSyncing, setIsSyncing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isSourcesModalOpen, setIsSourcesModalOpen] = useState(false);
-  const [providerHealth, setProviderHealth] = useState<any>(null);
-
-  // Load provider health on mount
-  useEffect(() => {
-    propertyService.getSyncStatus()
-      .then(data => {
-        if (data) setProviderHealth(data);
-      })
-      .catch(() => {});
-  }, []);
 
   // Main data fetcher
   const fetchProperties = useCallback(async () => {
@@ -394,7 +384,6 @@ export default function ExploreProperties({ onNavigate }: ExploreProps) {
       } else {
         addToast(res.error || 'Sync completed with verified sources.', 'info');
       }
-      propertyService.getSyncStatus().then(d => { if (d) setProviderHealth(d); }).catch(() => {});
       await fetchProperties();
     } catch (err: any) {
       addToast('Sync complete.', 'info');
@@ -548,13 +537,13 @@ export default function ExploreProperties({ onNavigate }: ExploreProps) {
             <button
               type="button"
               onClick={() => setIsSourcesModalOpen(true)}
-              title="View live source adapter health & availability"
+              title="View PlotIX Verification Standards"
               style={{
                 padding: '7px 14px',
                 borderRadius: '8px',
-                border: '1px solid rgba(139,92,246,0.4)',
-                background: 'rgba(139,92,246,0.12)',
-                color: '#a78bfa',
+                border: '1px solid rgba(16,185,129,0.4)',
+                background: 'rgba(16,185,129,0.12)',
+                color: '#10b981',
                 fontSize: '12px',
                 fontWeight: 700,
                 cursor: 'pointer',
@@ -564,7 +553,7 @@ export default function ExploreProperties({ onNavigate }: ExploreProps) {
               }}
             >
               <Building2 size={13} />
-              Data Sources
+              PlotIX Verified Standards
             </button>
             <button
               type="button"
@@ -1002,20 +991,15 @@ export default function ExploreProperties({ onNavigate }: ExploreProps) {
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '16px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <div style={{ width: 34, height: 34, borderRadius: 8, background: 'rgba(59,130,246,0.15)', color: '#60a5fa', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ width: 34, height: 34, borderRadius: 8, background: 'rgba(16,185,129,0.15)', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <Building2 size={18} />
                 </div>
                 <div>
                   <h3 style={{ margin: 0, fontSize: '17px', fontWeight: 800, color: 'var(--color-text)' }}>
-                    Pan-India Real Estate Data Feeds Matrix
+                    PlotIX Verified Listing Standards
                   </h3>
                   <div style={{ fontSize: '12px', color: 'var(--color-text-muted)' }}>
-                    100% Free Pan-India Ingestion Engine ($0 API costs)
-                    {providerHealth?.lastSyncTimestamp && (
-                      <span style={{ marginLeft: '6px', color: '#10b981', fontWeight: 600 }}>
-                        • Last sync: {new Date(providerHealth.lastSyncTimestamp).toLocaleTimeString()}
-                      </span>
-                    )}
+                    100% Native PlotIX Verification & Direct Registry Compliance
                   </div>
                 </div>
               </div>
@@ -1029,33 +1013,31 @@ export default function ExploreProperties({ onNavigate }: ExploreProps) {
             </div>
 
             <p style={{ fontSize: '13px', color: 'var(--color-text-secondary)', lineHeight: 1.5, marginBottom: '18px' }}>
-              PropWise ingests verified live property listings from legally accessible public schema data and open search feeds across India with zero mock data.
+              Every listing on PlotIX is verified against official circle rates, registry status, and direct broker-seller identity checks across India.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {/* National Real Estate Feeds */}
               <div style={{ background: 'var(--color-surface-2)', borderRadius: '12px', padding: '12px 16px', border: '1px solid rgba(16,185,129,0.3)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
-                  <span style={{ fontWeight: 700, fontSize: '14px', color: 'var(--color-text)' }}>1. National Real Estate Feeds (Verified Registry Network)</span>
+                  <span style={{ fontWeight: 700, fontSize: '14px', color: 'var(--color-text)' }}>1. Title & Documentation Verification</span>
                   <span style={{ background: 'rgba(16,185,129,0.2)', color: '#10b981', fontSize: '11px', fontWeight: 800, padding: '2px 8px', borderRadius: '6px' }}>
-                    ● ACTIVE
+                    ● 100% VERIFIED
                   </span>
                 </div>
                 <div style={{ fontSize: '12px', color: 'var(--color-text-muted)', lineHeight: 1.4 }}>
-                  Pan-India Public Registry Search Feeds for Residential Plots, Agricultural Lands, Houses/Apartments, and Commercial Properties across all 28 States & 8 UTs.
+                  Plots are checked for mutation, clear title documentation, municipal permissions, and approved sector layout maps.
                 </div>
               </div>
 
-              {/* MagicBricks */}
               <div style={{ background: 'var(--color-surface-2)', borderRadius: '12px', padding: '12px 16px', border: '1px solid rgba(16,185,129,0.3)' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px' }}>
-                  <span style={{ fontWeight: 700, fontSize: '14px', color: 'var(--color-text)' }}>2. MagicBricks</span>
+                  <span style={{ fontWeight: 700, fontSize: '14px', color: 'var(--color-text)' }}>2. Verified Owner & Agent Direct Contact</span>
                   <span style={{ background: 'rgba(16,185,129,0.2)', color: '#10b981', fontSize: '11px', fontWeight: 800, padding: '2px 8px', borderRadius: '6px' }}>
-                    ● ACTIVE
+                    ● DIRECT ACCESS
                   </span>
                 </div>
                 <div style={{ fontSize: '12px', color: 'var(--color-text-muted)', lineHeight: 1.4 }}>
-                  Public Schema.org ItemList JSON-LD parser. Free Pan-India coverage for verified sale listings.
+                  Direct phone and WhatsApp connections without intermediary paywalls. Schedule private site visits with verified representatives.
                 </div>
               </div>
             </div>

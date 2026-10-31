@@ -104,59 +104,95 @@ export default function Sidebar({ currentPage, onNavigate }: SidebarProps) {
       <div className="sidebar-bottom">
         <div className="sidebar-divider" />
 
-        <div 
-          style={{ 
-            padding: '10px 12px', 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: 10, 
-            borderRadius: 'var(--radius-lg)', 
-            cursor: 'pointer', 
-            background: 'var(--color-surface-2)',
-            border: '1px solid var(--color-border)',
-            transition: 'all var(--transition-fast)' 
-          }}
-          onClick={() => onNavigate(user ? 'settings' : 'signin')}
-        >
-          {user?.avatar ? (
-            <img
-              src={user.avatar}
-              alt={displayName}
-              style={{
-                width: 34,
-                height: 34,
-                borderRadius: '50%',
-                objectFit: 'cover',
-                flexShrink: 0,
-                border: '1.5px solid var(--color-border)'
-              }}
-            />
-          ) : (
-            <div style={{
-              width: 34, height: 34, borderRadius: '50%',
-              background: user?.isDemo 
-                ? 'linear-gradient(135deg, #D97706 0%, #F59E0B 100%)' 
-                : 'linear-gradient(135deg, #10B981 0%, #059669 100%)', 
-              color: 'white',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: 13, fontWeight: 800, flexShrink: 0,
-              boxShadow: '0 2px 8px rgba(16, 185, 129, 0.35)'
-            }}>
-              {initial}
-            </div>
-          )}
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-              <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {displayName}
-              </span>
-              <ShieldCheck size={13} style={{ color: user?.isDemo ? '#D97706' : 'var(--color-accent)' }} />
-            </div>
-            <div style={{ fontSize: 11, color: 'var(--color-text-muted)', fontWeight: 500 }}>
-              {user ? (user.isDemo ? 'Demo Mode Session' : (user.type === 'phone' ? user.identifier : (user.role || t.profile.kycVerified))) : 'Click to Sign In or Register'}
+        {user ? (
+          <div 
+            style={{ 
+              padding: '10px 12px', 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: 10, 
+              borderRadius: 'var(--radius-lg)', 
+              cursor: 'pointer', 
+              background: 'var(--color-surface-2)',
+              border: '1px solid var(--color-border)',
+              transition: 'all var(--transition-fast)' 
+            }}
+            onClick={() => onNavigate('settings')}
+          >
+            {user?.avatar ? (
+              <img
+                src={user.avatar}
+                alt={displayName}
+                style={{
+                  width: 34,
+                  height: 34,
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                  flexShrink: 0,
+                  border: '1.5px solid var(--color-border)'
+                }}
+              />
+            ) : (
+              <div style={{
+                width: 34, height: 34, borderRadius: '50%',
+                background: user?.isDemo 
+                  ? 'linear-gradient(135deg, #D97706 0%, #F59E0B 100%)' 
+                  : 'linear-gradient(135deg, #10B981 0%, #059669 100%)', 
+                color: 'white',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 13, fontWeight: 800, flexShrink: 0,
+                boxShadow: '0 2px 8px rgba(16, 185, 129, 0.35)'
+              }}>
+                {initial}
+              </div>
+            )}
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                <span style={{ fontSize: 13, fontWeight: 700, color: 'var(--color-text)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  {displayName}
+                </span>
+                <ShieldCheck size={13} style={{ color: user?.isDemo ? '#D97706' : 'var(--color-accent)' }} />
+              </div>
+              <div style={{ fontSize: 11, color: 'var(--color-text-muted)', fontWeight: 500 }}>
+                {user.isDemo ? 'Demo Mode Session' : (user.type === 'phone' ? user.identifier : (user.role || t.profile.kycVerified))}
+              </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <button
+              type="button"
+              className="btn btn-primary"
+              style={{
+                width: '100%',
+                justifyContent: 'center',
+                height: 38,
+                fontSize: 12.5,
+                fontWeight: 800,
+                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                borderColor: '#10B981',
+                boxShadow: '0 2px 8px rgba(16, 185, 129, 0.3)'
+              }}
+              onClick={() => onNavigate('signup')}
+            >
+              Sign Up Free
+            </button>
+            <button
+              type="button"
+              className="btn btn-outline"
+              style={{
+                width: '100%',
+                justifyContent: 'center',
+                height: 36,
+                fontSize: 12,
+                fontWeight: 700
+              }}
+              onClick={() => onNavigate('signin')}
+            >
+              Sign In
+            </button>
+          </div>
+        )}
       </div>
 
     </aside>

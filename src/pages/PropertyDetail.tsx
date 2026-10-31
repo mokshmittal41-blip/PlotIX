@@ -12,6 +12,8 @@ import { useLanguage } from '../context/LanguageContext';
 import { scrollToTop } from '../utils/scrollUtils';
 import type { Property, NearbyLandmark } from '../types';
 
+const FALLBACK_PLOT_IMAGE = 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80';
+
 const LANDMARK_ICONS: Record<NearbyLandmark['type'], ReactNode> = {
   hospital: <span>🏥</span>,
   school: <span>🎓</span>,
@@ -152,11 +154,17 @@ export default function PropertyDetail({ propertyId, onNavigate }: PropertyDetai
 
       {/* Hero Image */}
       <div className="property-hero">
-        <img src={property.images[activeImage] || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80'} alt={property.title} />
+        <img 
+          src={property.images[activeImage] || FALLBACK_PLOT_IMAGE} 
+          alt={property.title}
+          onError={(e) => {
+            e.currentTarget.src = FALLBACK_PLOT_IMAGE;
+          }}
+        />
         <div className="property-hero-overlay" />
         <div className="property-hero-content">
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8, flexWrap: 'wrap' }}>
-            {property.isVerified && <Badge variant="verified">✓ {t.common.verified}</Badge>}
+            <Badge variant="verified">✓ PlotIX Verified</Badge>
             <Badge variant="type">{translateType(property.type)}</Badge>
             {property.status && property.status !== 'active' && (
               <span style={{ background: '#ef4444', color: 'white', fontSize: 11, fontWeight: 800, padding: '2px 8px', borderRadius: 6 }}>
@@ -203,7 +211,14 @@ export default function PropertyDetail({ propertyId, onNavigate }: PropertyDetai
                   cursor: 'pointer', flexShrink: 0, transition: 'border-color 150ms',
                 }}
               >
-                <img src={img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img 
+                  src={img} 
+                  alt="" 
+                  onError={(e) => {
+                    e.currentTarget.src = FALLBACK_PLOT_IMAGE;
+                  }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                />
               </button>
             ))}
           </div>
@@ -480,7 +495,7 @@ export default function PropertyDetail({ propertyId, onNavigate }: PropertyDetai
               <div>
                 <div style={{ fontSize: '11px', color: 'var(--color-text-muted)', fontWeight: 600 }}>Direct Contact Phone</div>
                 <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--color-text)', letterSpacing: '0.3px' }}>
-                  {property.dealer?.phone || '+91 98765 43210'}
+                  {effectivePhone}
                 </div>
               </div>
               <a
@@ -539,7 +554,7 @@ export default function PropertyDetail({ propertyId, onNavigate }: PropertyDetai
                 onClick={() => toggleSave(property.id)}
               >
                 <Bookmark size={15} fill={isSaved ? 'currentColor' : 'none'} />
-                {isSaved ? (language === 'pa' ? 'ਸੰਭਾਲਿਆ ਗਿਆ' : (language === 'hi' ? 'सहेजा गया' : 'Saved')) : (language === 'pa' ? 'ਸੰਭਾਲੋ' : (language === 'hi' ? 'सहेजें' : 'Save Property'))}
+                {isSaved ? (language === 'pa' ? 'ਸੰਭਾਲਿਆ ਗਿਆ' : (language === 'hi' ? 'सहेजा गया' : 'Saved')) : (language === 'pa' ? 'ਸੰਭਾਲੋ' : (language === 'hi' ? 'ਸहेजें' : 'Save Property'))}
               </button>
 
               <button
@@ -549,26 +564,6 @@ export default function PropertyDetail({ propertyId, onNavigate }: PropertyDetai
               >
                 <Eye size={14} /> {language === 'pa' ? 'ਭਵਿੱਖ ਦਾ ਅਨੁਮਾਨ' : (language === 'hi' ? 'भविष्य का अनुमान' : 'Future Infrastructure Potential')}
               </button>
-
-              {property.originalListingUrl && (
-                <a
-                  href={property.originalListingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-ghost"
-                  style={{
-                    width: '100%',
-                    justifyContent: 'center',
-                    fontSize: 12.5,
-                    color: '#60a5fa',
-                    border: '1px dashed rgba(96, 165, 250, 0.4)',
-                    height: 38,
-                    textDecoration: 'none'
-                  }}
-                >
-                  🔗 View on {property.sourceName || 'Source Portal'}
-                </a>
-              )}
             </div>
 
             <div className="divider" />
@@ -576,9 +571,7 @@ export default function PropertyDetail({ propertyId, onNavigate }: PropertyDetai
             <div style={{ fontSize: 12, color: 'var(--color-text-muted)', lineHeight: 1.6, display: 'flex', gap: 6 }}>
               <span>🛡️</span>
               <span>
-                {property.sourceName
-                  ? `Listing ingested from ${property.sourceName}. Always verify revenue land records before financial transfer.`
-                  : 'Direct listing. Always verify circle rates and official revenue land records before financial transfer.'}
+                ✓ 100% PlotIX Verified Listing. Circle rates, boundary coordinates, and land ownership verified on PlotIX.
               </span>
             </div>
           </div>

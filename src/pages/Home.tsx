@@ -35,7 +35,6 @@ import { locationHierarchyService } from '../services/locationHierarchyService';
 import { propertyService } from '../services/propertyService';
 import { getPopularLocationsForStateAndDistrict } from '../data/popularLocationsData';
 import { scrollToTop } from '../utils/scrollUtils';
-import { openGoogleMaps } from '../utils/mapUtils';
 import type { Property } from '../types';
 
 interface HomeProps {
@@ -43,7 +42,7 @@ interface HomeProps {
 }
 
 type PropertyCategoryTab = 'recommended' | 'new' | 'popular' | 'price_drops';
-type IntentType = 'buy' | 'sell' | 'rent' | 'plots' | 'commercial';
+type IntentType = 'buy' | 'sell' | 'rent' | 'plots' | 'commercial' | 'naksha' | 'map';
 type PropertyTypeFilter = 'all' | 'Residential Plot' | 'Commercial Plot' | 'Apartment';
 
 export default function Home({ onNavigate }: HomeProps) {
@@ -248,16 +247,16 @@ export default function Home({ onNavigate }: HomeProps) {
     onNavigate('explore');
   };
 
-  // 1. Compact, sleek Intent Selector (Only BUY & SELL)
+  // 1. Sleek 4-Tile Quick Action Grid (Mobile-First Flagship)
   const intentOptions = [
     {
       id: 'buy' as IntentType,
-      title: language === 'pa' ? 'ਖਰੀਦੋ' : (language === 'hi' ? 'खरीदें' : 'BUY'),
-      subtitle: language === 'pa' ? 'ਮਕਾਨ, ਪਲਾਟ ਤੇ ਵਪਾਰਕ ਜਾਇਦਾਦ' : (language === 'hi' ? 'मकान, प्लाट व कमर्शियल प्रॉपर्टी' : 'Homes, Plots & Commercial Real Estate'),
+      title: language === 'pa' ? 'ਖਰੀਦੋ' : (language === 'hi' ? 'खरीदें' : 'BUY PLOTS'),
+      subtitle: language === 'pa' ? '੫੦+ ਪ੍ਰਮਾਣਿਤ ਪਲਾਟ' : (language === 'hi' ? '५०+ सत्यापित प्लाट' : '50+ Verified Land Plots'),
       icon: <Building2 size={24} strokeWidth={2.4} />,
-      color: '#2563eb',
-      bgLight: 'rgba(37, 99, 235, 0.08)',
-      tag: language === 'pa' ? 'ਪ੍ਰਾਪਰਟੀਆਂ ਲੱਭੋ' : (language === 'hi' ? 'प्रॉपर्टी खोजें' : 'Browse Inventory'),
+      color: '#10B981',
+      bgLight: 'rgba(16, 185, 129, 0.12)',
+      tag: language === 'pa' ? 'ਪ੍ਰਾਪਰਟੀਆਂ ਲੱਭੋ' : (language === 'hi' ? 'प्रॉपर्टी खोजें' : 'Explore'),
       action: () => {
         setSelectedIntent('buy');
         onNavigate('explore');
@@ -265,15 +264,39 @@ export default function Home({ onNavigate }: HomeProps) {
     },
     {
       id: 'sell' as IntentType,
-      title: language === 'pa' ? 'ਵੇਚੋ' : (language === 'hi' ? 'बेचें' : 'SELL'),
-      subtitle: language === 'pa' ? 'ਆਪਣੀ ਪ੍ਰਾਪਰਟੀ ਵੇਚਣ ਲਈ ਲਿਸਟ ਕਰੋ' : (language === 'hi' ? 'अपनी प्रॉपर्टी लिस्ट करें / डालें' : 'List Your Property Free'),
+      title: language === 'pa' ? 'ਵੇਚੋ' : (language === 'hi' ? 'बेचें' : 'SELL / POST'),
+      subtitle: language === 'pa' ? 'ਮੁਫ਼ਤ ਲਿਸਟਿੰਗ • ੦% ਕਮਿਸ਼ਨ' : (language === 'hi' ? 'मुफ्त लिस्टिंग • ०% कमीशन' : 'Post in 2 Mins • 0% Brokerage'),
       icon: <PlusCircle size={24} strokeWidth={2.4} />,
-      color: '#059669',
-      bgLight: 'rgba(16, 185, 129, 0.1)',
-      tag: language === 'pa' ? 'ਮੁਫ਼ਤ ਲਿਸਟਿੰਗ' : (language === 'hi' ? 'हम अपनी प्रॉपर्टी डालना चाहते हैं' : 'Post for Free'),
+      color: '#F59E0B',
+      bgLight: 'rgba(245, 158, 11, 0.12)',
+      tag: language === 'pa' ? 'ਮੁਫ਼ਤ ਲਿਸਟਿੰਗ' : (language === 'hi' ? 'फ्री पोस्टिंग' : 'Free Post'),
       action: () => {
         setSelectedIntent('sell');
         setShowSellModal(true);
+      }
+    },
+    {
+      id: 'naksha' as IntentType,
+      title: 'AI NAKSHA™',
+      subtitle: language === 'pa' ? '੨D/੩D ਤੇ ਵਾਸਤੂ ਨਕਸ਼ੇ' : (language === 'hi' ? '२D/३D व वास्तु नक्शे' : '2D, 3D & Vastu Plans'),
+      icon: <Sparkles size={24} strokeWidth={2.4} />,
+      color: '#8B5CF6',
+      bgLight: 'rgba(139, 92, 246, 0.12)',
+      tag: 'AI Studio',
+      action: () => {
+        onNavigate('ai-design');
+      }
+    },
+    {
+      id: 'map' as IntentType,
+      title: language === 'pa' ? 'ਨਕਸ਼ਾ' : (language === 'hi' ? 'GIS मैप' : 'GIS MAP'),
+      subtitle: language === 'pa' ? 'ਮਾਸਟਰ ਪਲਾਨ ਤੇ ਸੈਟੇਲਾਈਟ ਨਕਸ਼ਾ' : (language === 'hi' ? 'मास्टर प्लान व सैटेलाइट नक्शा' : 'Interactive Cadastral GIS & Maps'),
+      icon: <Navigation size={24} strokeWidth={2.4} />,
+      color: '#3B82F6',
+      bgLight: 'rgba(59, 130, 246, 0.12)',
+      tag: 'Interactive GIS',
+      action: () => {
+        onNavigate('map');
       }
     },
   ];
@@ -394,7 +417,7 @@ export default function Home({ onNavigate }: HomeProps) {
     {
       id: 'guide-001',
       category: 'Legal Due Diligence',
-      title: 'Things to check before buying a plot in Punjab: Jamabandi, Fard & Registry',
+      title: 'Things to check before buying a plot: Land Title, Registry & Legal Verification',
       readTime: '5 min read',
       date: 'Aug 2026',
       image: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?w=600&q=80',
@@ -487,9 +510,30 @@ export default function Home({ onNavigate }: HomeProps) {
     <div className="home-flagship-root">
       
       {/* ─── 1. INTERACTIVE SMART SEARCH HERO ──────────────────────────────────── */}
-      <section className="home-search-hero-wrap">
-        <div className="home-search-hero-content">
-          <div className="hero-top-badge-row">
+      <section className="home-search-hero-wrap" style={{
+        background: 'linear-gradient(135deg, #0A0F1D 0%, #0F172A 60%, #064E3B 100%)',
+        border: '1px solid rgba(16, 185, 129, 0.28)',
+        borderRadius: '24px',
+        padding: '22px 16px 20px',
+        boxShadow: '0 20px 48px -12px rgba(10, 15, 29, 0.5), 0 0 0 1px rgba(16, 185, 129, 0.15)',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* Ambient emerald flare */}
+        <div style={{
+          position: 'absolute',
+          top: '-40px',
+          right: '-40px',
+          width: '180px',
+          height: '180px',
+          background: 'radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 70%)',
+          pointerEvents: 'none',
+          borderRadius: '50%',
+          filter: 'blur(30px)'
+        }} />
+
+        <div className="home-search-hero-content" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="hero-top-badge-row" style={{ justifyContent: 'center', marginBottom: '10px' }}>
             <button 
               type="button"
               className="hero-location-active-pill"
@@ -501,14 +545,15 @@ export default function Home({ onNavigate }: HomeProps) {
                 alignItems: 'center',
                 gap: '8px',
                 padding: '6px 14px',
-                background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.04) 100%)',
-                border: '1.5px solid rgba(16, 185, 129, 0.3)',
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: '1.5px solid rgba(16, 185, 129, 0.35)',
                 borderRadius: '999px',
-                color: '#1e293b',
+                color: '#F8FAFC',
                 fontSize: '12.5px',
                 fontWeight: 600,
                 cursor: 'pointer',
-                boxShadow: '0 2px 8px rgba(16, 185, 129, 0.08)',
+                backdropFilter: 'blur(12px)',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.25)',
                 transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
               }}
             >
@@ -526,19 +571,18 @@ export default function Home({ onNavigate }: HomeProps) {
                 <MapPin size={11} strokeWidth={2.5} />
                 <span className="live-dot" style={{ position: 'absolute', top: -1, right: -1 }} />
               </span>
-              <span style={{ color: '#334155', fontWeight: 600 }}>
-                Active Market: <strong style={{ color: '#047857', fontWeight: 800 }}>{activeLocation.name}</strong> <span style={{ color: '#64748b', fontWeight: 500 }}>({activeLocation.district}, {activeLocation.state})</span>
+              <span style={{ color: '#E2E8F0', fontWeight: 600 }}>
+                Active: <strong style={{ color: '#34D399', fontWeight: 800 }}>{activeLocation.name}</strong> <span style={{ color: '#94A3B8', fontWeight: 500 }}>({activeLocation.district})</span>
               </span>
               <span style={{ 
                 fontSize: '10px', 
-                color: '#059669', 
-                background: 'rgba(16, 185, 129, 0.14)', 
+                color: '#FFFFFF', 
+                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)', 
                 padding: '2px 8px', 
                 borderRadius: '999px',
                 fontWeight: 800,
                 textTransform: 'uppercase',
                 letterSpacing: '0.4px',
-                border: '1px solid rgba(16, 185, 129, 0.25)',
                 marginLeft: '4px'
               }}>
                 Switch
@@ -547,21 +591,34 @@ export default function Home({ onNavigate }: HomeProps) {
           </div>
 
           <h1 className="home-hero-headline" style={{
-            fontSize: '26px',
+            fontSize: '22px',
             fontWeight: 900,
-            letterSpacing: '-0.5px',
-            color: '#0F172A',
-            margin: '6px 0 8px',
-            textAlign: 'center'
+            letterSpacing: '-0.4px',
+            color: '#FFFFFF',
+            margin: '4px 0 8px',
+            textAlign: 'center',
+            lineHeight: 1.25
           }}>
             {language === 'pa' 
-              ? `${activeLocation.name} ਵਿੱਚ ਪ੍ਰਮਾਣਿਤ ਜਾਇਦਾਦ ਅਤੇ ਜ਼ਮੀਨ ਲੱਭੋ` 
+              ? `${activeLocation.name} ਵਿੱਚ ਪ੍ਰਮਾਣਿਤ ਪਲਾਟ ਅਤੇ ਜ਼ਮੀਨ` 
               : (language === 'hi' 
-                ? `${activeLocation.name} में सत्यापित प्रॉपर्टी व ज़मीन खोजें` 
-                : `Discover verified properties & land in ${activeLocation.name}`)}
+                ? `${activeLocation.name} में सत्यापित प्लाट व ज़मीन` 
+                : (
+                  <>
+                    Find Verified Plots & Land in{' '}
+                    <span style={{
+                      background: 'linear-gradient(135deg, #34D399 0%, #10B981 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      fontWeight: 900
+                    }}>
+                      {activeLocation.name}
+                    </span>
+                  </>
+                ))}
           </h1>
-          <p style={{ fontSize: '14px', color: '#64748B', margin: '0 auto 20px', textAlign: 'center', maxWidth: '640px', lineHeight: 1.5 }}>
-            Intelligent geographic discovery covering {activeLocation.district} district, verified sub-tehsils, local agricultural mandis, and master plans.
+          <p style={{ fontSize: '13px', color: '#94A3B8', margin: '0 auto 16px', textAlign: 'center', maxWidth: '540px', lineHeight: 1.45 }}>
+            Geographic discovery across {activeLocation.district} district, verified sub-tehsils, mandis, and master plans.
           </p>
 
           {/* Interactive Search Input with Natural Language Parser */}
@@ -704,25 +761,28 @@ export default function Home({ onNavigate }: HomeProps) {
             </AnimatePresence>
           </div>
 
-          {/* ─── DYNAMIC "AROUND ME" RADIUS SELECTOR (Requirement 5 & 8) ─── */}
+          {/* ─── DYNAMIC "AROUND ME" RADIUS SELECTOR (Mobile-First Single Row Horizontal Scroll) ─── */}
           <div className="home-dynamic-radius-bar" style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
+            flexWrap: 'nowrap',
+            overflowX: 'auto',
+            scrollbarWidth: 'none',
+            WebkitOverflowScrolling: 'touch',
             gap: '8px',
-            marginTop: '20px',
-            padding: '6px 14px',
-            background: '#FFFFFF',
-            border: '1.5px solid rgba(226, 232, 240, 0.95)',
+            marginTop: '16px',
+            padding: '6px 10px',
+            background: 'rgba(15, 23, 42, 0.75)',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
             borderRadius: '999px',
-            maxWidth: '680px',
+            maxWidth: '100%',
             width: '100%',
-            margin: '18px auto 0',
-            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.03)'
+            boxSizing: 'border-box',
+            backdropFilter: 'blur(10px)',
+            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.25)'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '12px', fontWeight: 750, color: '#64748B', paddingLeft: '4px' }}>
-              <Navigation size={13} style={{ color: '#059669' }} />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '11.5px', fontWeight: 800, color: '#94A3B8', paddingLeft: '4px', flexShrink: 0 }}>
+              <Navigation size={13} style={{ color: '#10B981' }} />
               <span>Radius:</span>
             </div>
             {[1, 5, 10, 25, 50].map((r) => {
@@ -735,13 +795,14 @@ export default function Home({ onNavigate }: HomeProps) {
                   style={{
                     padding: '5px 12px',
                     borderRadius: '999px',
-                    border: isActive ? '1.5px solid #059669' : '1px solid #E2E8F0',
-                    background: isActive ? 'linear-gradient(135deg, #10B981 0%, #059669 100%)' : '#F8FAFC',
-                    color: isActive ? '#FFFFFF' : '#334155',
+                    border: isActive ? '1.5px solid #10B981' : '1px solid rgba(255, 255, 255, 0.12)',
+                    background: isActive ? 'linear-gradient(135deg, #10B981 0%, #059669 100%)' : 'rgba(255, 255, 255, 0.08)',
+                    color: isActive ? '#FFFFFF' : '#E2E8F0',
                     fontSize: '12px',
                     fontWeight: 750,
                     cursor: 'pointer',
-                    boxShadow: isActive ? '0 2px 8px rgba(16, 185, 129, 0.35)' : 'none',
+                    flexShrink: 0,
+                    boxShadow: isActive ? '0 2px 10px rgba(16, 185, 129, 0.4)' : 'none',
                     transition: 'all 0.15s ease'
                   }}
                 >
@@ -755,13 +816,15 @@ export default function Home({ onNavigate }: HomeProps) {
               style={{
                 padding: '5px 14px',
                 borderRadius: '999px',
-                border: activeRadiusKm === 'district' ? '1.5px solid #2563EB' : '1px solid #E2E8F0',
-                background: activeRadiusKm === 'district' ? 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)' : '#F8FAFC',
-                color: activeRadiusKm === 'district' ? '#FFFFFF' : '#2563EB',
+                border: activeRadiusKm === 'district' ? '1.5px solid #10B981' : '1px solid rgba(255, 255, 255, 0.12)',
+                background: activeRadiusKm === 'district' ? 'linear-gradient(135deg, #10B981 0%, #059669 100%)' : 'rgba(255, 255, 255, 0.08)',
+                color: activeRadiusKm === 'district' ? '#FFFFFF' : '#34D399',
                 fontSize: '12px',
                 fontWeight: 750,
                 cursor: 'pointer',
-                boxShadow: activeRadiusKm === 'district' ? '0 2px 8px rgba(37, 99, 235, 0.35)' : 'none',
+                flexShrink: 0,
+                whiteSpace: 'nowrap',
+                boxShadow: activeRadiusKm === 'district' ? '0 2px 10px rgba(16, 185, 129, 0.4)' : 'none',
                 transition: 'all 0.15s ease'
               }}
             >
@@ -827,7 +890,7 @@ export default function Home({ onNavigate }: HomeProps) {
         <div className="home-interactive-match-widget">
           <div className="match-widget-header">
             <div className="match-widget-title-box">
-              <Sparkles size={16} color="#2563eb" />
+              <Sparkles size={16} color="#10b981" />
               <h3>
                 {language === 'pa' ? '10 ਸਕਿੰਟਾਂ ਵਿੱਚ ਆਪਣੀ ਮਨਪਸੰਦ ਪ੍ਰਾਪਰਟੀ ਲੱਭੋ' : (language === 'hi' ? '10 सेकंड में अपनी मनपसंद प्रॉपर्टी खोजें' : 'Find your ideal property in 10 seconds')}
               </h3>
@@ -1019,7 +1082,7 @@ export default function Home({ onNavigate }: HomeProps) {
               <span style={{ display: 'block', fontSize: '16px', fontWeight: 900, color: '#0F172A', marginTop: '4px' }}>
                 {locationFilteredProperties.length} Properties
               </span>
-              <span style={{ fontSize: '11px', color: '#64748B', fontWeight: 600 }}>Clear title / Jamabandi</span>
+              <span style={{ fontSize: '11px', color: '#64748B', fontWeight: 600 }}>Clear title / Verified Deeds</span>
             </div>
           </div>
 
@@ -1233,123 +1296,133 @@ export default function Home({ onNavigate }: HomeProps) {
         </div>
 
         {/* Property Cards Carousel / Responsive Grid */}
-        <div className="home-properties-cards-scroll">
-          {filteredProperties.map((property) => {
-            const isSaved = savedPropertyIds.has(property.id);
-            const activeImgIdx = cardImageIndices[property.id] || 0;
-            const currentImg = property.images[activeImgIdx] || property.images[0];
-            const estEmiMonthly = Math.round((property.price * 0.8 * 0.085) / 12);
+        {filteredProperties.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '40px 20px', background: 'var(--color-surface)', borderRadius: '12px', border: '1px solid var(--color-border)', margin: '16px 0' }}>
+            <p style={{ fontWeight: 700, fontSize: '15px', color: 'var(--color-text)', marginBottom: '6px' }}>
+              No verified listings found in {activeLocation.name} matching your active filters
+            </p>
+            <p style={{ fontSize: '13px', color: 'var(--color-text-muted)', margin: 0 }}>
+              Try selecting "All Types" or searching nearby areas.
+            </p>
+          </div>
+        ) : (
+          <div className="home-properties-cards-scroll">
+            {filteredProperties.map((property) => {
+              const isSaved = savedPropertyIds.has(property.id);
+              const activeImgIdx = cardImageIndices[property.id] || 0;
+              const currentImg = property.images[activeImgIdx] || property.images[0] || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80';
+              const estEmiMonthly = Math.round((property.price * 0.8 * 0.085) / 12);
 
-            return (
-              <div 
-                key={property.id} 
-                className="home-property-editorial-card"
-                onClick={() => onNavigate('detail', property.id)}
-              >
-                <div className="prop-editorial-image-wrap">
-                  <img 
-                    src={currentImg} 
-                    alt={property.title} 
-                    className="prop-editorial-img" 
-                    loading="lazy"
-                  />
-                  <div className="prop-image-badge-overlay">
-                    {property.isVerified && (
-                      <span className="prop-verified-pill">
-                        <ShieldCheck size={12} />
-                        <span>{language === 'pa' ? 'ਪ੍ਰਮਾਣਿਤ' : (language === 'hi' ? 'सत्यापित' : 'Verified')}</span>
-                      </span>
-                    )}
-                    <span className="prop-type-pill">{translateType(property.type)}</span>
-                  </div>
-
-                  {/* Multi-Image Interactive Controls */}
-                  {property.images.length > 1 && (
-                    <div className="card-image-nav-controls">
-                      <button 
-                        type="button" 
-                        className="img-nav-btn left" 
-                        onClick={(e) => handlePrevImage(e, property.id, property.images.length)}
-                        aria-label="Previous photo"
-                      >
-                        <ChevronLeft size={14} />
-                      </button>
-                      <div className="img-nav-dots">
-                        {property.images.map((_, idx) => (
-                          <span key={idx} className={`dot ${idx === activeImgIdx ? 'active' : ''}`} />
-                        ))}
-                      </div>
-                      <button 
-                        type="button" 
-                        className="img-nav-btn right" 
-                        onClick={(e) => handleNextImage(e, property.id, property.images.length)}
-                        aria-label="Next photo"
-                      >
-                        <ChevronRight size={14} />
-                      </button>
-                    </div>
-                  )}
-
-                  <button
-                    type="button"
-                    className={`prop-card-save-icon-btn ${isSaved ? 'saved' : ''}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleSave(property.id);
-                    }}
-                    aria-label="Save property"
-                  >
-                    <Bookmark size={16} fill={isSaved ? '#2563eb' : 'none'} color={isSaved ? '#2563eb' : '#ffffff'} />
-                  </button>
-                </div>
-
-                <div className="prop-editorial-body">
-                  <div className="prop-price-row">
-                    <span className="prop-editorial-price">{formatPrice(property.price)}</span>
-                    <span className="prop-rate-sub">{formatPricePerUnit(property.pricePerUnit, property.areaUnit)}</span>
-                  </div>
-
-                  <h4 className="prop-editorial-title">{property.title}</h4>
-
-                  <div className="prop-editorial-meta-row">
-                    <span 
-                      className="prop-meta-item" 
-                      onClick={(e) => openGoogleMaps(property, e)}
-                      title="Open location on Google Maps"
-                      style={{ 
-                        cursor: 'pointer',
-                        padding: '2px 6px',
-                        borderRadius: '4px',
-                        background: 'rgba(56, 189, 248, 0.08)',
-                        color: '#38bdf8',
-                        fontWeight: 600,
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '4px'
+              return (
+                <div 
+                  key={property.id} 
+                  className="home-property-editorial-card"
+                  onClick={() => onNavigate('detail', property.id)}
+                >
+                  <div className="prop-editorial-image-wrap">
+                    <img 
+                      src={currentImg} 
+                      alt={property.title} 
+                      className="prop-editorial-img" 
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80';
                       }}
+                    />
+                    <div className="prop-image-badge-overlay">
+                      {property.isVerified && (
+                        <span className="prop-verified-pill">
+                          <ShieldCheck size={12} />
+                          <span>PlotIX Verified</span>
+                        </span>
+                      )}
+                      <span className="prop-type-pill">{translateType(property.type)}</span>
+                    </div>
+
+                    {/* Multi-Image Interactive Controls */}
+                    {property.images.length > 1 && (
+                      <div className="card-image-nav-controls">
+                        <button 
+                          type="button" 
+                          className="img-nav-btn left" 
+                          onClick={(e) => handlePrevImage(e, property.id, property.images.length)}
+                          aria-label="Previous photo"
+                        >
+                          <ChevronLeft size={14} />
+                        </button>
+                        <div className="img-nav-dots">
+                          {property.images.map((_, idx) => (
+                            <span key={idx} className={`dot ${idx === activeImgIdx ? 'active' : ''}`} />
+                          ))}
+                        </div>
+                        <button 
+                          type="button" 
+                          className="img-nav-btn right" 
+                          onClick={(e) => handleNextImage(e, property.id, property.images.length)}
+                          aria-label="Next photo"
+                        >
+                          <ChevronRight size={14} />
+                        </button>
+                      </div>
+                    )}
+
+                    <button
+                      type="button"
+                      className={`prop-card-save-icon-btn ${isSaved ? 'saved' : ''}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        toggleSave(property.id);
+                      }}
+                      aria-label="Save property"
                     >
-                      <MapPin size={11} style={{ color: '#ef4444' }} />
-                      <span style={{ color: 'var(--color-text)' }}>{property.location}</span>
-                      <span style={{ fontSize: '10px', color: '#38bdf8', fontWeight: 800 }}>📍 Maps</span>
-                    </span>
-                    <span className="prop-meta-bullet">•</span>
-                    <span className="prop-meta-item">{property.area} {translateUnit(property.areaUnit)}</span>
+                      <Bookmark size={16} fill={isSaved ? '#2563eb' : 'none'} color={isSaved ? '#2563eb' : '#ffffff'} />
+                    </button>
                   </div>
 
-                  <div className="prop-card-emi-tag-row">
-                    <span className="emi-tag">Est. EMI: ₹{estEmiMonthly.toLocaleString('en-IN')}/mo</span>
-                    <span className="prop-facing-tag">{translateFacing(property.facing)}</span>
-                  </div>
+                  <div className="prop-editorial-body">
+                    <div className="prop-price-row">
+                      <span className="prop-editorial-price">{formatPrice(property.price)}</span>
+                      <span className="prop-rate-sub">{formatPricePerUnit(property.pricePerUnit, property.areaUnit)}</span>
+                    </div>
 
-                  <div className="prop-editorial-footer-bar">
-                    <span>{language === 'pa' ? 'ਵੇਰਵੇ ਵੇਖੋ' : (language === 'hi' ? 'विवरण देखें' : 'View Details')}</span>
-                    <ArrowRight size={13} />
+                    <h4 className="prop-editorial-title">{property.title}</h4>
+
+                    <div className="prop-editorial-meta-row">
+                      <span 
+                        className="prop-meta-item" 
+                        style={{ 
+                          padding: '2px 6px',
+                          borderRadius: '4px',
+                          background: 'rgba(255, 255, 255, 0.04)',
+                          border: '1px solid rgba(255, 255, 255, 0.08)',
+                          fontWeight: 600,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '4px'
+                        }}
+                      >
+                        <MapPin size={11} style={{ color: '#ef4444' }} />
+                        <span style={{ color: 'var(--color-text)' }}>{property.location}</span>
+                      </span>
+                      <span className="prop-meta-bullet">•</span>
+                      <span className="prop-meta-item">{property.area} {translateUnit(property.areaUnit)}</span>
+                    </div>
+
+                    <div className="prop-card-emi-tag-row">
+                      <span className="emi-tag">Est. EMI: ₹{estEmiMonthly.toLocaleString('en-IN')}/mo</span>
+                      <span className="prop-facing-tag">{translateFacing(property.facing)}</span>
+                    </div>
+
+                    <div className="prop-editorial-footer-bar">
+                      <span>{language === 'pa' ? 'ਵੇਰਵੇ ਵੇਖੋ' : (language === 'hi' ? 'विवरण देखें' : 'View Details')}</span>
+                      <ArrowRight size={13} />
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
 
         <div className="home-section-bottom-link-row">
           <button 

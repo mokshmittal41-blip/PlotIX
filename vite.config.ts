@@ -12,11 +12,16 @@ function spaAuthCallbackPlugin(): Plugin {
     name: 'spa-auth-callback-plugin',
     closeBundle() {
       const distDir = path.resolve(import.meta.dirname, 'dist')
-      const targetDir = path.resolve(distDir, 'auth', 'callback')
       const indexHtml = path.resolve(distDir, 'index.html')
       if (fs.existsSync(indexHtml)) {
-        fs.mkdirSync(targetDir, { recursive: true })
-        fs.copyFileSync(indexHtml, path.resolve(targetDir, 'index.html'))
+        // Fallback for Vercel SPA routing
+        fs.copyFileSync(indexHtml, path.resolve(distDir, '404.html'))
+
+        ;['auth/callback', 'signup', 'signin', 'login'].forEach(sub => {
+          const targetDir = path.resolve(distDir, ...sub.split('/'))
+          fs.mkdirSync(targetDir, { recursive: true })
+          fs.copyFileSync(indexHtml, path.resolve(targetDir, 'index.html'))
+        })
       }
     }
   }

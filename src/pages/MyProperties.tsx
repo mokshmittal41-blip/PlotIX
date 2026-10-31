@@ -837,7 +837,7 @@ export default function MyProperties({ onNavigate }: MyPropertiesProps) {
                   onChange={(e) => setBrokerDocStatus(e.target.value)}
                 >
                   <option value="Clear Registry Verified">{translateDocStatus('Clear Registry Verified')}</option>
-                  <option value="Jamabandi 2024-25 Available">{translateDocStatus('Jamabandi 2024-25 Available')}</option>
+                  <option value="Title Deed 2024-25 Available">{translateDocStatus('Title Deed 2024-25 Available')}</option>
                   <option value="CLU / GMADA Approved">{translateDocStatus('CLU / GMADA Approved')}</option>
                   <option value="Lal Dora / Abadi Deh">{translateDocStatus('Lal Dora / Abadi Deh')}</option>
                 </select>

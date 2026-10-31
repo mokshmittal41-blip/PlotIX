@@ -990,8 +990,11 @@
   }
 
   .pw-auth-main {
-    padding: 6px 16px 36px;
-    align-items: flex-start;
+    padding: 10px 16px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100dvh - 72px);
   }
 
   .pw-auth-card {

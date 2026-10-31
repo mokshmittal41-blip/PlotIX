@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import MobileShell from './components/layout/MobileShell';
 import DesktopShell from './components/layout/DesktopShell';
 import { AppProvider, useApp } from './context/AppContext';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { MapProvider } from './context/MapContext';
 import LocationOnboardingScreen from './components/onboarding/LocationOnboardingScreen';
@@ -50,7 +50,6 @@ type Page =
   | 'ai-design'
   | 'land-calculator'
   | 'land-records'
-  | 'jamabandi'
   | 'planning-maps'
   | 'settings'
   | 'help'
@@ -156,35 +155,65 @@ function useIsMobile() {
   return isMobile;
 }
 
+function getInitialPage(): Page {
+  if (typeof window === 'undefined') return 'signin';
+  const path = window.location.pathname.toLowerCase();
+  const search = window.location.search.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+
+  // 1. If returning from OAuth redirect, process callback
+  if (path.startsWith('/auth/callback') || search.includes('code=') || hash.includes('access_token=') || search.includes('error=')) {
+    return 'auth-callback';
+  }
+  // 2. If explicit signup URL
+  if (path === '/signup' || search.includes('page=signup') || hash.includes('signup')) {
+    return 'signup';
+  }
+
+  // USER MANDATE: "starting mein sign in wala page chhaiye... first page hi wohi chhaiye"
+  // ALWAYS return 'signin' on website open / reload
+  return 'signin';
+}
+
 // ─── App Inner (needs context) ─────────────────────────────────────────────────
 function AppInner() {
-  const isOAuthRedirect = typeof window !== 'undefined' && (
-    window.location.pathname.startsWith('/auth/callback') ||
-    window.location.search.includes('code=') ||
-    window.location.hash.includes('access_token=') ||
-    window.location.search.includes('error=')
-  );
+  const initialPage = getInitialPage();
+  const isOAuthRedirect = initialPage === 'auth-callback';
 
-  const [showSplash, setShowSplash] = useState(!isOAuthRedirect);
-  const [currentPage, setCurrentPage] = useState<Page>(
-    isOAuthRedirect ? 'auth-callback' : 'signin'
-  );
+  const [showSplash, setShowSplash] = useState(false);
+  const [currentPage, setCurrentPage] = useState<Page>(initialPage);
   const { currentPropertyId, setCurrentPropertyId, hasCompletedOnboarding } = useApp();
-  const { user } = useAuth();
   const isMobile = useIsMobile();
 
-  // If user is already authenticated and currently on signin/signup, transition to dashboard
-  useEffect(() => {
-    if (user && (currentPage === 'signin' || currentPage === 'signup')) {
-      setCurrentPage('home');
-    }
-  }, [user, currentPage]);
+  // Auth gate is strictly false on website start / reload
+  const [hasStartedSession, setHasStartedSession] = useState<boolean>(false);
+
+  const handleAuthComplete = () => {
+    setHasStartedSession(true);
+    setCurrentPage('home');
+  };
 
   const navigate = (page: string, propertyId?: string) => {
     if (propertyId) setCurrentPropertyId(propertyId);
     setCurrentPage(page as Page);
+    if (typeof window !== 'undefined' && window.history) {
+      const newPath = page === 'home' ? '/' : (page === 'signup' ? '/signup' : (page === 'signin' ? '/signin' : `/${page}`));
+      if (window.location.pathname !== newPath) {
+        window.history.pushState(null, '', newPath);
+      }
+    }
     scrollToTop(true);
   };
+
+  // Handle browser Back / Forward navigation
+  useEffect(() => {
+    const handlePopState = () => {
+      const page = getInitialPage();
+      setCurrentPage(page);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // Scroll to top on every page or property detail transition
   useEffect(() => {
@@ -213,7 +242,6 @@ function AppInner() {
       case 'ai-design': return <AIDesign onNavigate={navigate} />;
       case 'land-calculator': return <LandCalculator />;
       case 'land-records': return <LandRecords onNavigate={navigate} />;
-      case 'jamabandi': return <LandRecords onNavigate={navigate} />;
       case 'planning-maps': return <MapPage />;
       case 'advisor': return <AIAdvisor onNavigate={navigate} />;
       case 'insights': return <MarketInsights />;
@@ -222,8 +250,8 @@ function AppInner() {
       case 'messages': return <Messages />;
       case 'settings': return <Profile onNavigate={navigate} />;
       case 'help': return <HelpSupport onNavigate={navigate} />;
-      case 'signup': return <Signup key="signup" initialMode="signup" onNavigate={navigate} />;
-      case 'signin': return <Signup key="signin" initialMode="signin" onNavigate={navigate} />;
+      case 'signup': return <Signup key="signup" initialMode="signup" onNavigate={navigate} onComplete={handleAuthComplete} />;
+      case 'signin': return <Signup key="signin" initialMode="signin" onNavigate={navigate} onComplete={handleAuthComplete} />;
       case 'auth-callback': return <AuthCallback onNavigate={navigate} />;
       default: return <Home onNavigate={navigate} />;
     }
@@ -237,17 +265,39 @@ function AppInner() {
     );
   }
 
-  // If OAuth callback route active, render callback handler
+  // 1. If OAuth callback route active, render callback handler
   if (currentPage === 'auth-callback') {
     return <AuthCallback onNavigate={navigate} />;
   }
 
-  // If user navigated directly to signup or signin, present full-page SaaS auth canvas
-  if (currentPage === 'signup' || currentPage === 'signin') {
-    return <Signup key={currentPage} initialMode={currentPage === 'signin' ? 'signin' : 'signup'} onNavigate={navigate} />;
+  // 2. USER REQUIREMENT: "website start hote pehle sign up/sign in page ana chhaiye"
+  // When website starts or user opens the app, ALWAYS SHOW AUTH CANVAS FIRST!
+  if (!hasStartedSession) {
+    const authMode = currentPage === 'signup' ? 'signup' : 'signin';
+    return (
+      <Signup 
+        key={authMode} 
+        initialMode={authMode} 
+        onNavigate={navigate} 
+        onComplete={handleAuthComplete} 
+      />
+    );
   }
 
-  // If the user has not onboarded location yet, show the Location Selection Screen
+  // 3. User explicitly navigated to signup or signin after passing auth gate
+  if (currentPage === 'signup' || currentPage === 'signin') {
+    return (
+      <Signup 
+        key={currentPage} 
+        initialMode={currentPage === 'signup' ? 'signup' : 'signin'} 
+        onNavigate={navigate} 
+        onComplete={handleAuthComplete} 
+      />
+    );
+  }
+
+  // 4. USER REQUIREMENT: "fir language ka"
+  // If the user has not onboarded location/language yet, show the Location Selection Screen
   if (!hasCompletedOnboarding) {
     return <LocationOnboardingScreen />;
   }

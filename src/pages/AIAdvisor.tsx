@@ -316,7 +316,7 @@ export default function AIAdvisor({ onNavigate }: AIAdvisorProps) {
       id: 'legal-check',
       title: t.advisor.quickPrompts.legal.title,
       subtitle: t.advisor.quickPrompts.legal.desc,
-      prompt: language === 'pa' ? 'ਬਿਆਨਾ ਦੇਣ ਤੋਂ ਪਹਿਲਾਂ ਕਿਹੜੇ ਸਰਕਾਰੀ ਕਾਗਜ਼ ਚੈੱਕ ਕਰਨੇ ਜ਼ਰੂਰੀ ਹਨ?' : (language === 'hi' ? 'बयाना देने से पहले कौन-से सरकारी कागज़ चेक करने जरूरी हैं?' : 'What are the mandatory legal documents and Jamabandi checks before buying?'),
+      prompt: language === 'pa' ? 'ਬਿਆਨਾ ਦੇਣ ਤੋਂ ਪਹਿਲਾਂ ਕਿਹੜੇ ਸਰਕਾਰੀ ਕਾਗਜ਼ ਚੈੱਕ ਕਰਨੇ ਜ਼ਰੂਰੀ ਹਨ?' : (language === 'hi' ? 'बयाना देने से पहले कौन-से सरकारी कागज़ चेक करने जरूरी हैं?' : 'What are the mandatory legal documents and title checks before buying?'),
       icon: <ShieldCheck size={18} />,
       badge: '6 Checkpoints',
       theme: 'violet'
@@ -327,19 +327,19 @@ export default function AIAdvisor({ onNavigate }: AIAdvisorProps) {
     '🔥 ਸੈਕਟਰ 82 ਮੋਹਾਲੀ ਦਾ ਰੇਟ',
     '📐 200 ਗਜ਼ ਪਲਾਟ ਦੇ ਪੁੱਡਾ ਨਿਯਮ',
     '💰 ਦੁਕਾਨ ਬਨਾਮ ਰਿਹਾਇਸ਼ੀ ਪਲਾਟ ROI',
-    '📋 ਜਮ੍ਹਾਂਬੰਦੀ ਤੇ ਫ਼ਰਦ ਜਾਂਚ',
+    '📋 ਰਜਿਸਟਰੀ ਤੇ ਮਾਲਕੀ ਜਾਂਚ',
     '⚖️ ਪੰਜਾਬ ਰਜਿਸਟਰੀ ਤੇ ਸਟੈਂਪ ਡਿਊਟੀ'
   ] : (language === 'hi' ? [
     '🔥 सेक्टर 82 मोहाली का भाव',
     '📐 200 गज प्लाट के PUDA नियम',
     '💰 दुकान बनाम रिहायशी प्लाट ROI',
-    '📋 जमाबंदी व फर्द जांच',
+    '📋 रजिस्ट्री व मालिकाना हक जांच',
     '⚖️ पंजाब रजिस्ट्री व स्टाम्प ड्यूटी'
   ] : [
     '🔥 Sector 82 Mohali 2026 Forecast',
     '📐 Setback rules for 200 Gaj plot',
     '💰 Commercial SCO vs Residential ROI',
-    '📋 Jamabandi & Title Search Checklist',
+    '📋 Land Registry & Title Search Checklist',
     '⚖️ Punjab Stamp Duty & Registry Charges'
   ]);
 
@@ -812,7 +812,7 @@ export default function AIAdvisor({ onNavigate }: AIAdvisorProps) {
                   ? 'ਕਿਸੇ ਵੀ ਪਲਾਟ, ਕਲੈਕਟਰ ਰੇਟ, ਪੁੱਡਾ ਨਿਯਮ ਜਾਂ ਰਜਿਸਟਰੀ ਬਾਰੇ ਸਵਾਲ ਪੁੱਛੋ।'
                   : (language === 'hi'
                     ? 'कलेक्टर सर्कल रेट, PUDA नियम, निर्माण FAR व रजिस्ट्री का तुरंत विश्लेषण पाएं।'
-                    : 'Ask about any plot, circle rate, building rules, or Jamabandi title verification.')}
+                    : 'Ask about any plot, circle rate, building rules, or land registry title verification.')}
               </p>
 
               {/* 4 Premium Bento Action Cards */}

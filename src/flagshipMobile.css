@@ -314,7 +314,7 @@
 }
 
 .bottom-nav-btn.active {
-  color: #2563eb;
+  color: #059669;
 }
 
 .bottom-nav-icon-container {
@@ -329,7 +329,7 @@
 .bottom-nav-active-indicator {
   position: absolute;
   inset: -2px -6px;
-  background: rgba(37, 99, 235, 0.1);
+  background: rgba(16, 185, 129, 0.12);
   border-radius: 14px;
   z-index: 0;
 }
@@ -349,8 +349,8 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #38bdf8;
-  box-shadow: 0 0 8px #38bdf8;
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
 }
 
 .bottom-nav-label {
@@ -362,8 +362,8 @@
 }
 
 .bottom-nav-btn.active .bottom-nav-label {
-  font-weight: 700;
-  color: #2563eb;
+  font-weight: 750;
+  color: #047857;
 }
 
 /* ─── CENTER HERO NAVIGATION ITEM ("MY PROPERTY") ────────────────────────────── */
@@ -402,11 +402,11 @@
 }
 
 .bottom-nav-center-hero.active .center-hero-icon-box {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   border-color: #ffffff;
   box-shadow: 
-    0 8px 24px rgba(37, 99, 235, 0.45),
-    0 2px 8px rgba(37, 99, 235, 0.3);
+    0 8px 24px rgba(16, 185, 129, 0.45),
+    0 2px 8px rgba(16, 185, 129, 0.3);
   transform: translateY(-2px) scale(1.05);
 }
 
@@ -414,7 +414,7 @@
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  background: rgba(37, 99, 235, 0.2);
+  background: rgba(16, 185, 129, 0.25);
   filter: blur(6px);
   opacity: 0;
   transition: opacity 0.3s;
@@ -451,7 +451,7 @@
 }
 
 .bottom-nav-center-hero.active .center-label {
-  color: #2563eb;
+  color: #059669;
 }
 
 /* Hide bottom nav on desktop screens */
@@ -501,7 +501,7 @@
   width: 28px;
   height: 28px;
   border-radius: 7px;
-  background: rgba(37, 99, 235, 0.08);
+  background: rgba(16, 185, 129, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -533,7 +533,7 @@
 .mobile-brand-wise {
   font-size: 14.5px;
   font-weight: 800;
-  color: #2563eb;
+  color: #10b981;
   letter-spacing: -0.3px;
 }
 
@@ -542,7 +542,7 @@
   font-weight: 800;
   padding: 1px 4px;
   border-radius: 3px;
-  background: #2563eb;
+  background: #059669;
   color: #ffffff;
   letter-spacing: 0.2px;
 }
@@ -643,7 +643,7 @@
 }
 
 .lang-globe-icon {
-  color: #2563eb;
+  color: #059669;
 }
 
 .mobile-notif-btn {
@@ -722,8 +722,8 @@
   gap: 5px;
   font-size: 10.5px;
   font-weight: 700;
-  color: #2563eb;
-  background: rgba(37, 99, 235, 0.08);
+  color: #059669;
+  background: rgba(16, 185, 129, 0.1);
   padding: 3px 8px;
   border-radius: 999px;
 }
@@ -928,7 +928,7 @@
 }
 
 .suggestion-meta strong {
-  color: #2563eb;
+  color: #059669;
   margin-left: 4px;
 }
 
@@ -1018,7 +1018,7 @@
   gap: 3px;
   font-size: 12px;
   font-weight: 700;
-  color: #2563eb;
+  color: #059669;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -1037,8 +1037,8 @@
 
 @media (min-width: 860px) {
   .home-sleek-intents-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
   }
 }
 
@@ -1636,10 +1636,10 @@
 }
 
 .home-subfilter-chip.active {
-  background: #eff6ff;
-  border-color: #2563eb;
-  color: #2563eb;
-  font-weight: 700;
+  background: rgba(16, 185, 129, 0.1);
+  border-color: #059669;
+  color: #047857;
+  font-weight: 750;
 }
 
 /* 6. Properties Editorial Feed */
@@ -1872,7 +1872,7 @@
 }
 
 .emi-tag {
-  color: #2563eb;
+  color: #059669;
   font-weight: 700;
 }
 
@@ -1889,7 +1889,7 @@
   justify-content: space-between;
   font-size: 11.5px;
   font-weight: 700;
-  color: #2563eb;
+  color: #059669;
 }
 
 .home-section-bottom-link-row {
@@ -1904,14 +1904,14 @@
   border: 1.5px solid #e2e8f0;
   font-size: 12.5px;
   font-weight: 700;
-  color: #2563eb;
+  color: #059669;
   cursor: pointer;
   transition: all 0.15s;
 }
 
 .home-full-width-action-btn:hover {
-  background: #eff6ff;
-  border-color: #2563eb;
+  background: #ecfdf5;
+  border-color: #059669;
 }
 
 /* 7. Popular Locations */

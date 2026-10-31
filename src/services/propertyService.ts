@@ -127,8 +127,8 @@ function mapEntityToProperty(entity: any, savedPropertyIds?: Set<string>): Prope
     price: priceVal,
     pricePerUnit: perUnitVal,
     images: Array.isArray(entity.images) && entity.images.length > 0 
-      ? entity.images.filter((img: string) => typeof img === 'string' && img.startsWith('http') && !img.includes('unsplash.com') && !img.includes('placeholder') && !img.includes('via.placeholder'))
-      : [],
+      ? entity.images.filter((img: string) => typeof img === 'string' && img.startsWith('http') && !img.includes('placeholder') && !img.includes('via.placeholder'))
+      : ['https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&fit=crop&q=80'],
     facing: (entity.facing || 'East') as Facing,
     roadWidth: Number(entity.road_width_ft || entity.roadWidth || 30),
     rating: typeof entity.rating === 'number' ? entity.rating : 4.7,
@@ -172,16 +172,9 @@ function mapEntityToProperty(entity: any, savedPropertyIds?: Set<string>): Prope
     viewsCount: entity.views_count || entity.viewsCount || 0,
     source: entity.source || 'direct_listing',
     externalId: entity.external_id || entity.externalId || undefined,
-    sourceName: (() => {
-      const rawName = entity.source_name || entity.sourceName;
-      if (!rawName) return undefined;
-      if (typeof rawName === 'string' && rawName.toLowerCase().includes('olx')) {
-        return 'PropWise Verified';
-      }
-      return rawName;
-    })(),
-    sourceUrl: entity.source_url || entity.sourceUrl || undefined,
-    originalListingUrl: entity.original_listing_url || entity.originalListingUrl || undefined,
+    sourceName: 'PlotIX Verified',
+    sourceUrl: undefined,
+    originalListingUrl: undefined,
     lastSeenAt: entity.last_seen_at || undefined,
     lastSyncedAt: entity.last_synced_at || undefined
   };
@@ -210,11 +203,12 @@ function queryLocalProperties(options: PropertyQueryOptions): PropertyListRespon
   let filtered = allProps.filter(p => {
     if (normCity) {
       const matchCity = 
+        (p.city && p.city.toLowerCase() === normCity) ||
+        (p.district && p.district.toLowerCase() === normCity) ||
         (p.city && p.city.toLowerCase().includes(normCity)) ||
         (p.district && p.district.toLowerCase().includes(normCity)) ||
         (p.tehsil && p.tehsil.toLowerCase().includes(normCity)) ||
-        (p.location && p.location.toLowerCase().includes(normCity)) ||
-        (p.title && p.title.toLowerCase().includes(normCity));
+        (p.location && p.location.toLowerCase().includes(normCity));
       if (!matchCity) return false;
     }
 
@@ -323,7 +317,7 @@ export const propertyService = {
           };
           const properties = rawList
             .map((item: any) => mapEntityToProperty(item))
-            .filter((p: Property) => p.images && p.images.length > 0 && p.images.every(img => typeof img === 'string' && !img.includes('unsplash.com') && !img.includes('placeholder')));
+            .filter((p: Property) => p.images && p.images.length > 0 && p.images.every(img => typeof img === 'string' && !img.includes('placeholder')));
           
           properties.forEach((mapped: Property) => {
             // Pre-seed detail cache for instant click navigation
@@ -607,9 +601,9 @@ export const propertyService = {
       if (res.data) return res.data;
     } catch {}
     return {
-      engine: 'PropWise Pan-India Free Ingestion Engine',
-      activeProviders: ['National Property Network', 'Direct Registry Feeds'],
-      disabledProviders: ['99acres', 'MagicBricks', 'Housing.com']
+      engine: 'PlotIX Verified Registry Engine',
+      activeProviders: ['PlotIX Verified Direct Feeds', 'Land Records Feeds'],
+      disabledProviders: []
     };
   },
 

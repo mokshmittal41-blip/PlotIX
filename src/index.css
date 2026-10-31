@@ -2737,7 +2737,43 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
   .property-card-list-image {
     width: 100%;
-    height: 160px;
+    height: 180px;
+  }
+
+  /* Flagship Mobile Properties Grid & Cards */
+  .properties-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .property-card {
+    border-radius: 20px;
+    border: 1.5px solid rgba(226, 232, 240, 0.95);
+    background: #ffffff;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.08);
+    overflow: hidden;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s;
+  }
+
+  .property-card:active {
+    transform: scale(0.985);
+  }
+
+  .property-card-image {
+    height: 200px;
+  }
+
+  .property-card-price {
+    font-size: 21px;
+    font-weight: 850;
+    color: #0f172a;
+    letter-spacing: -0.4px;
+  }
+
+  .property-card-per-unit {
+    color: #059669;
+    font-size: 12px;
+    font-weight: 750;
   }
 }
 

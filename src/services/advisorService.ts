@@ -265,10 +265,10 @@ export const askAdvisor = async (
                 note: lang === 'pa' ? 'ਯਕੀਨੀ ਬਣਾਉਂਦਾ ਹੈ ਕਿ ਜ਼ਮੀਨ ਉੱਤੇ ਕੋਈ ਪੁਰਾਣਾ ਬੈਂਕ ਕਰਜ਼ਾ ਜਾਂ ਅਦਾਲਤੀ ਰੋਕ ਨਹੀਂ ਹੈ।' : (lang === 'hi' ? 'यह पुष्टि करता है कि ज़मीन पर कोई बैंक लोन या कोर्ट केस नहीं है।' : 'Confirms no active bank liens or court attachments.')
               },
               {
-                task: lang === 'pa' ? 'ਜਮ੍ਹਾਂਬੰਦੀ ਤੇ ਫ਼ਰਦ ਵਿੱਚ ਮਾਲਕ ਦਾ ਨਾਂ' : (lang === 'hi' ? 'जमाबंदी व फर्द में विक्रेता का नाम' : 'Jamabandi & Fard Title Verification'),
+                task: lang === 'pa' ? 'ਰਜਿਸਟਰੀ ਵਿੱਚ ਮਾਲਕ ਦਾ ਨਾਂ' : (lang === 'hi' ? 'रजिस्ट्री व बैनामा में विक्रेता का नाम' : 'Official Land Title Verification'),
                 completed: true,
                 importance: 'Critical',
-                note: lang === 'pa' ? 'ਤਹਿਸੀਲ ਦੇ ਰਿਕਾਰਡ ਵਿੱਚ ਵੇਚਣ ਵਾਲਾ ਹੀ ਅਸਲ ਮਾਲਕ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।' : (lang === 'hi' ? 'तहसील के सरकारी रिकॉर्ड में बेचने वाला ही असली मालिक दर्ज होना चाहिए।' : 'Ensure seller is registered as absolute owner in Jamabandi.')
+                note: lang === 'pa' ? 'ਤਹਿਸੀਲ ਦੇ ਰਿਕਾਰਡ ਵਿੱਚ ਵੇਚਣ ਵਾਲਾ ਹੀ ਅਸਲ ਮਾਲਕ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ।' : (lang === 'hi' ? 'तहसील के सरकारी रिकॉर्ड में बेचने वाला ही असली मालिक दर्ज होना चाहिए।' : 'Ensure seller is registered as absolute owner in registry.')
               },
               {
                 task: lang === 'pa' ? 'ਪੁੱਡਾ/ਗਮਾਡਾ ਤੋਂ ਮਨਜ਼ੂਰਸ਼ੁਦਾ ਨਕਸ਼ਾ (CLU Approval)' : (lang === 'hi' ? 'सरकार से स्वीकृत लेआउट प्लान व CLU' : 'Sanctioned Layout Plan & CLU Clearance'),
@@ -286,9 +286,9 @@ export const askAdvisor = async (
           },
           actions: [
             { 
-              label: lang === 'pa' ? '📜 ਸਰਕਾਰੀ ਜਮ੍ਹਾਂਬੰਦੀ ਚੈੱਕ ਕਰੋ' : (lang === 'hi' ? '📜 ऑनलाइन जमाबंदी व फर्द चेक करें' : '📜 Open Online Jamabandi'), 
+              label: lang === 'pa' ? '📜 ਸਰਕਾਰੀ ਰਿਕਾਰਡ ਚੈੱਕ ਕਰੋ' : (lang === 'hi' ? '📜 ऑनलाइन ज़मीन रिकॉर्ड चेक करें' : '📜 Open Land Records'), 
               type: 'navigate', 
-              target: 'jamabandi' 
+              target: 'land-records' 
             },
             { 
               label: lang === 'pa' ? '🧮 ਰਜਿਸਟਰੀ ਖਰਚਾ ਜਾਣੋ' : (lang === 'hi' ? '🧮 रजिस्ट्री खर्चा कैलकुलेटर' : '🧮 Stamp Duty Calculator'), 

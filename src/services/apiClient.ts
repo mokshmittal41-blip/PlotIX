@@ -63,6 +63,19 @@ export const apiClient = {
   // Check backend server health
   checkHealth: () => apiRequest('/health'),
 
+  // Backend Authentication API
+  signup: (identifier: string, password?: string, fullName?: string) =>
+    apiRequest('/auth/signup', {
+      method: 'POST',
+      body: JSON.stringify({ identifier, password, fullName })
+    }),
+
+  login: (identifier: string, password?: string) =>
+    apiRequest('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ identifier, password })
+    }),
+
   // Get current user and database profile from Supabase PostgreSQL
   getMe: () => apiRequest('/users/me'),
 

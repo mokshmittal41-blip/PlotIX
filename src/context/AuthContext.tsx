@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useCallback } from 'react';
-import { supabase, isSupabaseConfigured, normalizeAuthIdentifier, supabaseUrl, supabaseAnonKey, getAuthRedirectUrl } from '../lib/supabaseClient';
+import { supabase, isSupabaseConfigured, normalizeAuthIdentifier, getAuthRedirectUrl } from '../lib/supabaseClient';
 import { apiClient } from '../services/apiClient';
 
 export interface UserProfile {
@@ -117,13 +117,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const profile = buildUserProfile(supabaseUser, profileData);
       setUser(profile);
       localStorage.setItem(STORAGE_KEY_AUTH, JSON.stringify(profile));
-
-      // 3. Inform Express backend of user context for additional application data
-      try {
-        apiClient.getMe().catch(() => null);
-      } catch {
-        // Backend optional auxiliary call
-      }
     } catch {
       const fallback = buildUserProfile(supabaseUser);
       setUser(fallback);
@@ -315,7 +308,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         console.warn('[Supabase Profiles] Notice upserting profile in public.profiles:', profileErr);
       }
 
-      // 3. Build authenticated user profile & establish session
+      // 3. Sync with Express backend database
+      apiClient.signup(identifier, password, formattedName).catch(() => null);
+
+      // 4. Build authenticated user profile & establish session
       const newProfile = buildUserProfile(data.user, {
         full_name: formattedName,
         phone: rawPhone
@@ -327,6 +323,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       return { success: true };
 
     } catch (err: any) {
+      // 5. Fallback: If network connection to Supabase failed, register in Express backend directly
+      try {
+        const backendRes = await apiClient.signup(identifier, password, formattedName);
+        if (backendRes && backendRes.success && backendRes.data) {
+          const bUser = backendRes.data;
+          const fallbackProfile: UserProfile = {
+            id: bUser.id || `user-${Date.now()}`,
+            name: bUser.fullName || formattedName,
+            identifier: identifier,
+            type: type as any,
+            authProvider: 'supabase',
+            isDemo: false,
+            isVerified: true,
+            memberSince: new Date().getFullYear().toString(),
+            role: bUser.role || 'Property Pro',
+            backendSynced: true
+          };
+          setUser(fallbackProfile);
+          localStorage.setItem(STORAGE_KEY_AUTH, JSON.stringify(fallbackProfile));
+          setIsLoading(false);
+          return { success: true };
+        }
+      } catch {}
+
       setIsLoading(false);
       const errText = err?.message || String(err);
       if (errText.includes('Failed to fetch') || errText.includes('NetworkError')) {
@@ -389,6 +409,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
 
       if (data.user) {
+        apiClient.login(identifier, password).catch(() => null);
         await fetchUserProfile(data.user);
         setIsLoading(false);
         return { success: true };
@@ -397,6 +418,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setIsLoading(false);
       return { success: false, error: 'Login did not return a valid user.' };
     } catch (err: any) {
+      // Fallback: If network connection to Supabase failed, attempt Express backend login
+      try {
+        const backendRes = await apiClient.login(identifier, password);
+        if (backendRes && backendRes.success && backendRes.data) {
+          const bUser = backendRes.data;
+          const fallbackProfile: UserProfile = {
+            id: bUser.id || `user-${Date.now()}`,
+            name: bUser.fullName || identifier.split('@')[0],
+            identifier: identifier,
+            type: identifier.includes('@') ? 'email' : 'phone',
+            authProvider: 'supabase',
+            isDemo: false,
+            isVerified: true,
+            memberSince: new Date().getFullYear().toString(),
+            role: bUser.role || 'Property Pro',
+            backendSynced: true
+          };
+          setUser(fallbackProfile);
+          localStorage.setItem(STORAGE_KEY_AUTH, JSON.stringify(fallbackProfile));
+          setIsLoading(false);
+          return { success: true };
+        }
+      } catch {}
+
       setIsLoading(false);
       const errText = err?.message || String(err);
       if (errText.includes('Failed to fetch')) {
@@ -422,31 +467,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     try {
-      // 1. Pre-flight check: verify Supabase backend is reachable and not paused
-      // Prevents browser from redirecting into an unresolvable DNS_PROBE_FINISHED_NXDOMAIN crash
-      const pingController = new AbortController();
-      const pingTimer = setTimeout(() => pingController.abort(), 3500);
-      try {
-        await fetch(`${supabaseUrl}/auth/v1/health`, {
-          method: 'GET',
-          headers: { apikey: supabaseAnonKey },
-          signal: pingController.signal
-        });
-        clearTimeout(pingTimer);
-      } catch {
-        clearTimeout(pingTimer);
-        setIsLoading(false);
-        return {
-          success: false,
-          error: 'Your Supabase project is currently PAUSED or unreachable. Free-tier Supabase projects automatically pause after 7 days of inactivity. Please go to https://supabase.com/dashboard and click "Restore project" to unpause it.'
-        };
-      }
+      const redirectUrl = getAuthRedirectUrl();
+      console.log('[AuthContext] Initiating Google OAuth with redirectTo:', redirectUrl);
 
-      // 2. Trigger real Supabase Google OAuth
-      const { error } = await supabase.auth.signInWithOAuth({
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: getAuthRedirectUrl(),
+          redirectTo: redirectUrl,
           queryParams: {
             access_type: 'offline',
             prompt: 'select_account'
@@ -466,9 +493,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return { success: false, error: error.message };
       }
 
-      // Supabase signInWithOAuth redirects browser directly to Google OAuth page
+      // Explicitly redirect browser to Google OAuth consent page
+      if (data?.url && typeof window !== 'undefined') {
+        window.location.href = data.url;
+      }
+
       // Safety reset: if user presses browser "Back" from Google, ensure auth state isn't stuck loading
-      setTimeout(() => setIsLoading(false), 2000);
+      setTimeout(() => setIsLoading(false), 3000);
       return { success: true };
     } catch (err: any) {
       setIsLoading(false);

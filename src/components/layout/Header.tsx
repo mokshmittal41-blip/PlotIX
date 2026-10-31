@@ -317,84 +317,123 @@ export default function Header({ currentPage, actions }: FullHeaderProps) {
           <span className="notif-dot" />
         </button>
 
-        {/* User Account / Sign In Action */}
-        <button
-          type="button"
-          className="header-auth-btn"
-          onClick={() => {
-            if (user) {
+        {/* User Account / Sign In & Sign Up Actions */}
+        {user ? (
+          <button
+            type="button"
+            className="header-auth-btn"
+            onClick={() => {
               window.dispatchEvent(new CustomEvent('navigate-to', { detail: 'settings' }));
-            } else {
-              window.dispatchEvent(new CustomEvent('navigate-to', { detail: 'signin' }));
-            }
-          }}
-          title={user ? `Signed in as ${user.name} (${user.identifier})` : "Sign In to PlotIX"}
-          id="btn-header-auth"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: user ? '5px 14px' : '7px 18px',
-            borderRadius: '999px',
-            background: user 
-              ? '#FFFFFF' 
-              : 'linear-gradient(135deg, #0F172A 0%, #1E293B 100%)',
-            border: user 
-              ? '1.5px solid rgba(226, 232, 240, 0.95)' 
-              : '1px solid rgba(16, 185, 129, 0.4)',
-            color: user ? '#0F172A' : '#FFFFFF',
-            fontSize: '12.5px',
-            fontWeight: 750,
-            cursor: 'pointer',
-            boxShadow: user 
-              ? '0 1px 3px rgba(0, 0, 0, 0.05)' 
-              : '0 4px 14px rgba(15, 23, 42, 0.25), 0 0 10px rgba(16, 185, 129, 0.2)',
-            transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
-          }}
-        >
-          {user ? (
-            <>
+            }}
+            title={`Signed in as ${user.name} (${user.identifier})`}
+            id="btn-header-auth"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '5px 14px',
+              borderRadius: '999px',
+              background: '#FFFFFF',
+              border: '1.5px solid rgba(226, 232, 240, 0.95)',
+              color: '#0F172A',
+              fontSize: '12.5px',
+              fontWeight: 750,
+              cursor: 'pointer',
+              boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
+              transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
+            }}
+          >
+            <span style={{
+              position: 'relative',
+              width: 22,
+              height: 22,
+              borderRadius: '50%',
+              background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+              color: '#FFFFFF',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '11px',
+              fontWeight: 800,
+              boxShadow: '0 2px 5px rgba(16, 185, 129, 0.3)'
+            }}>
+              {user.name.charAt(0).toUpperCase()}
               <span style={{
-                position: 'relative',
-                width: 22,
-                height: 22,
-                borderRadius: '50%',
-                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
-                color: '#FFFFFF',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '11px',
-                fontWeight: 800,
-                boxShadow: '0 2px 5px rgba(16, 185, 129, 0.3)'
-              }}>
-                {user.name.charAt(0).toUpperCase()}
-                <span style={{
-                  position: 'absolute',
-                  bottom: -1,
-                  right: -1,
-                  width: '6px',
-                  height: '6px',
-                  borderRadius: '50%',
-                  background: '#10B981',
-                  border: '1.5px solid #FFFFFF'
-                }} />
-              </span>
-              <span style={{ fontWeight: 750 }}>{user.name}</span>
-            </>
-          ) : (
-            <>
-              <span style={{
-                width: 8,
-                height: 8,
+                position: 'absolute',
+                bottom: -1,
+                right: -1,
+                width: '6px',
+                height: '6px',
                 borderRadius: '50%',
                 background: '#10B981',
-                boxShadow: '0 0 8px #10B981',
+                border: '1.5px solid #FFFFFF'
               }} />
-              <span>Sign In</span>
-            </>
-          )}
-        </button>
+            </span>
+            <span style={{ fontWeight: 750 }}>{user.name}</span>
+          </button>
+        ) : (
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+            <button
+              type="button"
+              className="header-auth-btn header-signin-btn"
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('navigate-to', { detail: 'signin' }));
+              }}
+              title="Sign In to PlotIX"
+              id="btn-header-signin"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '6px 14px',
+                borderRadius: '999px',
+                background: 'rgba(255, 255, 255, 0.06)',
+                border: '1px solid rgba(226, 232, 240, 0.3)',
+                color: 'var(--color-text)',
+                fontSize: '12.5px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                transition: 'all 0.15s ease',
+              }}
+            >
+              Sign In
+            </button>
+
+            <button
+              type="button"
+              className="header-auth-btn header-signup-btn"
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('navigate-to', { detail: 'signup' }));
+              }}
+              title="Create a free PlotIX account"
+              id="btn-header-signup"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '6px 16px',
+                borderRadius: '999px',
+                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                border: '1px solid #10B981',
+                color: '#FFFFFF',
+                fontSize: '12.5px',
+                fontWeight: 800,
+                cursor: 'pointer',
+                boxShadow: '0 2px 10px rgba(16, 185, 129, 0.35)',
+                transition: 'all 0.15s ease',
+              }}
+            >
+              <span style={{
+                width: 6,
+                height: 6,
+                borderRadius: '50%',
+                background: '#FFFFFF',
+                boxShadow: '0 0 6px #FFFFFF',
+              }} />
+              <span>Sign Up Free</span>
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );

@@ -14,6 +14,7 @@ import './Signup.css';
 interface SignupProps {
   initialMode?: 'signup' | 'signin';
   onNavigate?: (page: string, propertyId?: string) => void;
+  onComplete?: () => void;
 }
 
 // ─── Floating Particles Background ──────────────────────────────────────────────
@@ -61,7 +62,7 @@ function AnimatedStat({ value, suffix, label }: { value: number; suffix: string;
   );
 }
 
-export default function Signup({ initialMode = 'signup', onNavigate }: SignupProps) {
+export default function Signup({ initialMode = 'signup', onNavigate, onComplete }: SignupProps) {
   const { signup, login, loginWithGoogle } = useAuth();
   const { addToast } = useApp();
 
@@ -108,7 +109,9 @@ export default function Signup({ initialMode = 'signup', onNavigate }: SignupPro
   };
 
   const handleGoBack = () => {
-    if (onNavigate) {
+    if (onComplete) {
+      onComplete();
+    } else if (onNavigate) {
       onNavigate('home');
     } else {
       window.dispatchEvent(new CustomEvent('navigate-to', { detail: 'home' }));
@@ -150,12 +153,22 @@ export default function Signup({ initialMode = 'signup', onNavigate }: SignupPro
     try {
       if (mode === 'signup') {
         const res = await signup(cleanId, password);
-        if (res.success) { addToast('Account created successfully! Welcome to PlotIX.', 'success'); handleGoBack(); }
-        else { setErrorMessage(res.error || 'Failed to create account.'); }
+        if (res.success) {
+          addToast('Account created successfully! Welcome to PlotIX.', 'success');
+          if (onComplete) onComplete();
+          else handleGoBack();
+        } else {
+          setErrorMessage(res.error || 'Failed to create account.');
+        }
       } else {
         const res = await login(cleanId, password);
-        if (res.success) { addToast('Welcome back to PlotIX!', 'success'); handleGoBack(); }
-        else { setErrorMessage(res.error || 'Invalid credentials.'); }
+        if (res.success) {
+          addToast('Welcome back to PlotIX!', 'success');
+          if (onComplete) onComplete();
+          else handleGoBack();
+        } else {
+          setErrorMessage(res.error || 'Invalid credentials.');
+        }
       }
     } catch (err: any) { setErrorMessage(err.message || 'An unexpected error occurred.'); }
     finally { setIsSubmitting(false); }
@@ -243,8 +256,8 @@ export default function Signup({ initialMode = 'signup', onNavigate }: SignupPro
                 <div className="pw-feature-pill">
                   <div className="pw-pill-icon pw-pill-blue"><Layers size={16} /></div>
                   <div className="pw-pill-content">
-                    <span className="pw-pill-title">Jamabandi & Land Records</span>
-                    <span className="pw-pill-sub">Verified cadastral data & circle rates</span>
+                    <span className="pw-pill-title">Verified Land Records</span>
+                    <span className="pw-pill-sub">Official revenue data & circle rates</span>
                   </div>
                 </div>
 
@@ -272,7 +285,7 @@ export default function Signup({ initialMode = 'signup', onNavigate }: SignupPro
                 </div>
                 <p className="pw-testimonial-quote">
                   "PlotIX completely changed how I evaluate land in Mohali. The AI valuations 
-                  and instant Jamabandi lookups saved me lakhs on my last investment."
+                  and instant GIS land verification saved me lakhs on my last investment."
                 </p>
                 <div className="pw-testimonial-author">
                   <div className="pw-testimonial-avatar">RK</div>
@@ -511,6 +524,29 @@ export default function Signup({ initialMode = 'signup', onNavigate }: SignupPro
                     <button type="button" className="pw-switch-btn" onClick={() => handleToggleMode('signup')}>Create Account</button>
                   </span>
                 )}
+              </div>
+
+              {/* Guest Direct Skip */}
+              <div style={{ textAlign: 'center', marginTop: '12px', marginBottom: '8px' }}>
+                <button
+                  type="button"
+                  onClick={handleGoBack}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: '#94A3B8',
+                    fontSize: '12.5px',
+                    fontWeight: 650,
+                    cursor: 'pointer',
+                    textDecoration: 'underline',
+                    textUnderlineOffset: '3px',
+                    transition: 'color 0.15s ease'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#10B981'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#94A3B8'}
+                >
+                  Continue as Guest to Language & Location →
+                </button>
               </div>
 
               {/* Trust Strip */}

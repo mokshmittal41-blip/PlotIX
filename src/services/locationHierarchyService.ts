@@ -14,6 +14,7 @@ import {
   searchIndianLocations, 
   getCoordinatesForCity 
 } from '../data/indiaStatesAndCities';
+import { getAccurateCoordinates } from '../utils/mapUtils';
 import { locationService } from './locationService';
 
 export interface NaturalQueryResult {
@@ -323,28 +324,16 @@ export class LocationHierarchyService {
     activeLocation: ActiveLocation,
     radiusKm: number | 'district'
   ): (Property & { calculatedDistanceKm: number })[] {
-    const activeCoords: [number, number] = (activeLocation && activeLocation.coordinates && Array.isArray(activeLocation.coordinates) && activeLocation.coordinates.length >= 2)
+    if (!properties || properties.length === 0) return [];
+    if (!activeLocation) return [];
+
+    const activeCoords: [number, number] = (activeLocation.coordinates && Array.isArray(activeLocation.coordinates) && activeLocation.coordinates.length >= 2)
       ? activeLocation.coordinates
-      : [28.1920, 76.6186];
+      : getAccurateCoordinates({ city: activeLocation.name, district: activeLocation.district, state: activeLocation.state });
 
-    const withDistances = (properties || []).map(p => {
-      let propCoords: [number, number] = [28.1920, 76.6186];
-      if (p.coordinates && Array.isArray(p.coordinates) && p.coordinates.length >= 2 && typeof p.coordinates[0] === 'number') {
-        propCoords = p.coordinates;
-      } else {
-        const c = (p.city || '').toLowerCase();
-        const l = (p.location || '').toLowerCase();
-        if (c.includes('bawal') || l.includes('bawal')) propCoords = [28.0837, 76.5847];
-        else if (c.includes('dharuhera') || l.includes('dharuhera')) propCoords = [28.2056, 76.7925];
-        else if (c.includes('khol') || l.includes('khol')) propCoords = [28.2167, 76.4500];
-        else if (c.includes('rewari') || l.includes('rewari')) propCoords = [28.1920, 76.6186];
-        else if (c.includes('gurugram') || c.includes('gurgaon') || l.includes('gurugram')) propCoords = [28.4595, 77.0266];
-        else if (c.includes('mohali') || l.includes('mohali')) propCoords = [30.6799, 76.7221];
-        else if (c.includes('panchkula') || l.includes('panchkula')) propCoords = [30.6865, 76.8526];
-        else if (c.includes('zirakpur') || l.includes('zirakpur')) propCoords = [30.6425, 76.8173];
-        else propCoords = [30.7333, 76.7794];
-      }
-
+    // 1. Calculate distances accurately for all properties
+    const withDistances = properties.map(p => {
+      const propCoords = getAccurateCoordinates(p);
       const dist = this.calculateDistanceKm(activeCoords, propCoords);
       return {
         ...p,
@@ -353,43 +342,98 @@ export class LocationHierarchyService {
       };
     });
 
-    // 1. If radius is 'district' or location scope is 'district':
-    if (radiusKm === 'district' || activeLocation.scope === 'district') {
-      const districtMatches = withDistances.filter(p => 
-        (p.district && p.district.toLowerCase() === activeLocation.district.toLowerCase()) ||
-        p.location.toLowerCase().includes(activeLocation.district.toLowerCase()) ||
-        p.city.toLowerCase().includes(activeLocation.district.toLowerCase()) ||
-        p.calculatedDistanceKm <= 40
-      );
+    // 2. Normalize active location identifiers
+    const locName = (activeLocation.name || '').toLowerCase().trim();
+    const locDistrict = (activeLocation.district || '').toLowerCase().trim();
+    const locTehsil = (activeLocation.tehsil || '').toLowerCase().trim();
+    const locPlace = (activeLocation.placeName || '').toLowerCase().trim();
+    const locState = (activeLocation.state || '').toLowerCase().trim();
 
-      return (districtMatches.length > 0 ? districtMatches : withDistances).sort(
-        (a, b) => a.calculatedDistanceKm - b.calculatedDistanceKm
-      );
-    }
+    // Twin-city & Metropolitan district clusters
+    const ALIAS_CLUSTERS: Record<string, string[]> = {
+      'mohali': ['sas nagar', 'mohali', 'kharar', 'zirakpur', 'new chandigarh', 'aerocity', 'it city'],
+      'sas nagar': ['sas nagar', 'mohali', 'kharar', 'zirakpur', 'new chandigarh', 'aerocity', 'it city'],
+      'chandigarh': ['chandigarh', 'new chandigarh', 'mullanpur', 'sector 8', 'sector 15', 'sector 34'],
+      'panchkula': ['panchkula', 'pinjore', 'kalka', 'mdc'],
+      'gurugram': ['gurugram', 'gurgaon', 'sohna', 'manesar', 'pataudi', 'golf course'],
+      'gurgaon': ['gurugram', 'gurgaon', 'sohna', 'manesar', 'pataudi', 'golf course'],
+      'noida': ['noida', 'greater noida', 'gautam buddha nagar', 'gautam buddh nagar', 'yamuna expressway', 'pari chowk', 'noida extension'],
+      'greater noida': ['greater noida', 'noida', 'gautam buddha nagar', 'yamuna expressway', 'pari chowk', 'noida extension'],
+      'gautam buddha nagar': ['noida', 'greater noida', 'gautam buddha nagar'],
+      'rewari': ['rewari', 'bawal', 'dharuhera', 'khol', 'kosli'],
+      'bawal': ['bawal', 'rewari'],
+      'dharuhera': ['dharuhera', 'rewari'],
+      'sunam': ['sunam', 'sangrur', 'chathe', 'jakhal road', 'suman'],
+      'sangrur': ['sangrur', 'sunam', 'dhuri', 'bhawanigarh'],
+      'delhi': ['delhi', 'new delhi', 'dwarka', 'rohini', 'vasant kunj', 'chattarpur', 'najafgarh'],
+      'new delhi': ['delhi', 'new delhi', 'dwarka', 'rohini', 'vasant kunj', 'chattarpur'],
+      'bengaluru': ['bengaluru', 'bangalore', 'whitefield', 'sarjapur', 'electronic city', 'devanahalli'],
+      'bangalore': ['bengaluru', 'bangalore', 'whitefield', 'sarjapur', 'electronic city', 'devanahalli'],
+      'jaipur': ['jaipur', 'jagatpura', 'mansarovar', 'ajmer road', 'tonk road'],
+      'mumbai': ['mumbai', 'navi mumbai', 'thane', 'panvel'],
+      'pune': ['pune', 'hinjewadi', 'wakad', 'kharadi', 'baner'],
+      'hyderabad': ['hyderabad', 'gachibowli', 'hitec city', 'kondapur', 'mokila']
+    };
 
-    // 2. Specific numeric radius (e.g. 1km, 5km, 10km, 25km, 50km)
-    if (typeof radiusKm === 'number') {
-      const radiusMatches = withDistances.filter(p => p.calculatedDistanceKm <= radiusKm);
-      if (radiusMatches.length > 0) {
-        return radiusMatches.sort((a, b) => a.calculatedDistanceKm - b.calculatedDistanceKm);
+    const targetAliases = new Set<string>();
+    [locName, locDistrict, locTehsil, locPlace].forEach(term => {
+      if (!term) return;
+      targetAliases.add(term);
+      if (ALIAS_CLUSTERS[term]) {
+        ALIAS_CLUSTERS[term].forEach(a => targetAliases.add(a));
       }
-      // If none inside exact radius, return closest properties sorted
-      return withDistances.sort((a, b) => a.calculatedDistanceKm - b.calculatedDistanceKm);
+    });
+
+    // Determine if property belongs strictly to this active location
+    const isStrictMatch = (p: typeof withDistances[0]) => {
+      const pCity = (p.city || '').toLowerCase().trim();
+      const pDistrict = (p.district || '').toLowerCase().trim();
+      const pTehsil = (p.tehsil || '').toLowerCase().trim();
+      const pLoc = (p.location || '').toLowerCase().trim();
+
+      // Check text match against target aliases
+      for (const alias of targetAliases) {
+        if (!alias) continue;
+        if (pCity === alias || pCity.includes(alias)) return true;
+        if (pDistrict === alias || pDistrict.includes(alias)) return true;
+        if (pTehsil === alias || pTehsil.includes(alias)) return true;
+        if (pLoc.includes(alias)) return true;
+      }
+
+      // Check spatial proximity: within 35 km and same state/contiguous cluster
+      if (p.calculatedDistanceKm <= 35) {
+        const pState = (p.state || '').toLowerCase().trim();
+        if (locState && pState && (locState.includes(pState) || pState.includes(locState))) {
+          return true;
+        }
+        // Tricity cluster (Punjab / Haryana / Chandigarh)
+        const isTricity = (s: string) => ['punjab', 'haryana', 'chandigarh'].some(x => s.includes(x));
+        if (isTricity(locState) && isTricity(pState) && p.calculatedDistanceKm <= 25) {
+          return true;
+        }
+        // NCR cluster (Delhi / Haryana / Uttar Pradesh)
+        const isNcr = (s: string) => ['delhi', 'haryana', 'uttar pradesh'].some(x => s.includes(x));
+        if (isNcr(locState) && isNcr(pState) && p.calculatedDistanceKm <= 25) {
+          return true;
+        }
+      }
+
+      return false;
+    };
+
+    const matched = withDistances.filter(isStrictMatch);
+
+    // If radius is a number, filter by that radius or return matching city properties
+    if (typeof radiusKm === 'number') {
+      const insideRadius = matched.filter(p => p.calculatedDistanceKm <= radiusKm);
+      if (insideRadius.length > 0) {
+        return insideRadius.sort((a, b) => a.calculatedDistanceKm - b.calculatedDistanceKm);
+      }
+      return matched.sort((a, b) => a.calculatedDistanceKm - b.calculatedDistanceKm);
     }
 
-    // 3. Default scope-aware fallback:
-    if (activeLocation.scope === 'tehsil' && activeLocation.tehsil) {
-      const tehsilMatches = withDistances.filter(p => 
-        (p.tehsil && p.tehsil.toLowerCase() === activeLocation.tehsil!.toLowerCase()) ||
-        p.location.toLowerCase().includes(activeLocation.tehsil!.toLowerCase()) ||
-        p.calculatedDistanceKm <= 15
-      );
-      return (tehsilMatches.length > 0 ? tehsilMatches : withDistances).sort(
-        (a, b) => a.calculatedDistanceKm - b.calculatedDistanceKm
-      );
-    }
-
-    return withDistances.sort((a, b) => a.calculatedDistanceKm - b.calculatedDistanceKm);
+    // Default or district scope
+    return matched.sort((a, b) => a.calculatedDistanceKm - b.calculatedDistanceKm);
   }
 
   /**

@@ -146,9 +146,67 @@ export default function LocationOnboardingScreen({ onComplete }: LocationOnboard
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '100%',
+            marginBottom: '20px'
+          }}
         >
           <div className="onboarding-logo-badge">
             <PropWiseLogo size="md" animated variant="light" />
+          </div>
+
+          <div className="onboarding-top-actions" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <button
+              type="button"
+              className="onboarding-signin-btn"
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('navigate-to', { detail: 'signin' }));
+              }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '6px 14px',
+                borderRadius: '999px',
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(255, 255, 255, 0.22)',
+                color: '#F8FAFC',
+                fontSize: '12.5px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                backdropFilter: 'blur(8px)',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              Sign In
+            </button>
+            <button
+              type="button"
+              className="onboarding-signup-btn"
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('navigate-to', { detail: 'signup' }));
+              }}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '6px 15px',
+                borderRadius: '999px',
+                background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                border: 'none',
+                color: '#FFFFFF',
+                fontSize: '12.5px',
+                fontWeight: 800,
+                cursor: 'pointer',
+                boxShadow: '0 2px 8px rgba(16, 185, 129, 0.35)',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              Sign Up Free
+            </button>
           </div>
         </motion.div>
 

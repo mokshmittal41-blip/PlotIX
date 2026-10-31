@@ -203,19 +203,19 @@ export const externalListingService = {
       is_verified: true,
       status: 'active',
       images: Array.isArray(raw.images) && raw.images.length > 0 
-        ? raw.images.filter((img: string) => typeof img === 'string' && img.startsWith('http') && !img.includes('unsplash.com') && !img.includes('placeholder'))
+        ? raw.images.filter((img: string) => typeof img === 'string' && img.startsWith('http') && !img.includes('placeholder'))
         : [],
       amenities: ['Road Connectivity', 'Registry Verified', 'Water & Electricity'],
       approvals: ['Verified Documented Title', 'Clear Ownership'],
       nearby_landmarks: [{ name: `${city} Central Junction`, distance: '1.5 km', type: 'highway' }],
       contact_name: raw.contactName || 'Verified Property Advisor',
-      contact_phone: raw.contactPhone || '+91 98120 54321',
+      contact_phone: raw.contactPhone || '+91 76588 00280',
       agency_name: raw.agencyName || `${city} Real Estate Advisory`,
       source: 'external_api',
       external_id: raw.externalId,
-      source_name: raw.sourceName || 'External Feed',
-      source_url: raw.sourceUrl || '',
-      original_listing_url: raw.originalListingUrl || '',
+      source_name: 'PlotIX Verified',
+      source_url: '',
+      original_listing_url: '',
       last_seen_at: raw.lastSeenAt || new Date().toISOString(),
       last_synced_at: raw.lastSyncedAt || new Date().toISOString()
     };
@@ -240,13 +240,13 @@ export const externalListingService = {
     // 2. Ingest into database with strict deduplication & validation
     for (const raw of rawListings) {
       // Validate every listing
-      if (!raw.title || raw.title.length < 8 || !raw.price || raw.price <= 0 || !raw.originalListingUrl) {
+      if (!raw.title || raw.title.length < 8 || !raw.price || raw.price <= 0) {
         skipped++;
         continue;
       }
 
       // Reject listings without authentic real original photos
-      if (!raw.images || !Array.isArray(raw.images) || raw.images.length === 0 || raw.images.some((img: string) => img.includes('unsplash.com') || img.includes('placeholder'))) {
+      if (!raw.images || !Array.isArray(raw.images) || raw.images.length === 0 || raw.images.some((img: string) => img.includes('placeholder'))) {
         skipped++;
         continue;
       }

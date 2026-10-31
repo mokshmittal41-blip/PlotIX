@@ -183,7 +183,7 @@ export default function HelpSupport({ onNavigate }: HelpSupportProps) {
               ? 'ਦਸਤਾਵੇਜ਼, ਫਰਦ ਜਾਂ ਵਿਸਤ੍ਰਿਤ ਪੁੱਛਗਿੱਛ ਈਮੇਲ ਰਾਹੀਂ ਭੇਜੋ। 24 ਘੰਟਿਆਂ ਵਿੱਚ ਜਵਾਬ।'
               : (language === 'hi'
                   ? 'दस्तावेज, फर्द या विस्तृत पूछताछ ईमेल के माध्यम से भेजें। 24 घंटे में उत्तर।'
-                  : 'Send documents, Jamabandi fards, partnership queries or detailed feedback.')}
+                  : 'Send documents, registry deeds, partnership queries or detailed feedback.')}
           </p>
           <div className="help-card-actions">
             <a 

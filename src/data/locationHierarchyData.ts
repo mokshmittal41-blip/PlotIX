@@ -893,7 +893,7 @@ export const SANGRUR_DISTRICT_INTELLIGENCE: DistrictIntelligence = {
     { name: 'Sangrur - Patiala NH-7 Corridor (Bhawanigarh)', tag: 'Highway Commercial', description: 'High-speed national highway connecting Sangrur to Patiala & Chandigarh.' }
   ],
   verifiedListingsCount: 80,
-  coverageNote: 'Verified land records, Jamabandi survey, circle rates, and mandi listings across Sunam, Sangrur, and Dhuri.'
+  coverageNote: 'Verified land records, cadastral surveys, circle rates, and mandi listings across Sunam, Sangrur, and Dhuri.'
 };
 
 // ─── PATIALA DISTRICT DATA (Verified Seed Dataset) ──────────────────────────
